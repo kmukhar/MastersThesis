@@ -1,0 +1,480 @@
+\clearpage
+\chapter{Background Research}\label{chap:background}
+
+\section{Overview}
+
+Research in applying evolutionary computation to games\footnote{The term
+``game'' is highly overridden. Throughout this chapter (and the entire thesis)
+the term generally refers to board games or other similar types of competitions
+that are played between two or more persons} has been performed almost since the
+study of evolutionary computing began. Holland, in his seminal work
+\emph{Adaptation in Natural and Artificial Systems}, discussed applications of
+genetic algorithms to games~\cite{holland1975adaptation,Holland1992}. Holland
+showed that the search space of many games quickly grew to a size that is not
+computationally tractable. He then discussed how an artificial adaptive system
+(i.e., evolutionary computation) could be used to efficiently search the game
+space and realize an optimal strategy.
+
+In Chapter \ref{chap:algorithm} the design of the genetic algorithms used for
+this research is presented. The decisions made for those algorithms have a basis
+in research that applied genetic algorithms to the study of various games. In
+the remainder of this chapter we review some of that research.
+
+\section{Deterministic zero sum games}
+
+One fundamental type of game is the deterministic two player game with perfect
+information. To be deterministic means that the game has no element of
+randomness or chance in it. Two player obviously means that only two players are
+involved in the game. (Using only two players is done to make computations easy,
+but the results are easily extended to games with more than two players.) A two
+player game involves a gain or payoff to one player and a loss to the other
+player. The gain and loss are not necessarily equal; when the gain to one player
+is equal to the loss experienced by the other player in the game, the game is
+known as a zero sum game. In its simplest form the payoff is a binary win/loss
+result: one player wins and the other player loses. Finally, for a game to
+involve perfect information means that every player in the game knows everything
+about every the other player's state and future possible moves.
+
+\subsection{The Prisoner's Dilemma}
+
+One of the most studied deterministic two player games is the two person game
+known as the Prisoner's Dilemma, a game in which two players can either
+cooperate or defect, without the ability to communicate with each other. The
+payoff matrix for this game is shown in Table \ref{table-pdpayoff}. This game is
+not a zero sum game. 
+
+\begin{table}[h]
+\caption{Payoff matrix for Prisoner's Dilemma}
+\begin{center}
+\begin{tabular}{|l|c|c|}
+\hline
+\multicolumn{1}{|l|}{\raisebox{-1.50ex}[0cm][0cm]{Decision\!}}
+& \multicolumn{1}{|c|}{Cooperate}
+& \multicolumn{1}{|c|}{Defect} \\ \hline
+Cooperate &  R,R & S,T \\ \hline 
+Defect    &  T,S & P,P  \\ \hline \hline
+Notes & \multicolumn{2}{|c|}{\(T > R > P > S\)} \\ 
+      & \multicolumn{2}{|c|}{\(2R > T + S\)} \\ \hline
+\end{tabular}
+\label{table-pdpayoff}
+\end{center}
+\end{table}
+
+In a single iteration of this game, the best strategy for both players is to
+defect~\cite{nash50,Nash1951}. Suppose player 1 chooses to cooperate;
+looking at the payoffs, this player sees that regardless of which strategy the
+opponent chooses, player 1 gets a better score by switching to defect. The same
+reasoning applies to player 2.
+
+However, studies have shown that when the game is played repeatedly (known as
+the Iterated Prisoner's Dilemma game), a strategy of cooperation will
+spontaneously evolve within a
+population~\cite{Axelrod1984,Nowak1993,DBLP:conf/cig/QuekG07,Mittal2009,WangTao2010}.
+This game is different from the others presented below in that there is an
+objective measure of fitness for this game. For Nowak and Sigmund, ``Strategies
+with higher payoffs produce more offspring.''~\cite{Nowak1993} Similarly for
+Quek and Goh, ``\ldots fitness assignment is performed after each tournament and
+is given by the payoffs accumulated throughout the game
+play.''~\cite{DBLP:conf/cig/QuekG07} Mittal and Deb studied the Prisoner's
+Dilemma as ''\ldots a bi-objective optimization problem of maximizing the
+player's own score and simultaneously minimizing the opponent's score'' where
+the score was the sum of the player's payoff over the set of games. Wang et al.
+also used the sum of payoffs as a fitness measure~\cite{WangTao2010}.
+
+In other games, having an objective fitness measure is not always possible. In
+some games the only thing that can be measured is which player won the game and
+which lost; but the winner does not necessarily have high fitness and the loser
+does not necessarily have low fitness. A mediocre player could get a large
+number of wins if many of the opponents are worse players. In these cases, a
+competitive fitness function is used. In the remainder of this section we look
+at several studies that used competitive fitness functions.
+
+\subsection{Tic-Tac-Toe}
+
+The game of Tic-Tac-Toe is a relatively simple two-player competitive game
+played on a 3x3 grid. Players alternately place a symbol, (usually one player
+plays X and the other plays O) on an open grid space; the winner is the player
+that manages to create a straight line (vertically, horizontally, or diagonally)
+of three symbols. Fogel showed that genetic algorithms could be used to evolve
+neural networks to play the game~\cite{Fogel1993}.
+
+Fogel played a population of 50 randomly generated neural networks against a
+rule-based opponent which also had a small probability of making a random move.
+Each neural network played 32 games against the rule-based player. A competitive
+fitness function was used in which the neural network was awarded +1 for
+winning, -10 for losing, and 0 for a draw. Because of the element of randomness,
+a neural network with a high score did not necessarily have a perfect strategy.
+That is, a neural network could have a high score because the opponent made
+several bad moves over the 32 games. So, before propagating the population,
+Fogel ran a further competition where a neural network played 10 other randomly
+chosen networks. Neural networks that scored high in the second competition were
+allowed to reproduce to the next generation.
+
+In this example, the basic elements of a competitive fitness functions are
+present: 1) individuals in the population 2) compete against some other player
+and 3) are awarded points for winnning, losing, or drawing. In this study, the
+individuals in the population competed against static players from outside the
+population. However, individuals in a population can also compete against each
+other in a process known as coevolution.
+
+\subsection{Checkers}
+
+In Checkers each player has 12 pieces that can move diagonally on a board
+divided into an 8x8 grid of squares. If one player's piece is adjacent to the
+opponent's piece, and there is a blank square on the opposite side of the
+opponent's piece, the player can jump that piece and remove the opponent's piece
+from the board. The winner is the player who removes all of the opponent's
+pieces from the board. Fogel and Chellapilla used evolutionary computing  to
+evolve neural networks that could generate moves for the
+game~\cite{Fogel2000Anaconda,journals/tec/ChellapillaF01}. 
+
+Interestingly, Fogel's genetic algorithm did not use any reproduction operators
+on the genome. The genome was evolved by picking the fittest genomes to carry
+over to the new generation, with new genomes created by mutation only.
+
+Fogel and Chellapilla used a competitive fitness function for their research.
+A population consisted of 15 parents from which 15 children were created by
+mutation. Each neural network in the population then played five games against
+five other randomly chosen neural networks from the population. Wins, losses,
+and draws were awarded +1, -2, or 0 points respectively. After all games had
+been played, the top 15 neural networks by total score were copied into the next
+generation and the process was repeated. Again, neural networks with high scores
+were not necessarily the best players, since a high score could be obtained by a
+player with poor strategy if the opponents of the player were all worse players.
+To validate their results, Fogel and Chellapilla took the best evolved neural
+network and played it against human players over the Internet. After 250
+generations, it played just below expert level, and after 840 generations their
+evolved ANN player was able to play at Expert level, well above the average
+human player.
+
+This is an example of coevolution. In this work the competitive fitness function
+consists of individuals competing against other individuals in the same
+population. However, each individual only competes consists of a subset of the
+population.
+
+\subsection{Othello}
+
+Othello (also known as Reversi) is a two-player game where players take turns
+placing colored tokens on the board. The winner is the player who can get the
+most tokens of his color on the board. Play is complicated by the fact that a
+player can only place a token in a way that ``captures'' the opponent's tokens.
+This is done by placing a token adjacent to an opponent's token such that at
+least one of the opponent's tokens lies between the new token and one of the
+already placed tokens. When a player captures a line of the opponent's tokens,
+all of the opponent's tokens in that line change to the capturing player's
+color. Chong et al., investigated evolving the evaluation function of a neural
+network to create an ANN that could play Othello~\cite{ChongTW05}.
+
+The population consisted of 10 parent neural networks, with 10 children created
+through mutation. Each of the 20 individuals in the population then played 5
+games against other neural networks chosen randomly from the population. Wins
+were awarded five points, losses received zero points, and draws resulted in
+each network getting one point. The top ten scoring individuals were propagated
+to the next generation as parents. At each generation, a second evaluation was
+performed by having the best neural networks play against a computer player that
+used a deterministic evaluation function to generate moves. These secondary
+competitions were only used to evaluate the ability of the neural networks, and
+were not used to guide the evolution. As the population evolved, competition
+against the computer player showed that the neural networks were indeed playing
+at higher levels, achieving master level at about the 800th generation.
+
+This example of coevolution is very similar to the previous example.
+
+\subsection{State Space Complexity}
+We could continue to cite other research into genetic algorithms and games, and
+will make a brief mention below. But at this point it will be instructive to
+look at the state space complexity of games. The first four games cited above
+were introduced from the least complex to the more complex.
+
+The state space complexity of these and other games is well known and can be
+easily found (or calculated). Allis, for example, provides the following
+estimates for several games including some of the ones~\footnote{Allis looked at
+games from the Computer Olympiad (see
+\url{http://www.grappa.univ-lille3.fr/icga/competition.php?id=3} which does not
+include The Prisoner's Dilemma. However, the state space for The Prisoner's
+Dilemma is easy to calculate. With a single iteration, each player has two
+possible moves, so the state space complexity is \(2\cdot2=4\). If iteration is
+allowed, then with two iterations each player has four moves and the state space
+complexity is 16. Three iterations gives a state space complexity of 64. In
+general, the state space complexity is \(2^{2n}\) where \(n\) is the number of
+iterations.} discussed above~\cite{Allis1994}. Tic-Tac-Toe has an estimated
+state space complexity of \(\approx10^{3.7}\). The state space complexity for
+Checkers is \(\approx10^{18}\). As might be expected, Othello is more
+complicated with a state space complexity of \(\approx10^{30}\). Even for games
+of much higher complexity, genetic algorithms have been used with success. While
+not able to provide a complete solution, genetic algorithms have been applied to
+some subproblems for games such as Chess~\cite{Mitsuta:2010:OPG:1994486.1994517}
+(state space complexity of \(\approx10^{50}\)) and
+Go~\cite{shah2012Go,Blackman2009Go} (state space complexity of
+\(\approx10^{172}\)). It is clear that the state space complexity of a game is
+not barrier to the use of evolutionary computing. These numbers will become
+important in Chapter~\ref{chap:algorithm}.
+
+These deterministic, two-player, zero-sum games are widely studied because
+they are relatively simple to understand and play. Many classic game theory
+games like Prisoner's Dilemma have very small state spaces. Some of them have a
+relatively small search space (Othello, Chess and Go being obvious exceptions),
+which makes them tractable to study and simulation. However, there
+is a whole class of games with many examples that are non-deterministic,
+multi-player (but still usually zero-sum) games.
+
+\section{Non-Deterministic games}
+
+Non-deterministic games are those that have some element of randomness in them.
+Many gambling games such as poker, blackjack, roulette, or craps are based
+on random outcomes. Randomness in those games is provided by the shuffling of
+cards, the spin of a wheel and roll of a ball, or the throw of dice. Many
+recreational board games use dice or cards to provide a random element to the
+game. 
+
+While not as well studied as the two player games mentioned previously, there
+has been some research on using evolutionary computation to create winning
+strategies for non-deterministic games. In this section we look at two games
+on which evolutionary computing has been applied: Acquire and Monopoly
+
+\subsection{Acquire: Evolving Board Evaluation Functions for a Complex Strategy
+Game}
+
+Acquire is a board game in which players attempt to gain wealth by building and
+investing in properties\footnote{See \url{http://en.wikipedia.org/wiki/Acquire}
+for details}. The player with the most wealth at the end of the game is the
+winner.
+
+Anthony applied genetic programming (a subset of evolutionary computing) to the
+problem of evolving board evaluation functions for the game~\cite{Anthony2002}.
+She identified two basic decisions a board evaluation function would need to
+make for the game: where to place a tile (build a property) on the board and
+which property to invest in. 
+
+Like many other games, there is no objective fitness criteria for Acquire, so
+Anthony used a competitive fitness function. She evaluated several possible
+methods for computing a game score including number of wins, amount of money
+earned, and ratio of money earned in a game to total amount of money earned by
+all players in the same game. The last method was the one used in her
+experiments.
+
+There were 1000 players in a generation, and 50 generations were evolved. Each
+player in a generation played 10 games against other players in the population.
+The raw score was computed for each game, and the average over 10 games was the
+player's fitness for that generation. To validate that the population was
+evolving better evaluation functions, the best player in the final generation
+was played against the best player in each previous generation.
+
+\subsection{Strategies for the Game of Monopoly}
+
+The last game we look at in the section is the game of Monopoly, which is the
+subject of this research. A detailed overview of the game is presented in
+Chapter~\ref{chap:monopoly}, but it will be helpful to understand a few basics
+about the game here. 
+
+In the game of Monopoly, players can purchase specific locations on the game
+board. Some of those locations are known as streets, and streets are further
+grouped into one of eight color groups (See Figure~\ref{figure-monoboard}). When
+a player lands on a location owned by another player, the first player pays rent
+to the owner. If a player owns all the streets in a color group, the player can
+build houses or hotels which dramatically increases the rent.
+
+\subsubsection{Monopoly as a Markov Process}
+
+Some of the first studies of the game were statistical analyses of which
+locations were more valuable to own. Ash and Bishop modeled the Monopoly board
+as a Markov process~\cite{Ash1972}. From this they concluded that the properties
+with the greatest expected income where streets which comprise the Green group
+on the east side of the board, followed by the two groups (Red and Yellow) on
+the north side of the board.
+
+Abbott and Richey extended Ash's and Bishop's work with a more
+rigorous~\footnote{In 1972, Ash and Bishop did not have the same computing
+resources to apply their calculations that Abbott and Richey had in 1997}
+examination of the game as a Markov process~\cite{Abbott1997}. They came to a
+similar conclusion: They expected income is greatest from the Green group,
+followed by Red, Yellow, and Orange. However, because it costs much less to
+build houses and hotels on the Orange group, the more valuable group is Orange,
+followed by Red, then Yellow.
+
+\subsubsection{An Evolutionary Approach to Strategies for the Game of Monopoly}
+
+Frayn used evolutionary computing to develop a strategy for property valuation
+and property management~\cite{DBLP:conf/cig/Frayn05}. Frayn used four different
+chromosomes for each individual in the population. Three of the four chromosomes
+represented the values of properties that could be owned by players. Each gene
+in those chromosomes represented the value of a particular property. The fourth
+chromosome represented other game decisions such as when to mortgage a property,
+or the minimum amount of cash a player should retain.
+
+Frayn came to the conclusion that the best property group was the Orange group.
+In contrast to the conclusions of the previous two studies, the best individuals
+in Frayn's experiment avoided the Red, Yellow, and Green groups. His experiment
+also found that the properties on the south and west sides all had values
+greater than their costs, whereas everything on the north and east sides had
+values less than their costs. His individuals were thus buying the properties on
+the south and west sides, and avoiding properties on the north and east sides.
+
+Frayn used a genetic algorithm with 1000 players in a generation, and
+1420 generations were evolved. He used a competitive fitness function where each
+player in a generation played 100 games against three other players in the
+population. The winner of the game received a score of +3 points, second place
+recieved +2 points, third place received +1 point, and fourth place received 0
+points. The total fitness was the sum of points over 100 games.
+
+\subsubsection{Property Trading Strategies}
+
+Yasumura et al., studied different negotiating strategies to identify the best
+way to conduct negotiations between players~\cite{Yasumura2001Negotiate}. They
+constructed an evaluation function that was the summation of property values
+under different ownership conditions, less expected losses over the short term
+(1 dice roll) and medium term (1 trip around the board). The summation and
+losses were each also weighted by constant terms that were varied to make
+strategies more bullish (more weight to potential gains and more likely to trade
+a property) or bearish (more weight to expected losses and more likely not to
+trade a property). They found that a strategy where the gains and losses in
+their evaluation function were weighted evenly gave the best results.
+
+\section{Competitive Fitness Functions}
+
+When used in optimization problems, genetic algorithms usually rely on an
+objective fitness function. However in the particular case of games, there is no
+objective way to measure fitness, and so as seen previously in this chapter a
+competitive fitness function must be used. In this section we review some of the
+research into competitive fitness functions.
+
+\subsection{Competitive Environments Evolve Better Solutions for Complex Tasks}
+
+Angeline and Pollack conducted an early study into competitive environments for
+evolutionary computing. They claimed that ``\ldots for many complex tasks an
+independent fitness function is either impractical or impossible to
+provide.~\cite{Angeline:1993:CEE:645513.657590}'' Their research attempted to
+demonstrate that fitness functions that are dependent on the constituents of the
+population ``\ldots can provide a more robust training environment than
+independent fitness functions.~\cite{Angeline:1993:CEE:645513.657590}''
+
+In their paper they discussed three different ways to structure a competitive
+fitness function.
+
+First, they looked at a round robin style of tournament where every member of
+the population engages in a competition with every other member of the
+population. In Axelrod's study of the evolution of cooperation in Prisoner's
+Dilemma, every member of the population played every other member of
+the population~\cite{Axelrod1984}. Of course, if the size of the population is
+\(n\), the number of competitions is of order \(O(n^2)\), so this is not
+very scalable.
+
+Second, they looked at a bipartite competitive environment. In this environment
+every individual in one population competes against some individual in another
+population. This type of competition was used in a study of sorting networks by
+Hillis~\cite{Hillis:1990:CPI:87498.87560}. Hillis had two populations: one
+population consisted of sorting networks, and the second population consisted of
+sets of test cases, where each set is an individual. Each sorting network
+competed against one set of test cases. The fitness of each sorting network was
+scored based on the percent of test cases that were sorted correctly; whereas
+each set of test cases was scored based on the percent of test cases that were
+not sorted correctly. This type of fitness environment requires \(n\)
+competitions for a population of size \(n\).
+
+Finally they looked at a single elimination tournament style of
+competition within a single population. In this style of competition, pairs of
+individuals are randomly selected from a population and engage in a competition.
+The winner is returned to the population, the loser is temporarily removed from
+the population. This proceeds until a single individual remains. The fitness of
+each individual is the number of competitions that the individual won. This
+requires \(n-1\) competitions for a population of size \(n\).
+
+Angeline and Pollack found that the tournament fitness function performed well
+in evolving players for the game of Tic-Tac-Toe. The tournament fitness function
+has several advantages over other fitness functions: it does not require task
+knowledge of the optimization problem as an objective fitness function might;
+and it avoids the need to develop a separate population and fitness function as
+the bipartite competition does.
+
+\subsection{A Comparative Study of Two Competitive Fitness Functions}
+
+Panait and Luke provided a further examination of tournament selection versus
+round robin style competitions~\cite{Panait02acomparative}. In their study they
+used both tournament selection and generalized round robin competition on four
+different problems: two versions of the game Nim, the Rosenbrock function, and
+the Rastrigin function~\footnote{Like other functions used in the study of
+optimization, the Rosenbrock and Rastrigin functions have many local minima and
+a single global minimum. For examples see
+\url{https://en.wikipedia.org/wiki/Rosenbrock_function} and
+\url{https://en.wikipedia.org/wiki/Rastrigin_function}}.
+
+Panait and Luke presented a generalized version of round robin called K-Random
+Opponents. When \(K=1\), then K-Random Opponents is a single elimination
+tournament: the population is divided into pairs and each pair engages in a
+single competition with the loser eliminated from further competitions in that
+generation. This is used when the cost of a single competition is relatively
+high and thus it would be impractical to perform a full round robin tournament.
+When \(K=n-1\), then a complete round robin tournament is conducted where every
+member of the population engages in one competition against every other member.
+When \(1 < K < n-1\) then each individual competes against \(K\) opponents.
+
+For each of the four problems they evaluated, Panait and Luke found that in
+general, the Single Elimination Tournament performed better than K-Random
+Opponents for almost any value of K. The specific cases where Single Elimination
+Tournament performed worse than K-Random Opponents was when noise was introduced
+into the fitness calculation. Noise was introduced by taking a random number of
+competitions and exchanging the scores of the two players. That is, for a random
+percentage of games, the loser of the game is awarded a win, and the winner is
+given the loss. Luke and Panait found that Single Elimination Tournament
+performed worse than K-Random Opponents for some values of \(K\) when the noise
+percentage was greater than 30\%.
+
+The research cited above into Checkers, Othello, Acquire, and Monopoly all used
+K-Random
+Opponents~\cite{Fogel2000Anaconda,journals/tec/ChellapillaF01,ChongTW05,Anthony2002,DBLP:conf/cig/Frayn05}.
+
+\subsection{Fitnessless Coevolution}
+
+More recently Ja\'{s}kowski, Krawiec, and Wieloch realized that when a
+competitive fitness function was being used as part of a genetic algorithm, one
+could skip the fitness evaluation component and use the competitions directly in the
+selection phase of the algorithm~\cite{Jaskowski:2008:FC:1389095.1389161}. 
+
+When using fitnessless coevolution, the fitness evaluation step is skipped
+completely. The genetic algorithm then proceeds to the selection phase where
+individuals are selected for propagation to the next generation, either
+directly, or as part of reproduction. For each new individual in the next
+generation, a sample set \(S\) of individuals is selected with replacement from
+the current generation. The individuals in \(S\) then compete in a single
+elimination tournament and the winner of the tournament becomes a candidate for
+being directly added to the next generation, or becoming a parent of a new
+individual in the next generation. The size \(t\) of sample set \(S\) can be
+varied. If \(t=1\) then fitnessless coevolution is the same as Single
+Elimination Tournament.
+
+Ja\'{s}kowski, Krawiec, and Wieloch evaluated fitnessless coevolution against a
+similar set of problems as Panait and Luke (a single version of Nim, the
+Rosenbrock function, and the Rastrigin function) and additionally tested it with
+Tic-Tac-Toe. They found that fitnessless coevolution was competitive with Single
+Elimination Tournament and K-Random Opponents. It usually outperformed Single
+Elimination Tournament, and like Single Elimination Tournament only performed
+more poorly than K-Random Opponents when there was a noise percentage more than
+30\%. It simplifies the competitive fitness genetic algorithm by eliminating
+numerical fitness and the evaluation phase of the genetic algorithm. Also,
+fitnessless coevolution works best with tasks that satisfy the transitivity
+condition: in a game, if \(Player_{i}\) beats \(Player_{j}\) and \(Player_{j}\)
+beats \(Player_{k}\), then \(Player_{i}\) beats \(Player_{k}\) for all i, j, k.
+
+However, while fitnessless coevolution simplifies the genetic algorithm by
+eliminating numerical fitness, this can also be a disadvantage. In many of the
+studies discussed above, the best individuals in a generation were often
+validated by competing them against some other benchmark player, either a
+different AI opponent or a human competitor. With no numerical fitness, it is
+more difficult to select the fittest players in a generation for the objective
+competition.
+
+\section{Summary}
+
+Evolutionary computing has been applied to the study of games for many years. It
+has been used successfully for the very simplest of games to the most
+complicated of games. When genetic algorithms are applied to games, it is almost
+always necessary to use a competitive fitness function. Researchers generally
+use K-Random Opponents as the competition structure. If the game has a very high
+time- or space- complexity they may use a single elimination tournament
+style of competition \(K=1\). Even if the game has low complexity, in the
+absence of noise, single elimination tournament style competitions appear to
+provide the most robust fitness determination. However, if there is a lot of
+noise, single elimination tournament does worse than K-Random Opponents with a
+higher value of K. This is because noise can distort the results of a single
+competition and multiple competitions are needed to smooth out the effects of
+noise.

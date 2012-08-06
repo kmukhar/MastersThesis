@@ -1,0 +1,71 @@
+\clearpage
+\chapter{Introduction}\label{chap:intro}
+Games can be used to study many different real world problems. In the
+classic monograph by John Von Neumann and Oskar Morgenstern, \emph{Theory of
+Games and Economic Behavior}, it was applied to economics and economic behavior
+\cite{neumann1944theory}.
+
+Early work by mathematicians studying card and dice games led to the development
+of statistics and probability \cite{hald1990history,rudas2008handbook}. Games
+can be studied from a sociological point of view, looking at how social behavior
+and human interactions affect and are affected by game play
+\cite{fararo1992meaning}. As mentioned previously, games can be studied as a
+model of economics and decision making \cite{neumann1944theory}. A great deal of
+artificial intelligence research deals with developing AI game players and
+finding optimum game strategies \cite{russell2010artificial}.
+
+\section{Objective}
+
+Early research into AI and games tended to focus on developing algorithms for
+searching the space of legal moves. This research led to such techniques as the
+Min-Max algorithm~\cite{neumann1944theory} and the A* search
+algorithm~\cite{Hart_Nilsson_Raphael_1968,Hart:1972:LFB:1056777.1056779}. The
+Min-Max algorithm was originally developed by Von Neumann as a way to develop
+the best move in a 2-person zero-sum game with complete information. Although
+originally developed for a 2-person game, the min-max theorem has been extended
+to cover any number of players. The A* algorithm is a method to find the least
+cost path in traversing a search space or graph.
+
+With the development of genetic algorithms and evolutionary computation,
+re\-search\-ers in this area have investigated many games in attempts to show
+that optimal strategies for games can be evolved. Much of that research has
+focused on two player deterministic games like The Prisoner's
+Dilemma~\cite{Flood1958} and Tic-Tac-Toe. Evolutionary computation techniques
+have been used with good success for these types of problems.
+
+There are other classes of games, however, such as multi-player
+non-deterministic games where the search space is potentially quite large and
+the cost function could have multiple local and global optima. Any game that
+relies on some form of non-determinism (i.e., rolling dice, shuffling cards,
+etc.) falls into this category. Evolutionary computation could be an effective
+approach to these types of problems because it provides the capability to
+traverse a large search space and find optimal strategies.
+
+This paper proposes a thesis project to investigate using evolutionary
+computation to evolve game strategies for these types of games. In general, the
+proposed project will study whether genetic algorithms can be used to develop
+strategies for non-deterministic games or games with incomplete knowledge.
+
+\section{Organization of Thesis}
+
+The thesis project proposed here will investigate evolutionary computing as a
+means to develop game playing strategies. Since the primary subject
+matter of this thesis is genetic algorithms, we start in Chapter
+\ref{chap:geneticAlgorithms} with a brief overview of genetic algorithms. 
+
+Chapter \ref{chap:background} provides a survey of some previous research into
+evolutionary computation and games that will be applied in this thesis. We will
+look at both practical and theoretical research that applied evolutionary
+computing to various games.
+
+The game known as Monopoly was chosen as the subject of this research. Chapter
+\ref{chap:monopoly} provides details about Monopoly, focusing on the rules of
+the game.
+
+The details of how a genetic algorithm will be used in this research is provided
+in Chapter \ref{chap:algorithm}. We look at various formats for the genome,
+along with different options for measuring genome fitness, and the process for
+propagating a population.
+
+Finally, The results of this research are detailed in Chapter
+\ref{chap:results}.

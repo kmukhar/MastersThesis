@@ -1,0 +1,118 @@
+%Thesis Main Page used with thesis.sty (Dorothea Brosius, September 2007) based on the
+%University of Maryland Electronic Thesis and Dissertation (ETD) Style Guide
+
+%Adapted for use at the University of Colorado, Colorado Springs by Suzette Stoutenberg and Jeremy Witmer
+
+\documentclass[11pt]{thesis}
+\usepackage[utf8]{inputenc}
+\usepackage{lscape}
+\usepackage{indentfirst}
+\usepackage{latexsym}
+\usepackage{multirow}
+\usepackage{tabls}
+\usepackage{wrapfig}
+\usepackage{slashbox}
+\usepackage{longtable}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{algorithm}
+\usepackage{algorithmic}
+\usepackage{cite}
+\usepackage[hyphens]{url}
+%\usepackage{hyperref}
+% when uncommenting hyperref, uncomment phantom section below
+\usepackage{boxedminipage}
+\usepackage{listings}
+\usepackage{ifpdf}
+\usepackage{verbatim}
+\usepackage{color}
+
+\ifpdf
+	\usepackage[pdftex]{graphicx}
+\else
+	\usepackage{graphicx}
+\fi
+
+\ifpdf
+	\DeclareGraphicsExtensions{.pdf, .jpg, .tif, .png}
+\else
+	\DeclareGraphicsExtensions{.eps, .jpg}
+\fi
+
+\renewcommand{\topfraction}{0.85}
+\renewcommand{\textfraction}{0.1}
+\renewcommand{\floatpagefraction}{0.75}
+
+\renewcommand{\baselinestretch}{2}
+\setlength{\textwidth}{6in}
+\setlength{\textheight}{9in}
+\setlength{\topmargin}{-.50in}
+%\setlength{\topmargin}{0in}    %use this setting if the printer makes the the top margin 1/2 inch instead of 1 inch
+\setlength{\oddsidemargin}{.5in}
+
+\clubpenalty=10000
+\widowpenalty=10000
+
+\begin{document}
+
+\pagenumbering{roman}
+\input{Chapters/0-FrontMatter.tex} %This is all title pages, acknowledgments, copyright, etc.
+
+\newpage
+%\small\normalsize
+\tableofcontents %(required, lower-case Roman)
+
+\newpage
+\setlength{\parskip}{1em}
+\clearpage
+%\phantomsection
+\addcontentsline{toc}{chapter}{List of Tables}
+\listoftables %(if present,
+% lower-case Roman)
+
+\newpage
+\clearpage
+%\phantomsection
+\addcontentsline{toc}{chapter}{List of Figures}
+\listoffigures %(if present,
+% lower-case Roman)
+
+\newpage
+\setlength{\parskip}{0em}
+\small\normalsize
+\setcounter{tocdepth}{2}
+
+\pagenumbering{arabic}
+\setcounter{page}{1}
+
+\setlength{\parindent}{.4in}
+
+\lstset{
+  breaklines=true,
+  language=XML,
+  frame=ltrb,
+  framesep=5pt,
+  basicstyle=\normalsize
+}
+
+\input{Chapters/1-Introduction}
+\input{Chapters/2-GeneticAlgorithms}
+\input{Chapters/3-Background}
+\input{Chapters/4-Monopoly}
+\input{Chapters/5-AlgorithmDesign}
+\input{Chapters/6-Results}
+\input{Chapters/7-Conclusion}
+%more chapters would go here
+
+\renewcommand{\baselinestretch}{1}
+\small\normalsize
+\newpage
+
+\bibliographystyle{ieeetr}
+
+\bibliography{Thesis}
+
+\renewcommand{\baselinestretch}{2}
+\input{Chapters/Appendix.tex} %example Appendix
+
+\end{document}
