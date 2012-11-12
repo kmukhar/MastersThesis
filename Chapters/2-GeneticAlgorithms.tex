@@ -5,12 +5,12 @@ Genetic algorithms are used to model optimization problems and to find solutions
 to those problems using techniques borrowed from natural evolution. In nature,
 populations of individuals exist in some environment. Individuals that are more
 fit in their environment are more likely to survive to pass on their genes to
-new individuals.
+new individuals, leading to the overall population being more fit.
 
 Likewise in genetic algorithms there are populations of solutions. Those
 solutions that are more fit in the solution space are more likely to pass their
 genes to a new population either through reproduction, recombination, or
-mutation.
+mutation. Over time, the population tends to have more fit solutions.
 
 Genetic algorithms can be used to find approximate solutions to problems that
 are considered to be intractable.
@@ -124,11 +124,11 @@ solution has the following two attributes:
 
 \begin{enumerate}
   \item {The solution can be encoded into some kind of data structure.}
-  \item {There is a relatively low cost method to measure the fitness (the
-  ``goodness'') of the solution.}
+  \item {There is a relatively low cost deterministic method to measure the
+  fitness (the ``goodness'') of the solution.}
 \end{enumerate}
 
-A genetic algorithm consists of randomly creating solutions to a problem,
+A genetic algorithm consists of randomly creating solutions to a problem, and
 encoding those solutions into a data structure. The quality of those solutions
 is assessed, and then new solutions are created by reproducing, combining, or
 mutating the current set of solutions into a new set. Higher quality solutions
@@ -137,8 +137,8 @@ solutions. Since higher quality solutions are more likely to propagate into the
 next generation, over time they come to make up larger proportions of the
 population. Combination and mutation introduce variations into the population
 which creates solutions which cover unexplored regions of the solution space and
-make it more likely that solutions don't get trapped in local minima or maxima. Over
-time this tends to produce approximate solutions which are optimal or very
+make it more likely that solutions don't get trapped in local minima or maxima.
+Over time this tends to produce approximate solutions which are optimal or very
 close to optimal.
 
 To use the techniques of a genetic algorithm the solution to the problem needs
@@ -200,6 +200,10 @@ function would be the length of the tour encoded by the chromosome; if the
 problem domain is the set of moves in a game, the fitness function could be the
 payoff for making the move specified by the chromosome.
 
+\subsection{Stopping Criteria}
+
+Discuss stopping criteria.
+
 \subsection{Selection}
 
 After fitness is measured, the fitness is used to guide the selection of
@@ -212,6 +216,11 @@ ratio. This is commonly referred to as roulette wheel selection. Another
 technique is to randomly pick two individuals and compare their fitness; the
 individual with the higher fitness is then selected. This is referred to as
 tournament selection. 
+
+Individuals that are selected can be moved directly into the next generation.
+Alternately, they can be combined with other individuals to create new
+individuals for the next generation. Either or both of those occur in the
+propagation phase.
 
 \subsection{Propagation}
 
@@ -230,7 +239,9 @@ individuals. The most common method of recombination is known as crossover. For
 crossover, two individuals are selected and then a position in the chromosome is
 randomly chosen, the chromosome is split at that point, and then one of the
 sections created is exchanged with the same section in the other chromosome.
-This creates two new individuals in the new population.
+This creates two new individuals in the new population. There are other
+techniques for recombination; those will be discussed in praagraph
+\ref{2-recombination}.
 
 In mutation, an individual is selected and the chromosome of the individual is
 randomly changed. This can be an individual in the current population; the
@@ -283,16 +294,18 @@ individual loses a game does not make the individual poor quality: it could have
 lost just because of chance. In this case, one uses a competitive fitness
 function. We discuss these in much more detail in Chapter~\ref{chap:background}.
 
-\section{Recombination and mutation}
+\section{Recombination and mutation} \label{2-recombination}
 
 There are many different ways to perform recombination in a genetic algorithm.
-We briefly discussed the most basic crossover operation earlier. When
-recombining strings or arrays, one can also use multi-point crossover where
-multiple crossover points are used. In uniform crossover each gene in the child
-is randomly selected from the parents. With real-valued or continuous
-chromosomes, there is arithmetic (also known as blended) crossover that linearly
-combines both parent chromosomes to create two child
+The basic crossover operation was briefly discussed earlier. When recombining
+strings or arrays, one can also use multi-point crossover where multiple
+crossover points are used. In uniform crossover each gene in the child is
+randomly selected from the parents. With real-valued or continuous chromosomes,
+there is arithmetic (also known as blended) crossover that linearly combines
+both parent chromosomes to create two child
 chromosomes~\cite{haupt2004practical}. With a problem like the traveling
 salesman problem, the standard crossover operations are not appropriate since
-they can duplicate cities in the chromosome. For permutation type problems,
-other crossover operations have been developed~\cite{goldberg1989genetic}.
+they can duplicate cities in the chromosome. For permutation type problems like
+the traveling salesman problem, other crossover operations have been
+developed~\cite{goldberg1989genetic} which avoid duplications in the child
+chromosomes. 

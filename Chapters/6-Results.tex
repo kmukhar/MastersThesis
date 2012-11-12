@@ -6,22 +6,28 @@ chromosomes in this experiment. One thousand generations were evolved for every
 combination of population size (32, 128, 512, and 1024), chromosome type (RGA,
 SGA, and TGA), number of games played by each chromosome in a generation (7, 25,
 50, 100), and fitness evaluator (FINISH\_ORDER, NET\_WORTH, NUM\_MONOPOLIES,
-NUM\_PROPERTIES, NUM\_WINS, and TOURNAMENT). Results of the evolutionary process
-are presented in the first section of this Chapter.
+NUM\_PROPERTIES, NUM\_WINS, and TOURNAMENT\footnote{For the tournament fitness
+evaluator the number of games was determined by the population size and was not
+independent. So for TOURNAMENT, 1000 generations were evolved for every
+combination of population size and chromosome type}). Results of the
+evolutionary process are presented in the first section of this Chapter.
 
 After the evolutionary process was complete, the best players from each
-generation were competed in various combinations to validate the results. First,
-an intra-population validation was performed where the best players from
+generation were competed in various combinations to validate the results. 
+
+First, an intra-population validation was performed where the best players from
 different generations within a population were competed against each other. For
 most populations, players in later generations were better than players in
 earlier generations, which suggests that the genetic algorithm was successful in
-evolving players. Players were also validated with an inter-population
+evolving players. 
+
+Second, Players were also validated with an inter-population
 validation. That is, the best players from different populations were competed
 against each other in various combinations. We expect that players from larger
 populations would tend to evolve into better players; it is not known whether
 any of the fitness evaluators would be better than any other. The
-inter-population competitions showed that players from the TBD TBD population
-performed the best (or TBD TBD TBD no fitness evaluator resulted in better
+inter-population competitions showed that players from the TBD population
+performed the best (or TBD no fitness evaluator resulted in better
 players than any other evaluator). The results from the intra- and
 inter-population competitions are discussed in the second section of this
 Chapter.
