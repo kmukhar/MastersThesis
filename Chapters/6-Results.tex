@@ -12,6 +12,17 @@ independent. So for TOURNAMENT, 1000 generations were evolved for every
 combination of population size and chromosome type}). Results of the
 evolutionary process are presented in the first section of this Chapter.
 
+In the first section, results for the RGA chromosome are presented first, and in
+a large amount detail. We also look briefly at the results for the SGA
+chromosomes, even though players with this chromosome tended to evolve poorly.
+This is most likely due to the fact that the data structure used for the SGA
+chromosomes is not well suited to the problem domain. Finally, results for the
+TGA chromosomes are also briefly discussed, but these players were almost
+identical to the RGA chromosomes and so do not provide much of any additional
+insight. Because the evolution of SGA and TGA chromosomes do not provide any
+useful information, the remainder of the chapter focuses exclusively on results
+obtained from the RGA chromosomes.
+
 After the evolutionary process was complete, the best players from each
 generation were competed in various combinations to validate the results. 
 
@@ -19,47 +30,48 @@ First, an intra-population validation was performed where the best players from
 different generations within a population were competed against each other. For
 most populations, players in later generations were better than players in
 earlier generations, which suggests that the genetic algorithm was successful in
-evolving players. 
+evolving players. We will also show that populations that play more games per
+generation tended to evolve better players than populations with less games per
+generation. 
 
-Second, Players were also validated with an inter-population
-validation. That is, the best players from different populations were competed
-against each other in various combinations. We expect that players from larger
-populations would tend to evolve into better players; it is not known whether
-any of the fitness evaluators would be better than any other. The
-inter-population competitions showed that players from the TBD population
-performed the best (or TBD no fitness evaluator resulted in better
-players than any other evaluator). The results from the intra- and
-inter-population competitions are discussed in the second section of this
-Chapter.
+Second, players were also validated with an inter-population validation. That
+is, the best players from different populations were competed against each other
+in various combinations. Since the first analysis showed that populations that
+played more games per generation tended to evolve better players, only players
+from the populations that played 100 games per generation were
+competed\footnote{Except for TOURNAMENT in which the most games per generation
+was 9, for the population size 1024.}. In this validation, various fitness evaluators
+were compared to see which fitness evaluator evolved the best players.
+
+Finally, different population sizes are compared. In this validation, we expect
+that players from larger populations would tend to evolve into better players. The validation
+shows that this expectation was correct.
+
+The results from the intra- and inter-population competitions are discussed in
+the second section of this Chapter.
 
 In the last section of this Chapter, results from real-world competitions are
 presented. Based on the previous intra- and inter-population validations
 performed, a set of the best overall players that evolved were selected and then
-competed against human players and AI players available online. In these
-competitions players from TBD TBD TBD TBD TBD.
-
-In each section that follows, results for the RGA chromosome are presented
-first, and in a large amount detail. The results for the SGA chromosomes are
-also presented, even though players with this chromosome tended to evolve
-poorly. This is most likely due to the fact that the data structure used for the
-SGA chromosomes is not well suited to the problem domain. Finally, results for
-the TGA chromsomes are also discussed, but these players were almost identical
-to the RGA chromosomes and so do not provide much of any additional insight.
+competed against human players and AI players available online.
 
 \section{The evolutionary process and its results}
 
 In a genetic algorithm which can use an objective fitness function, we expect
 that the initial population has fitness values which are uniformly distributed.
-As the population is evolved, average fitness should steadily improve until a
-plateau is reached, and the average error should decrease to some minimal
-value.
+In other words, the probability of an individual having average fitness is the
+same as the probability of having low fitness or high fitness. As the population
+is evolved, average fitness should steadily improve until a plateau is reached,
+and the average error should decrease to some minimal value.
 
 The expected results for for a competitive fitness function are different. Since
 the first generation is randomly created, it is expected that the players will
 be randomly spread in their ability to win games. Some players will win games,
 some will lose games, and the average player will win about half the games they
-play. The distribution of fitness scores should follow a distribution similar to
-the binomial distribution (See Figure~\ref{figure-binomial}).
+play. So the probability that an individual has average fitness is higher than
+the probability that an individuals has low or high fitness. The distribution of
+fitness scores should follow a distribution similar to the binomial distribution
+(See Figure~\ref{figure-binomial}).
 
 \begin{figure}[htp]
 \centerline{\includegraphics[width=1.0\columnwidth]{Figures/binomial.png}}
@@ -69,19 +81,21 @@ fitness. The distribution is similar to a binomial distribution.}
 \label{figure-binomial}
 \end{figure}
 
+\subsection{Results for Initial Generations}
+
 When the initial population of players was run through a single generation, the
-actual results matched the expected results quite closely. Thirty populations
-were initialized and run through a single generation for the various
-combinations of parameters. The average population fitness for the 30 trials
-after 1 generation was as expected. For example, for the FINISH\_ORDER fitness
-evaluator and 100 games per generation, a player that wins all 100 games will
-have a fitness of 300; a player that loses all 100 games will have a fitness of
-0. Se we expect that the fitness scores in the first generation will have a
-distribution that is centered on the average score of 150.
-Figure~\ref{figure-RGA-G000-N100-FO-initial_fitness} shows the fitness
-distribution for the first generation of an RGA population with the
-FINISH\_ORDER fitness evaluator. The average of the distribution over 30 trials
-was 149.962.
+actual results matched the expected results quite closely. 
+
+It is very obvious with the FINISH\_ORDER fitness evaluator, for example.
+Because the FINISH\_ORDER evaluator assigns 1, 2, and 3 points to the players in
+a game, for a total of 6 points per game, the average fitness for any single
+game is \(6/4\) or 1.5. So for \(n\) games the average fitness is \(n * 1.5\).
+For a population that plays 100 games per generation, we expect that the fitness
+scores in any generation will have a distribution that is centered on the
+average score of 150. Figure~\ref{figure-RGA-G000-N100-FO-initial_fitness} shows
+the fitness distribution for the first generation of an RGA population with the
+FINISH\_ORDER fitness evaluator. The figure shows a binomial shaped distribution
+which appears to be centered around the population average of 150. 
 
 \begin{figure}[htp]
 \centerline{\includegraphics[width=1.0\columnwidth]{Figures/RGA_1024_G000_N100_FO.png}}
@@ -90,13 +104,19 @@ generation 0, 100 games per generation, finish order fitness evaluator.}
 \label{figure-RGA-G000-N100-FO-initial_fitness}
 \end{figure}
 
+This same process (initialize a population and compete for a single generation)
+was repeated for thirty trials. This was done for all the various combinations
+of parameters.
+
+\subsection{Results for Subsequent Generations}
+
 The other difference between a competitive fitness function and an objective
-fitness function is that as the population evolves the average and best fitness
-scores are not expected to increase in the competitive fitness function. Rather
-the average fitness will remain the same as the initial population, and the
-worst and best fitness scores should tend to converge towards the average. As
-the players get better and the population is more evenly matched, most players
-will tend to win half the games they play.
+fitness function is that as the population co-evolves under a competitive
+fitness function the average and best fitness scores are not expected to
+increase. Rather the average fitness will remain the same as the initial
+population, and the worst and best fitness scores should tend to converge
+towards the average. As the players get better and the population is more evenly
+matched, most players will tend to win half the games they play.
 
 This is because the fitness is measured by awarding points to players as they
 play against each other in games. So, as poor players are removed from the
@@ -111,8 +131,8 @@ predicted, it can be seen that the mean remained approximately the same, but the
 variance has appeared to decrease. Whereas the fitness scores in generation 0
 ranged from 103 to 193, in generation 100 they ranged from 115 to 186. The
 distribution around the mean tightened relatively quickly (it can clearly be
-seen in generation 100), and remained fairly constant over the course of the
-simulation which was 1000 generations.
+seen in generation 100), and then remained fairly constant over the course of
+the simulation which was 1000 generations.
 
 \begin{figure}[htp]
 \centerline{\includegraphics[width=1.0\columnwidth]{Figures/RGA_1024_G100_N100_FO.png}}
@@ -188,11 +208,11 @@ Table~\ref{table-stats-for-s1024-n100-fo}.
 \hline                        
 Generation & Min & Max & Average & Variance & Std Dev \\ \hline \hline
 0   & 103 & 193 & 150 & 227.43 & 15.08 \\ \hline
-100 & 115 & 186 &   0 & 126.81 & 11.26 \\ \hline 
-250 & 110 & 179 &   0 & 122.02 & 11.05 \\ \hline
-500 & 119 & 189 &   0 & 120.44 & 10.97 \\ \hline
-750 & 117 & 184 &   0 & 124.63 & 11.16 \\ \hline
-999 & 113 & 188 &   0 & 121.10 & 11.00 \\ \hline
+100 & 115 & 186 & 150 & 126.81 & 11.26 \\ \hline 
+250 & 110 & 179 & 150 & 122.02 & 11.05 \\ \hline
+500 & 119 & 189 & 150 & 120.44 & 10.97 \\ \hline
+750 & 117 & 184 & 150 & 124.63 & 11.16 \\ \hline
+999 & 113 & 188 & 150 & 121.10 & 11.00 \\ \hline
 \end{tabular}
 \label{table-stats-for-s1024-n100-fo}
 \end{center}
