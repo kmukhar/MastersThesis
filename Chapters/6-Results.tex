@@ -40,12 +40,13 @@ in various combinations. Since the first analysis showed that populations that
 played more games per generation tended to evolve better players, only players
 from the populations that played 100 games per generation were
 competed\footnote{Except for TOURNAMENT in which the most games per generation
-was 9, for the population size 1024.}. In this validation, various fitness evaluators
-were compared to see which fitness evaluator evolved the best players.
+was 9, for the population size 1024.}. In this validation, various fitness
+evaluators were compared to see which fitness evaluator evolved the best
+players.
 
 Finally, different population sizes are compared. In this validation, we expect
-that players from larger populations would tend to evolve into better players. The validation
-shows that this expectation was correct.
+that players from larger populations would tend to evolve into better players.
+The validation shows that this expectation was correct.
 
 The results from the intra- and inter-population competitions are discussed in
 the second section of this Chapter.
@@ -87,15 +88,16 @@ When the initial population of players was run through a single generation, the
 actual results matched the expected results quite closely. 
 
 It is very obvious with the FINISH\_ORDER fitness evaluator, for example.
-Because the FINISH\_ORDER evaluator assigns 1, 2, and 3 points to the players in
-a game, for a total of 6 points per game, the average fitness for any single
-game is \(6/4\) or 1.5. So for \(n\) games the average fitness is \(n * 1.5\).
+Figure~\ref{figure-RGA-G000-N100-FO-initial_fitness} shows the fitness
+distribution for the first generation of an RGA population with the
+FINISH\_ORDER fitness evaluator. The figure shows a binomial shaped distribution
+which appears to be centered around the population average of 150. Because the
+FINISH\_ORDER evaluator assigns 1, 2, and 3 points to the players in a game, for
+a total of 6 points per game, the average fitness for any single game is \(6/4\)
+or 1.5. So for \(n\) games the average fitness is \(n * 1.5\).
 For a population that plays 100 games per generation, we expect that the fitness
 scores in any generation will have a distribution that is centered on the
-average score of 150. Figure~\ref{figure-RGA-G000-N100-FO-initial_fitness} shows
-the fitness distribution for the first generation of an RGA population with the
-FINISH\_ORDER fitness evaluator. The figure shows a binomial shaped distribution
-which appears to be centered around the population average of 150. 
+average score of 150.
 
 \begin{figure}[htp]
 \centerline{\includegraphics[width=1.0\columnwidth]{Figures/RGA_1024_G000_N100_FO.png}}
@@ -107,6 +109,10 @@ generation 0, 100 games per generation, finish order fitness evaluator.}
 This same process (initialize a population and compete for a single generation)
 was repeated for thirty trials. This was done for all the various combinations
 of parameters.
+
+The NUM\_WINS fitness evaluator is similar to FINISH\_ORDER. Every game will
+always award 3 points to the winner, so the average fitness for a single game is
+\(3/4\) or 0.75. So for \(n\) games the average fitness is \(n * 1.5\).
 
 \subsection{Results for Subsequent Generations}
 
@@ -278,9 +284,9 @@ That is, for the player to not obtain a property requires the player to decline
 to buy it twice (the second decline being the loss of the auction). Since these
 are independent events, the probability of losing an auction is approximately
 \(P_{decline} * P_{decline}\). The probability of obtaining a property is 1
-minus that product. Thus, even when the probability of buying is as low as 0.6, the
-probability of declining is 0.4, and the probability of obtaining the property
-becomes 0.84.
+minus that product. Thus, even when the probability of buying is as low as 0.6,
+the probability of declining is 0.4, and the probability of obtaining the
+property becomes 0.84.
 
 \section{SGA Player}
 
@@ -363,7 +369,8 @@ these competitions.
 \begin{figure}[htp]
 \centerline{\includegraphics[width=1.0\columnwidth]{Figures/figureTBD.png}}
 \caption[Validation - Comparing Fitness Evaluators]{The results of playing the
-best player in the last generation against the best players in previous generations.}
+best player in the last generation against the best players in previous
+generations.}
 \label{figure-interpopulation1}
 \end{figure}
 
@@ -385,6 +392,7 @@ these competitions.
 \begin{figure}[htp]
 \centerline{\includegraphics[width=1.0\columnwidth]{Figures/figureTBD.png}}
 \caption[Validation - Comparing population sizes]{The results of playing the
-best player in the last generation against the best players in previous generations.}
+best player in the last generation against the best players in previous
+generations.}
 \label{figure-interpopulation2}
 \end{figure}
