@@ -74,8 +74,8 @@ the probability that an individuals has low or high fitness. The distribution of
 fitness scores should follow a distribution similar to the binomial distribution
 (See Figure~\ref{figure-binomial}).
 
-\begin{figure}[htp]
-\centerline{\includegraphics[width=1.0\columnwidth]{Figures/binomial.png}}
+\begin{figure}[htbp]
+\centerline{\includegraphics[width=0.75\columnwidth]{Figures/binomial.png}}
 \caption[Binomial Distribution]{The expected fitness distribution for the first
 generation of a population. A peak is expected around the average population
 fitness. The distribution is similar to a binomial distribution.}
@@ -101,7 +101,7 @@ scores in any generation will have a distribution that is centered on the
 average score of 150.
 
 \begin{figure}[htbp]
-\centerline{\includegraphics[width=1.0\columnwidth]{Figures/RGA_1024_G000_N100_FO.png}}
+\centerline{\includegraphics[width=0.75\columnwidth]{Figures/RGA_1024_G000_N100_FO.png}}
 \caption[RGA Fitness Distribution, Initial Generation]{RGA chromosome,
 generation 0, 100 games per generation, finish order fitness evaluator.}
 \label{figure-RGA-G000-N100-FO-initial_fitness}
@@ -120,10 +120,40 @@ NUM\_WINS fitness evaluator. The figure shows a binomial shaped distribution
 which appears to be centered around the population average of 75.
 
 \begin{figure}[htbp]
-\centerline{\includegraphics[width=1.0\columnwidth]{Figures/RGA_1024_G000_N100_NW.png}}
+\centerline{\includegraphics[width=0.75\columnwidth]{Figures/RGA_1024_G000_N100_NW.png}}
 \caption[RGA Fitness Distribution, Initial Generation]{RGA chromosome,
 generation 0, 100 games per generation, number of wins fitness evaluator.}
 \label{figure-RGA-G000-N100-NW-initial_fitness}
+\end{figure}
+
+The fitness distribution for the initial generation with the NET\_WORTH fitness
+evaluator is shown in Figure~\ref{figure-RGA-G000-N100-NetW-initial_fitness}.
+The fitness distribution for the initial generation with the NUM\_MONOPOLIES
+fitness evaluator is shown in
+Figure~\ref{figure-RGA-G000-N100-NM-initial_fitness}.
+The fitness distributions for the initial generation with the NUM\_PROPERTIES
+fitness evaluator is shown in
+Figure~\ref{figure-RGA-G000-N100-NP-initial_fitness}.
+
+\begin{figure}[htbp]
+\centerline{\includegraphics[width=0.75\columnwidth]{Figures/RGA_1024_G000_N100_NetW.png}}
+\caption[RGA Fitness Distribution, Initial Generation]{RGA chromosome,
+generation 0, 100 games per generation, net worth fitness evaluator.}
+\label{figure-RGA-G000-N100-NetW-initial_fitness}
+\end{figure}
+
+\begin{figure}[htbp]
+\centerline{\includegraphics[width=0.75\columnwidth]{Figures/RGA_1024_G000_N100_NM.png}}
+\caption[RGA Fitness Distribution, Initial Generation]{RGA chromosome,
+generation 0, 100 games per generation, number of monopolies evaluator.}
+\label{figure-RGA-G000-N100-NM-initial_fitness}
+\end{figure}
+
+\begin{figure}[htbp]
+\centerline{\includegraphics[width=0.75\columnwidth]{Figures/RGA_1024_G000_N100_NP.png}}
+\caption[RGA Fitness Distribution, Initial Generation]{RGA chromosome,
+generation 0, 100 games per generation, number of properties fitness evaluator.}
+\label{figure-RGA-G000-N100-NP-initial_fitness}
 \end{figure}
 
 \subsection{Results for Subsequent Generations}
@@ -153,7 +183,7 @@ seen in generation 100), and then remained fairly constant over the course of
 the simulation which was 1000 generations.
 
 \begin{figure}[htp]
-\centerline{\includegraphics[width=1.0\columnwidth]{Figures/RGA_1024_G100_N100_FO.png}}
+\centerline{\includegraphics[width=0.75\columnwidth]{Figures/RGA_1024_G100_N100_FO.png}}
 \caption[RGA Fitness Distribution, 100th Generation]{RGA chromosome, generation
 100, 100 games per generation, finish order fitness evaluator.}
 \label{figure-100th_gen_fitness}
@@ -269,7 +299,7 @@ the gene values for buying when one opponent owns are generally higher than when
 two opponents own a property in the group.
 
 \begin{figure}[htp]
-\centerline{\includegraphics[width=1.0\columnwidth]{Figures/genome.png}}
+\centerline{\includegraphics[width=0.75\columnwidth]{Figures/genome.png}}
 \caption[Illustration of Genome]{This chart shows part of the genome of the
 fittest player in the last generation. This chart compares the chromosome used
 when the player already owns a property in the group (represented by the circle
@@ -311,7 +341,7 @@ similarity to the binomial distribution (Figure~\ref{figure-sga_gen0}), although
 there appears to be a bit of skewness.
 
 \begin{figure}[htp]
-\centerline{\includegraphics[width=1.0\columnwidth]{Figures/sga_gen0.png}}
+\centerline{\includegraphics[width=0.75\columnwidth]{Figures/sga_gen0.png}}
 \caption[SGA Fitness Generation 0]{This chart shows the actual fitness
 distribution for the first generation of an SGA population.}
 \label{figure-sga_gen0}
@@ -321,7 +351,7 @@ Figure~\ref{figure-sga_gen289} shows the fitness distribution at generation 289
 and the skew is definitely present. It is unclear why this would have occurred.
 
 \begin{figure}[htp]
-\centerline{\includegraphics[width=1.0\columnwidth]{Figures/sga_gen289.png}}
+\centerline{\includegraphics[width=0.75\columnwidth]{Figures/sga_gen289.png}}
 \caption[SGA Fitness Generation 289]{This chart shows the actual fitness
 distribution for the generation 289 of an SGA population.}
 \label{figure-sga_gen289}
@@ -359,7 +389,7 @@ generation should lose more games on average. The results are shown in
 Figure~\ref{figure-intrapopulation}.
 
 \begin{figure}[htp]
-\centerline{\includegraphics[width=1.0\columnwidth]{Figures/figureTBD.png}}
+\centerline{\includegraphics[width=0.75\columnwidth]{Figures/figureTBD.png}}
 \caption[Intrapopulation validation]{The results of playing the best player in
 the last generation against the best players in previous generations.}
 \label{figure-intrapopulation}
@@ -379,7 +409,7 @@ ACTUAL RESULTS TBD. Figure~\ref{figure-interpopulation1} shows the results of
 these competitions.
 
 \begin{figure}[htp]
-\centerline{\includegraphics[width=1.0\columnwidth]{Figures/figureTBD.png}}
+\centerline{\includegraphics[width=0.75\columnwidth]{Figures/figureTBD.png}}
 \caption[Validation - Comparing Fitness Evaluators]{The results of playing the
 best player in the last generation against the best players in previous
 generations.}
@@ -402,7 +432,7 @@ ACTUAL RESULTS TBD. Figure~\ref{figure-interpopulation2} shows the results of
 these competitions.
 
 \begin{figure}[htp]
-\centerline{\includegraphics[width=1.0\columnwidth]{Figures/figureTBD.png}}
+\centerline{\includegraphics[width=0.75\columnwidth]{Figures/figureTBD.png}}
 \caption[Validation - Comparing population sizes]{The results of playing the
 best player in the last generation against the best players in previous
 generations.}
