@@ -87,7 +87,8 @@ fitness. The distribution is similar to a binomial distribution.}
 When the initial population of players was run through a single generation, the
 actual results matched the expected results quite closely. 
 
-It is very obvious with the FINISH\_ORDER fitness evaluator, for example.
+For example, it can clearly be seen that the fitness distribution looks like a
+binomial distribution when the FINISH\_ORDER fitness evaluator is used.
 Figure~\ref{figure-RGA-G000-N100-FO-initial_fitness} shows the fitness
 distribution for the first generation of an RGA population with the
 FINISH\_ORDER fitness evaluator. The figure shows a binomial shaped distribution
@@ -99,20 +100,31 @@ For a population that plays 100 games per generation, we expect that the fitness
 scores in any generation will have a distribution that is centered on the
 average score of 150.
 
-\begin{figure}[htp]
+\begin{figure}[htbp]
 \centerline{\includegraphics[width=1.0\columnwidth]{Figures/RGA_1024_G000_N100_FO.png}}
 \caption[RGA Fitness Distribution, Initial Generation]{RGA chromosome,
 generation 0, 100 games per generation, finish order fitness evaluator.}
 \label{figure-RGA-G000-N100-FO-initial_fitness}
 \end{figure}
 
-This same process (initialize a population and compete for a single generation)
-was repeated for thirty trials. This was done for all the various combinations
-of parameters.
+% This same process (initialize a population and compete for a single generation)
+% was repeated for thirty trials. This was done for all the various combinations
+% of parameters.
 
 The NUM\_WINS fitness evaluator is similar to FINISH\_ORDER. Every game will
 always award 3 points to the winner, so the average fitness for a single game is
 \(3/4\) or 0.75. So for \(n\) games the average fitness is \(n * 1.5\).
+Figure~\ref{figure-RGA-G000-N100-NW-initial_fitness} shows the fitness
+distribution for the first generation of an RGA population with the
+NUM\_WINS fitness evaluator. The figure shows a binomial shaped distribution
+which appears to be centered around the population average of 75.
+
+\begin{figure}[htbp]
+\centerline{\includegraphics[width=1.0\columnwidth]{Figures/RGA_1024_G000_N100_NW.png}}
+\caption[RGA Fitness Distribution, Initial Generation]{RGA chromosome,
+generation 0, 100 games per generation, number of wins fitness evaluator.}
+\label{figure-RGA-G000-N100-NW-initial_fitness}
+\end{figure}
 
 \subsection{Results for Subsequent Generations}
 
