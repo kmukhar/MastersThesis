@@ -107,13 +107,14 @@ generation 0, 100 games per generation, finish order fitness evaluator.}
 \label{figure-RGA-G000-N100-FO-initial_fitness}
 \end{figure}
 
-The NUM\_WINS fitness evaluator is similar to FINISH\_ORDER. Every game will
-always award 3 points to the winner, so the average fitness for a single game is
-\(3/4\) or 0.75. So for \(n\) games the average fitness is \(n * 1.5\).
+The fitness distribution for the NUM\_WINS fitness evaluator is similar to
+FINISH\_ORDER. Every game will always award 3 points to the winner, so the
+average fitness for a single game is \(3/4\) or 0.75. So for \(n\) games the
+average fitness is \(n * 1.5\).
 Figure~\ref{figure-RGA-G000-N100-NW-initial_fitness} shows the fitness
-distribution for the first generation of an RGA population with the
-NUM\_WINS fitness evaluator. The figure shows a binomial shaped distribution
-which appears to be centered around the population average of 75.
+distribution for the first generation of an RGA population with the NUM\_WINS
+fitness evaluator. The figure shows a binomial shaped distribution which appears
+to be centered around the population average of 75.
 
 \begin{figure}[htbp]
 \centerline{\includegraphics[width=0.75\columnwidth]{Figures/RGA_1024_G000_N100_NW.png}}
@@ -124,12 +125,10 @@ generation 0, 100 games per generation, number of wins fitness evaluator.}
 
 The fitness distribution for the initial generation with the NET\_WORTH fitness
 evaluator is shown in Figure~\ref{figure-RGA-G000-N100-NetW-initial_fitness}.
-The fitness distribution for the initial generation with the NUM\_MONOPOLIES
-fitness evaluator is shown in
-Figure~\ref{figure-RGA-G000-N100-NM-initial_fitness}.
-The fitness distributions for the initial generation with the NUM\_PROPERTIES
-fitness evaluator is shown in
-Figure~\ref{figure-RGA-G000-N100-NP-initial_fitness}. 
+Because of the large spread of net worth values and because no [CHECK THIS] net
+worth values are the same,
+Figure~\ref{figure-RGA-G000-N100-NetW-initial_fitness} shows a histogram of the
+net worth scores.
 
 \begin{figure}[htbp]
 \centerline{\includegraphics[width=0.75\columnwidth]{Figures/RGA_1024_G000_N100_NetW.png}}
@@ -138,12 +137,23 @@ generation 0, 100 games per generation, net worth fitness evaluator.}
 \label{figure-RGA-G000-N100-NetW-initial_fitness}
 \end{figure}
 
+The fitness distribution for the initial generation with the NUM\_MONOPOLIES
+fitness evaluator is shown in
+Figure~\ref{figure-RGA-G000-N100-NM-initial_fitness}.
+
 \begin{figure}[htbp]
 \centerline{\includegraphics[width=0.75\columnwidth]{Figures/RGA_1024_G000_N100_NM.png}}
 \caption[RGA Fitness Distribution, Initial Generation]{RGA chromosome,
 generation 0, 100 games per generation, number of monopolies evaluator.}
 \label{figure-RGA-G000-N100-NM-initial_fitness}
 \end{figure}
+
+The fitness distributions for the initial generation with the NUM\_PROPERTIES
+fitness evaluator is shown in
+Figure~\ref{figure-RGA-G000-N100-NP-initial_fitness}. Because of the large
+spread in the fitness scores (the number of properties) and because there are
+very few duplicated scores, Figure~\ref{figure-RGA-G000-N100-NP-initial_fitness}
+shows a histogram of the fitness scores.
 
 \begin{figure}[htbp]
 \centerline{\includegraphics[width=0.75\columnwidth]{Figures/RGA_1024_G000_N100_NP.png}}
@@ -216,12 +226,13 @@ fitness evaluator is the FINISH\_ORDER evaluator.
 
 \begin{minipage}[t]{0.47\linewidth}
 \centering
+%%----start of third figure----
 \includegraphics[width=1.0\linewidth]{Figures/RGA_1024_G750_N100_FO.png}
 \caption[RGA Fitness Distribution, 750th Generation]{RGA chromosome, generation
 750, 100 games per generation, finish order fitness evaluator.} \label{figure-RGA-750th_gen_fitness}
 \end{minipage}%
 \hspace{0.06\linewidth}%
-%%----start of second figure----
+%%----start of fourth figure----
 \begin{minipage}[t]{0.47\linewidth}
 \centering
 \includegraphics[width=1.0\linewidth]{Figures/RGA_1024_G999_N100_FO.png}
@@ -240,13 +251,15 @@ population, the 100th generation, and every 250th generation. Thus, the point at
 which the population average fitness reaches the plateau cannot be calculated.
 However, in a coevolutionary environment this is not a problem. A coevolutionary
 population can continue to improve even though the fitness appears to plateau.
-This will be further discussed later in this Chapter.}, that the population
+This will be further discussed later in this Chapter.} that the population
 average fitness reaches a plateau. This is also demonstrated by looking at some
 of the descriptive statistics for each generation. These are shown in
-Table~\ref{table-stats-for-s1024-n100-fo}.
+Table~\ref{table-stats-for-s1024-n100-fo} for a single RGA population with a
+size of 1024 individuals; each player in the population played 100 games per
+generation and the fitness evaluator was the FINISH\_ORDER evaluator.
 
 \begin{table}[ht]
-\caption{Descriptive Statistics Various Generations}
+%\caption{Descriptive Statistics, RGA Finish Order, Various Generations}
 \begin{center}
 \begin{tabular}{ | r || r | r | r | r | r |}
 \hline                        
@@ -258,30 +271,58 @@ Generation & Min & Max & Average & Variance & Std Dev \\ \hline \hline
 750 & 117 & 184 & 150 & 124.63 & 11.16 \\ \hline
 999 & 113 & 188 & 150 & 121.10 & 11.00 \\ \hline
 \end{tabular}
+\caption{Descriptive statistics for various generations of a single RGA
+population, size 1024, Finish Order fitness evaluator, 100 games per generation}
 \label{table-stats-for-s1024-n100-fo}
 \end{center}
 \end{table}
 
 Looking at the standard deviation column, the standard deviation is 15.08 in the
-initial generation, is down to 11.26 by the 100th generation, and then in
-generations 250, 500, 750, and 999 (the last generation) the standard deviation
-appears to fluctuate around 11.05. We did not attempt to determine whether this
-difference in variance between generations is statistically
-significant~\footnote{To test the hypothesis that the standard deviations are
-not equal between generations would require running (in this example) a
-population of size 1024 through 1000 generations, and then repeating that 1000
-generation evolution enough times to get a statistically significant sample.
-Based on the work performed for this research, that would take approximately a
-half week of computer time for each population and there were 240 populations to
-test. It was decided that a better use of resources would be to do a comparative
-test between players of different generations and populations.}. As discussed
-earlier, it is expected that the average population fitness will stay the same,
-and the variance in population fitness will decrease. Even though it appears
-that the variance has plateaued in this example, what is more important is
-whether or not the population has stopped improving or not. Players in later
-generation can still be improving in fitness even though the variance of the
-population does not change. And in fact, what will be shown later in this
-Chapter is that whether or not the variance is decreasing, players in the last
+initial generation, is down to 11.26 by the 100th generation, and then in the
+remaining generations (250, 500, 750, and 999) the standard deviation appears to
+fluctuate around 11.05. We did not attempt to determine whether this difference
+in variance between generations is statistically significant~\footnote{To test
+the hypothesis that the standard deviations are not equal between generations
+would require running (in this example) a population of size 1024 through 1000
+generations, and then repeating that 1000 generation evolution enough times to
+get a statistically significant sample. Based on the work performed for this
+research, that would take approximately a half week for each trial, and there
+were 80 different populations for just the RGA chromosome. It was decided that a
+better use of resources would be to do a comparative test between players of
+different generations and populations.}.
+
+Table~\ref{table-stats-for-s1024-n100-netw} shows the statistics for a single
+RGA population with a size of 1024 individuals; each player in the population
+played 100 games per generation and the fitness evaluator was the NET\_WORTH
+evaluator.
+
+\begin{table}[ht]
+\begin{center}
+\begin{tabular}{ | r || r | r | r | r | r |}
+\hline                        
+Generation & Min & Max & Average & Variance & Std Dev \\ \hline \hline
+0   & 4728 & 11186 & 7499.99 & 1137919.23 & 1066.73 \\ \hline
+100 & & & & & \\ \hline 
+250 & 4285 & 10374 & 7499.80 &  649447.67 & 805.88 \\ \hline
+500 & 5235 & 10242 & 7500.00 & 665909.43 & 816.03 \\ \hline
+750 & 5080 & 10977 & 7500.05 & 723209.97 & 850.42 \\ \hline
+999 & 5306 & 9831 & 7499.96 & 649001.83 & 805.61 \\ \hline
+\end{tabular}
+\caption{Descriptive statistics for various generations of a single RGA
+population, size 1024, Net Worth fitness evaluator, 100 games per generation}
+\label{table-stats-for-s1024-n100-netw}
+\end{center}
+\end{table}
+
+
+
+As discussed earlier, it is expected that the average population fitness will
+stay the same, and the variance in population fitness will decrease. Even though
+it appears that the variance has plateaued in this example, what is more
+important is whether or not the population has stopped improving or not. Players
+in later generation can still be improving in fitness even though the variance
+of the population does not change. And in fact, what will be shown later in this
+chapter is that whether or not the variance is decreasing, players in the last
 generation are statistically better (i.e., they win more games) than players in
 the earliest generations.
 
