@@ -53,8 +53,8 @@ purple arrow in Figure~\ref{figure-statemachine}).
   \item{When a player lands on an unowned location, the player must decide
   whether or not to buy the property. If the player declines to buy the
   property, any player, including the player who declined to buy the property
-  originally, can bid for the property in an action. The player must then decide
-  whether to participate in the auction and how much to bid for the property.}
+  originally, can bid for the property in an auction. The player must then
+  decide whether to participate in the auction and how much to bid for the property.}
   \item{When a player is in jail, the player must decide whether to pay bail and
   exit jail immediately, or roll the dice and wait until doubles are rolled.}
   \item{When a player has a monopoly, the player must decide when and how to buy
@@ -95,7 +95,9 @@ the buy property decision (items 1 and 2 from the list above) and the get out of
 jail decision (item 3). The other two decisions, whether to build a house (item
 4) and whether to trade a property (item 5), were not implemented using genetic
 computation. The house building decision was implemented as a rule based
-algorithm; the property trading decision was not implemented.
+algorithm; the property trading decision was implemented by adapting a property
+evaluation function proposed by Yasamura, Oguchi, and
+Nitta~\cite{Yasumura2001Negotiate}.
 
 \section{Chromosome description} \label{5_chromo}
 
@@ -107,8 +109,8 @@ digits~\cite{haupt2004practical}. Following the initial description of the
 primary chromosome used in this study, two alternate versions of the chromosome
 will be described.
 
-The first set of chromosomes consists of 4 arrays of doubles, 40 elements per
-array (See Table \ref{table-chromo}). In this thesis, this chromosome is
+The first set of chromosomes consists of 4 arrays of real numbers, 40 elements
+per array (See Table \ref{table-chromo}). In this thesis, this chromosome is
 referred to as the RGA Player (RGA for Real-valued Genetic Algorithm). Each
 element of the array represents the probability that the player will purchase
 the property represented by the array element. There are 40 locations on the
@@ -139,7 +141,7 @@ Each array corresponds to one of the following game states:
 \begin{center}
 \begin{tabular}{|l|c|c|c|c|c|}
 \hline
-\multicolumn{1}{|l|}{\raisebox{-1.50ex}[0cm][0cm]{Location\!}}
+\multicolumn{1}{|l|}{\backslashbox{Location}{Chromosome}}
 & \multicolumn{1}{|c|}{Chr1}
 & \multicolumn{1}{|c|}{Chr2}
 & \multicolumn{1}{|c|}{Chr3}
@@ -164,7 +166,7 @@ location, the player must decide whether or not to buy the street. A random
 number is generated, and if that random number is less than the gene value, the
 player has ``decided'' to buy that street.
 
-Based on the game strategies listed earlier (Chapter \ref{m_gamestrategies})
+Based on the game strategies listed earlier (Section \ref{m_gamestrategies})
 we expect that the 4th chromosome will tend to have values that are generally
 less than the values in the 1st, 2nd and 3rd chromosomes. That is, the player
 will tend to decide to buy property more often when no other player owns any
@@ -174,7 +176,7 @@ another player (3rd chromosome).
 
 The other set of chromosomes is used to determine when to pay to get out of
 jail, and when to remain in jail (and hopefully not roll doubles with the dice).
-This chromosome is a 2-D array of doubles.
+This chromosome is a 2-D array of real numbers.
 
 Rows and columns in the array are indexed by 6-bit numbers created by the
 properties on one side of the board. The first index corresponds to the west
@@ -189,7 +191,7 @@ Ave. If opponents owned the first three, then the index would be $000111_2$. The
 second index is formed similarly. The two indices are then used to access an
 element in the array.
 
-The value at the element is a double which represents the probability that the
+The value at the element is a real number which represents the probability that the
 player will choose to pay the bail. When the player is in jail, if a randomly
 generated number is less than the gene value, the player has ``decided" to pay
 bail. Note that this scheme automatically accounts for different game states:
@@ -549,7 +551,7 @@ uses parameters similar to those used by Frayn, but with some modifications.
   \item Another 30\% of the new population is created by selecting individuals through
   tournament selection, mutating them, and then copying them into the new
   generation.
-  \item the final individuals are created by selecting parents using
+  \item The final individuals are created by selecting parents using
   roulette wheel selection, and then combining the chromosomes to create two
   new children. The child chromosomes are created by arithmetic crossover using
   the formulas 
