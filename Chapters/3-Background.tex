@@ -70,18 +70,18 @@ reasoning applies to player 2.
 
 However, studies have shown that when the game is played repeatedly (known as
 the Iterated Prisoner's Dilemma game), a strategy of cooperation will
-spontaneously evolve within a
-population~\cite{Axelrod1984,Nowak1993,DBLP:conf/cig/QuekG07,Mittal2009,WangTao2010}.
-This game is different from the others presented below in that there is an
-objective measure of fitness for this game. For Nowak and Sigmund, ``Strategies
-with higher payoffs produce more offspring~\cite{Nowak1993}.'' Similarly for
-Quek and Goh, ``\ldots fitness assignment is performed after each tournament and
-is given by the payoffs accumulated throughout the game
-play~\cite{DBLP:conf/cig/QuekG07}.'' Mittal and Deb studied the Prisoner's
-Dilemma as ''\ldots a bi-objective optimization problem of maximizing the
-player's own score and simultaneously minimizing the opponent's score'' where
-the score was the sum of the player's payoff over the set of games. Wang et al.
-also used the sum of payoffs as a fitness measure~\cite{WangTao2010}.
+spontaneously evolve within a population~\cite{Axelrod1984, Nowak1993,
+DBLP:conf/cig/QuekG07, Mittal2009, WangTao2010}. This game is different from the
+others presented below in that there is an objective measure of fitness for this
+game. For Nowak and Sigmund, ``Strategies with higher payoffs produce more
+offspring~\cite{Nowak1993}.'' Similarly for Quek and Goh, ``\ldots fitness
+assignment is performed after each tournament and is given by the payoffs
+accumulated throughout the game play~\cite{DBLP:conf/cig/QuekG07}.'' Mittal and
+Deb studied the Prisoner's Dilemma as ''\ldots a bi-objective optimization
+problem of maximizing the player's own score and simultaneously minimizing the
+opponent's score'' where the score was the sum of the player's payoff over the
+set of games~\cite{Mittal2009}. Wang, et al., also used the sum of payoffs as a
+fitness measure~\cite{WangTao2010}.
 
 In other games, having an objective fitness measure is not always possible. In
 some games the only thing that can be measured is which player won the game and
@@ -209,18 +209,18 @@ some subproblems for games such as Chess~\cite{Mitsuta:2010:OPG:1994486.1994517}
 (state space complexity of \(\approx10^{50}\)) and
 Go~\cite{shah2012Go,Blackman2009Go} (state space complexity of
 \(\approx10^{172}\)). It is clear that the state space complexity of a game is
-not barrier to the use of evolutionary computing.
+not a barrier to the use of evolutionary computing.
 
 These numbers will become important in Chapter~\ref{chap:algorithm} where the
 state space complexity of Monopoly is discussed.
 
-These deterministic, two-player, zero-sum games are widely studied because
-they are relatively simple to understand and play. Many classic game theory
-games like Prisoner's Dilemma have very small state spaces. Some of them have a
-relatively small search space (Othello, Chess and Go being obvious exceptions),
-which makes them tractable to study and simulation. However, there
-is a whole class of games with many examples that are non-deterministic,
-multi-player (but still usually zero-sum) games.
+Deterministic, two-player, zero-sum games are widely studied because they are
+relatively simple to understand and play. Many classic game theory games like
+Prisoner's Dilemma have very small state spaces. Some of them have a relatively
+small search space (Othello, Chess and Go being obvious exceptions), which makes
+them tractable to study and simulation. However, there is a whole class of games
+with many examples that are non-deterministic, multi-player (but still usually
+zero-sum) games.
 
 \section{Non-Deterministic games}
 
@@ -233,8 +233,20 @@ game.
 
 While not as well studied as the two player games mentioned previously, there
 has been some research on using evolutionary computation to create winning
-strategies for non-deterministic games. In this section we look at two games
-on which evolutionary computing has been applied: Acquire and Monopoly
+strategies for non-deterministic games. In this section we look at three games
+to which evolutionary computing has been applied: Rummy, Acquire, and Monopoly.
+
+\subsection{}
+
+Discuss Kotnik, Kalita here~\cite{kotnik2003significance}.
+
+\begin{figure}[htp]
+\centerline{\includegraphics[width=0.75\columnwidth]{Figures/figureTBD.png}}
+\caption[Kotnik Kalita]{The significance of temporal-difference learning in
+self-play training td-rummy versus evo-rummy.}
+\label{figure-kotnik}
+\end{figure}
+
 
 \subsection{Acquire: Evolving Board Evaluation Functions for a Complex Strategy
 Game}
@@ -287,11 +299,11 @@ with the greatest expected income where streets which comprise the Green group
 on the east side of the board, followed by the two groups (Red and Yellow) on
 the north side of the board.
 
-Abbott and Richey extended Ash's and Bishop's work with a more
+Abbott and Richey extended Ash and Bishop's work with a more
 rigorous~\footnote{In 1972, Ash and Bishop did not have the same computing
 resources to apply their calculations that Abbott and Richey had in 1997}
 examination of the game as a Markov process~\cite{Abbott1997}. They came to a
-similar conclusion: They expected income is greatest from the Green group,
+similar conclusion: the expected income is greatest from the Green group,
 followed by Red, Yellow, and Orange. However, because it costs much less to
 build houses and hotels on the Orange group, the more valuable group is Orange,
 followed by Red, then Yellow.

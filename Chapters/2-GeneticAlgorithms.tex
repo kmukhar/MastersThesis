@@ -2,10 +2,11 @@
 \chapter{Genetic Algorithms}\label{chap:geneticAlgorithms}
 
 Genetic algorithms are used to model optimization problems and to find solutions
-to those problems using techniques borrowed from natural evolution. In nature,
-populations of individuals exist in some environment. Individuals that are more
-fit in their environment are more likely to survive to pass on their genes to
-new individuals, leading to the overall population being more fit.
+to those problems using techniques borrowed from natural
+evolution~\cite{Holland1992,goldberg1989genetic,fogel2000evolutionary}. In
+nature, populations of individuals exist in some environment. Individuals that
+are more fit in their environment are more likely to survive to pass on their
+genes to new individuals, leading to the overall population being more fit.
 
 Likewise in genetic algorithms there are populations of solutions. Those
 solutions that are more fit in the solution space are more likely to pass their
@@ -15,11 +16,12 @@ mutation. Over time, the population tends to have more fit solutions.
 Genetic algorithms can be used to find approximate solutions to problems that
 are considered to be intractable.
 
-We begin with a very brief summary of the complexity class NP and list
-some examples of those types of problems. There are various ways to tackle
-NP problems such as approximation, the Monte Carlo method, and heuristics. None
-of those methods can guarantee an exact solution, just a ``good enough''
-solution.
+We begin with a very brief summary of the complexity class
+NP~\cite{alsuwaiyel1999algorithms,Cormen:2009:IAT:1614191} and list some
+examples of those types of problems. There are various ways to tackle NP
+problems such as approximation, the Monte Carlo method, and
+heuristics~\cite{russell2010artificial}. None of those methods can guarantee an
+exact solution, just a ``good enough'' solution.
 
 Another way to get an approximate solution is to use a genetic algorithm. A
 genetic algorithm is similar to the Monte Carlo method, in that a set of
@@ -61,10 +63,10 @@ winnning position for player \(P_1\)?}
 
 However, there are some problems which (so far) do not have a solution that can
 be deterministically computed in polynomial time. In \emph{Algorithms: Design
-Techniques and Analysis}, NP problems are defined as ``\ldots those decision
-problems for which there exists a nondeterministic algorithm that runs in
-polynomial time~\cite{alsuwaiyel1999algorithms}.'' Cormen et al, provide this
-simple definition of NP: ``The class NP consists of those problems that are
+Techniques and Analysis}~\cite{alsuwaiyel1999algorithms}, NP problems are
+defined as ``\ldots those decision problems for which there exists a
+nondeterministic algorithm that runs in polynomial time.'' Cormen et al, provide
+this simple definition of NP: ``The class NP consists of those problems that are
 `verifiable' in polynomial time~\cite{Cormen:2009:IAT:1614191}.'' By combining
 those definitions we can say there are some problems for which no deterministic
 algorithm has yet been found which can produce an exact or optimal solution in
@@ -99,7 +101,7 @@ where the solution approaches the optimal solution within a few percentage
 points. This ``good enough'' solution may even be the optimal solution, although
 there is no guarantee that it is optimal. Some of these techniques are
 approximation, the Monte Carlo method, and
-heuristics~\cite{Cormen:2009:IAT:1614191}.
+heuristics~\cite{Cormen:2009:IAT:1614191,russell2010artificial}.
 
 \begin{itemize}
   \item {Approximation - Use an algorithm that runs in polynomial time that is
@@ -114,7 +116,7 @@ heuristics~\cite{Cormen:2009:IAT:1614191}.
 Approximation and heuristics can find solutions, but because they may not
 explore the entire the search space it is possible that they may never produce
 highly optimal solutions. The Monte Carlo method can explore large regions of
-the search space, but because of it's random nature it may require the
+the search space, but because of its random nature it may require the
 generation of a large amount of solutions before it finds one that is close to
 optimal.
 
@@ -124,8 +126,9 @@ heuristics to find near optimal solutions with relatively low time cost.
 
 \section{Basic Genetic Algorithms}
 
-Genetic algorithms tend to be good at solving optimization problems where the
-solution has the following two attributes:
+Genetic algorithms~\cite{Holland1992, goldberg1989genetic,
+fogel2000evolutionary, haupt2004practical} tend to be good at solving
+optimization problems where the solution has the following two attributes:
 
 \begin{enumerate}
   \item {The solution can be encoded into some kind of data structure.}
@@ -171,7 +174,7 @@ selected individuals using various techniques and a new population is created.}
 Applying a genetic algorithm to a problem requires that a solution to the
 problem can be encoded into a data structure. A single data structure is
 referred to as a chromosome. A given chromosome represents a single individual
-in the population. In it's simplest form a chromosome might consist of a binary
+in the population. In its simplest form a chromosome might consist of a binary
 string, that is, a string of 1s and 0s. The interpretation of the chromosome is
 problem dependent. If the problem domain is creating a melody, the 0s and 1s in
 the chromosome might encode specific notes and other musical features; if the
@@ -207,7 +210,27 @@ payoff for making the move specified by the chromosome.
 
 \subsection{Stopping Criteria}
 
-Discuss stopping criteria.
+After fitness is measured, the algorithm evaluates whether to stop or not. One
+can stop after finding an exact solution, after solutions stop improving, or
+after a set number of generations.
+
+Obviously, if the algorithm has found an exact solution to a problem, there is
+no point in proceeding further. This is often the case when optimizing a
+mathematical function. If one knows ahead of time that the minima of a function
+is 0 and a genetic algorithm finds a solution that produces that minima, then,
+if there is no reason to search for additional solutions, the algorithm can
+terminate.
+
+More often, though, the optimal fitness value is not known a priori. In this
+case, one can measure the improvement in fitness between generations and stop
+the algorithm when the solutions stop improving or when the improvement in
+fitness between generations drops below some threshold.
+
+A third criteria for stopping a genetic algorithm is when a preset number of
+populations have evolved. Computer resources can be constrained, and although
+an algorithm might find the optimal solution given enough CPU time, one can 
+decide before starting the algorithm to terminate after \(n\) generations, and
+take the best solution at that point.
 
 \subsection{Selection}
 
@@ -245,8 +268,8 @@ crossover, two individuals are selected and then a position in the chromosome is
 randomly chosen, the chromosome is split at that point, and then one of the
 sections created is exchanged with the same section in the other chromosome.
 This creates two new individuals in the new population. There are other
-techniques for recombination; those will be discussed in praagraph
-\ref{2-recombination}.
+techniques for recombination; those will be discussed in
+Section~\ref{2-recombination}.
 
 In mutation, an individual is selected and the chromosome of the individual is
 randomly changed. This can be an individual in the current population; the
@@ -260,7 +283,7 @@ After the new population is created, the process repeats.
 A large amount of research has been conducted into extending various features of
 the basic algorithm to cover a larger number of problems. We briefly look at
 some of those extensions here, with additional coverage of specific fitness
-measurement extensions in Chapter \ref{chap:background}.
+measurement extensions in Chapter~\ref{chap:background}.
 
 \subsection{Chromosomes}
 
@@ -313,4 +336,4 @@ salesman problem, the standard crossover operations are not appropriate since
 they can duplicate cities in the chromosome. For permutation type problems like
 the traveling salesman problem, other crossover operations have been
 developed~\cite{goldberg1989genetic} which avoid duplications in the child
-chromosomes. 
+chromosomes.
