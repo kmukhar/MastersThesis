@@ -97,7 +97,8 @@ jail decision (item 3). The other two decisions, whether to build a house (item
 computation. The house building decision was implemented as a rule based
 algorithm; the property trading decision was implemented by adapting a property
 evaluation function proposed by Yasamura, Oguchi, and
-Nitta~\cite{Yasumura2001Negotiate}.
+Nitta~\cite{Yasumura2001Negotiate}. We discuss the property trading decision in
+Section~\ref{}.
 
 \section{Chromosome description} \label{5_chromo}
 
@@ -117,7 +118,7 @@ the property represented by the array element. There are 40 locations on the
 monopoly board, so each location corresponds to an element in the array. The
 ``Go'' space is element 0, with subsequent locations assigned successive element
 indices. However, only 28 locations can be owned by a player, so 12 of the array
-elements are ignored. \footnote{The chromosome could have been designed with
+elements are ignored.\footnote{The chromosome could have been designed with
 only 28 locations, but by using 40 elements, the need to create a mapping
 between locations and array elements is avoided (improved code readability and
 maintainability) at a small cost of memory for the 12 unused elements.}
@@ -215,8 +216,8 @@ indices were created by determining if any of the four color groups on the
 west and north edges are part of a monopoly owned by an opponent. This only
 requires a two-bit index and 16 array elements. The players that use this
 alternate Jail chromosome will be referred to as the TGA Players\footnote{Unlike
-the R in RGA, or the S in SGA, the T in TGA has no meaning. It was chosen
-because it follows R and S alphabetically.}.
+the R (for Real) in RGA, or the S (for Simple) in SGA, the T in TGA has no
+meaning. It was chosen because it follows R and S alphabetically.}.
 
 \subsection{Alternate Chromosome description} \label{5_altchromo}
 
@@ -500,7 +501,7 @@ The populations are tested using both K-Random Opponents and a modified
 version of Single Elimination Tournament.
 
 Again following Frayn, each player in the population competes in 100 games per
-generation, which equates to approximately 300 opponents~\footnote{The number of
+generation, which equates to approximately 300 opponents\footnote{The number of
 opponents is approximate because of the random nature in which matches within a
 generation are intialized. After all players play a single game, the players are
 all returned to the player pool and are randomly selected again for the next
@@ -530,7 +531,7 @@ two remaining players get the same fitness score.
 We set the number of players in a generation to be a multiple of four so that
 SET would be easier to implement. Population numbers that are not multiples of
 four would require implementing the simulator to give some players
-byes~\footnote{A bye is when a participant in a tournament automatically
+byes\footnote{A bye is when a participant in a tournament automatically
 advances to the next level automatically without playing a game at the current
 level.} for some matches, and keeping track of that information. It is easier
 just to specify that the population size is a multiple of four, so that no byes
@@ -544,21 +545,21 @@ population using reproduction, recombination, and mutation. Again, this study
 uses parameters similar to those used by Frayn, but with some modifications.
 
 \begin{itemize}
-  \item The top 10\% of individuals are copied into the new generation
-  (elitism).
-  \item 30\% of the new population is created by selecting individuals through
-  tournament selection and copying them into the new generation.
-  \item Another 30\% of the new population is created by selecting individuals through
-  tournament selection, mutating them, and then copying them into the new
-  generation.
-  \item The final individuals are created by selecting parents using
+  \item {The top 10\% of individuals are copied into the new generation
+  (elitism).}
+  \item {30\% of the new population is created by selecting individuals through
+  tournament selection and copying them into the new generation.}
+  \item {Another 30\% of the new population is created by selecting individuals
+  through tournament selection, mutating them, and then copying them into the new
+  generation.}
+  \item {The final individuals are created by selecting parents using
   roulette wheel selection, and then combining the chromosomes to create two
   new children. The child chromosomes are created by arithmetic crossover using
   the formulas 
   
   \(child_{1} = \beta * parent_{1} + (1 - \beta ) * parent_{2}\)
 
-  \(child_{2} = (1 - \beta ) * parent_{1} + \beta * parent_{2}\)
+  \(child_{2} = (1 - \beta ) * parent_{1} + \beta * parent_{2}\)}
 \end{itemize}
 
 The parameters used for the genetic algorithm are summarized in
