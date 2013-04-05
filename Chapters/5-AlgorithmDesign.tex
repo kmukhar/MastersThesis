@@ -34,71 +34,70 @@ of the player.
 \begin{figure}[htp]
 \centerline{\includegraphics[width=1.0\columnwidth]{Figures/statemachine.png}}
 \caption[Monopoly player state machine]{A simplified illustration of the state
-machine for a prototype player. The black lines represent automatic state
-transitions. The colored lines represent decisions that a player makes that
-result in a transition. Not all transitions are shown here; for example, a
-player can participate in an auction, trade properties, and develop properties,
-from the inactive state}
+machine for a prototype player. Not all transitions are shown here; for example,
+a player can participate in an auction, trade properties, and develop
+properties, from the inactive state}
 \label{figure-statemachine}
 \end{figure}
 
 The decisions that a player makes are whether to buy a property or not (the
-green arrow in Figure~\ref{figure-statemachine}), whether to pay bail to exit
-jail or not (the red arrow in Figure~\ref{figure-statemachine}), whether to buy
-houses for a property or not (the blue arrow in
+arrow numbered 1 in Figure~\ref{figure-statemachine}), whether to pay bail to
+exit jail or not (the arrow numbered 2 in Figure~\ref{figure-statemachine}),
+whether to buy houses for a property or not (the arrow numbered 3 in
 Figure~\ref{figure-statemachine}), and whether to trade a property or not (the
-purple arrow in Figure~\ref{figure-statemachine}).
+arrow numbered 4 in Figure~\ref{figure-statemachine}).
 
-\begin{itemize}
-  \item{When a player lands on an unowned location, the player must decide
-  whether or not to buy the property. If the player declines to buy the
-  property, any player, including the player who declined to buy the property
-  originally, can bid for the property in an auction. The player must then
-  decide whether to participate in the auction and how much to bid for the property.}
-  \item{When a player is in jail, the player must decide whether to pay bail and
-  exit jail immediately, or roll the dice and wait until doubles are rolled.}
-  \item{When a player has a monopoly, the player must decide when and how to buy
-  houses or hotels for their properties.}
-  \item{When some other player owns one or more properties needed to complete a
-  monopoly, the player must decide if and when to trade for properties to
-  complete a monopoly.}
-\end{itemize}
+\subsection{Buying Property}
+The primary objective of the game is to acquire and develop properties, and to
+obtain monopolies of property groups. When a player lands on an unowned
+location, the player must decide whether or not to buy the property. If the
+player declines to buy the property, any player, including the player who
+declined to buy the property originally, can bid for the property in an auction.
+The player must then decide whether to participate in the auction and how much
+to bid for the property.
 
-Based on the rules of Monopoly, the rules of thumb developed over time, and
-previous analytic studies, the following focus areas were enumerated.
+Decisions on whether to buy a property depend on what other properties have been
+acquired and which players have acquired them.
+  
+\subsection{Paying Bail}
+When a player is in jail, the player must decide whether to pay bail and exit
+jail immediately, or roll the dice and wait until doubles are rolled.
 
-\begin{enumerate}
-  \item{The primary objective is to acquire and develop properties, and to
-  obtain monopolies of property groups.}
-  \item{Decisions on whether to buy a property depend on what other properties
-  have been acquired and which players have acquired them.}  
-  \item{The decision of whether to stay in jail or leave jail depends on what
-  other properties have been acquired and which players have acquired them.}
-  \item{There are a limited number of buildings in the game. Whether you can
-  build depends on what other players have built, and vice versa.}
-  \item{The ability to develop a property group depends on the ability of the
-  player to acquire all the properties in a group. This is done by trading with
-  other players.}
-\end{enumerate}
+The decision of whether to stay in jail or leave jail depends on what other
+properties have been acquired and which players have acquired them.
 
-These focus areas resulted in a preliminary decision to use a multiple
-chromosome strategy where different chromosomes or different parts of the
-chromosome will control the player behavior depending on the state of the game:
-one strategy for early in the game when few properties are owned; a different
-strategy for later in the game when many properties are owned. Frayn used a
-similar strategy, except in his study chromosomes represented the valuation of 
-properties, which depended on ownership and development
-factors~\cite{DBLP:conf/cig/Frayn05}.
+\subsection{Buying Houses or Hotels}
+When a player has a monopoly, the player must decide when and how to buy houses
+or hotels for their properties. There are a limited number of buildings in the
+game. Whether a player can build depends on what other players have built, and
+vice versa.
 
-Additionally, this study focused on just two decisions the player would make:
-the buy property decision (items 1 and 2 from the list above) and the get out of
-jail decision (item 3). The other two decisions, whether to build a house (item
-4) and whether to trade a property (item 5), were not implemented using genetic
-computation. The house building decision was implemented as a rule based
-algorithm; the property trading decision was implemented by adapting a property
-evaluation function proposed by Yasamura, Oguchi, and
+\subsection{Trading Properties}
+The ability to develop a property group depends on the ability of the player to
+acquire all the properties in a group. This is done by trading with other
+players. When some other player owns one or more properties needed to complete a
+monopoly, the player must decide if and when to trade for properties to complete
+a monopoly.
+
+\subsection{General Approach}
+
+The four decision areas above led to a preliminary decision to use a multiple
+chromosome strategy where different chromosomes will control the player behavior
+depending on the state of the game: one strategy for early in the game when few
+properties are owned; a different strategy for later in the game when many
+properties are owned. Frayn used a similar strategy, except in his study
+chromosomes represented the valuation of properties, which depended on ownership
+and development factors~\cite{DBLP:conf/cig/Frayn05}.
+
+Additionally, this study used genetic algorithms for just two decisions the
+player would make: the buy property decision and the get out of jail decision.
+The other two decisions, whether to build a house and whether to trade a
+property, were not implemented using genetic computation. The house buying
+decision was implemented as a rule based algorithm and is discussed further in
+section~\ref{5_buy_house}. The property trading decision was implemented by
+adapting a property evaluation function proposed by Yasumura, Oguchi, and
 Nitta~\cite{Yasumura2001Negotiate}. We discuss the property trading decision in
-Section~\ref{}.
+Section~\ref{5_trade_property}.
 
 \section{Chromosome description} \label{5_chromo}
 
@@ -107,15 +106,17 @@ chromosome used for a different purpose or state of the game. This is in
 contrast to the classic simple GA (SGA) where each member of the population has
 a single chromosome that is expressed as a string of binary
 digits~\cite{haupt2004practical}. Following the initial description of the
-primary chromosome used in this study, two alternate versions of the chromosome
-will be described.
+genome used in this study, two alternate versions of the chromosome will be
+described.
+
+\subsection{Chromosomes for Buying Property}
 
 The first set of chromosomes consists of 4 arrays of real numbers, 40 elements
 per array (See Table \ref{table-chromo}). In this thesis, this chromosome is
 referred to as the RGA Player (RGA for Real-valued Genetic Algorithm). Each
 element of the array represents the probability that the player will purchase
 the property represented by the array element. There are 40 locations on the
-monopoly board, so each location corresponds to an element in the array. The
+Monopoly board, so each location corresponds to an element in the array. The
 ``Go'' space is element 0, with subsequent locations assigned successive element
 indices. However, only 28 locations can be owned by a player, so 12 of the array
 elements are ignored.\footnote{The chromosome could have been designed with
@@ -175,6 +176,8 @@ properties in the group (1st chromosome), and when the property is needed to
 complete a monopoly (2nd chromosome), and when the property is needed to block
 another player (3rd chromosome).
 
+\subsection{Chromosomes for Paying Bail}
+
 The other set of chromosomes is used to determine when to pay to get out of
 jail, and when to remain in jail (and hopefully not roll doubles with the dice).
 This chromosome is a 2-D array of real numbers.
@@ -196,7 +199,7 @@ The value at the element is a real number which represents the probability that 
 player will choose to pay the bail. When the player is in jail, if a randomly
 generated number is less than the gene value, the player has ``decided" to pay
 bail. Note that this scheme automatically accounts for different game states:
-early in the game, very few of the properties are owned (none when the game
+early in the game very few of the properties are owned (none when the game
 begins) so the indices will be near (0, 0); later in the game, if many
 properties are owned by other players, the indices will be near (63, 63). It
 also accounts for differences in ownership. That is, if opponents own many
@@ -206,18 +209,18 @@ relatively low. So, if the player owns properties near the jail, his jail
 decision will be similar to the decision made early in the game when few
 properties are owned.
 
-\subsection{Alternate Jail Chromosome} \label{5_altjail}
+\subsection{Alternate Chromosome for Paying Bail} \label{5_altjail}
 
 Because the 64x64 array described above consumes a relatively large amount of
-memory, this study also looked at an alternate genome which varied the Get Out
-Of Jail chromosome by making it a 4x4 array. Instead of indexing by which
-players owned properties on the west and north edges of the board, the
-indices were created by determining if any of the four color groups on the
-west and north edges are part of a monopoly owned by an opponent. This only
-requires a two-bit index and 16 array elements. The players that use this
-alternate Jail chromosome will be referred to as the TGA Players\footnote{Unlike
-the R (for Real) in RGA, or the S (for Simple) in SGA, the T in TGA has no
-meaning. It was chosen because it follows R and S alphabetically.}.
+memory, this study also looked at an alternate genome which varied this
+chromosome by making it a 4x4 array. Instead of indexing by which players owned
+properties on the west and north edges of the board, the indices were created by
+determining if any of the four color groups on the west and north edges are part
+of a monopoly owned by an opponent. This only requires a two-bit index and 16
+array elements. The players that use this alternate Jail chromosome will be
+referred to as the TGA Players\footnote{Unlike the R (for Real) in RGA, or the S
+(for Simple) in SGA, the T in TGA has no meaning. It was chosen because it
+follows R and S alphabetically.}.
 
 \subsection{Alternate Chromosome description} \label{5_altchromo}
 
@@ -241,12 +244,202 @@ example, the first chromosome of 40 elements in the RGA becomes a single string
 of 240 bits (6 bits * 40 elements). Each of the other property buying
 chromosomes is encoded in the same way.
 
-Likewise, the 4x4 Get Out Of Jail chromosome is then encoded as a 96 bit string
+Likewise, the 4x4 chromosome for paying bail is then encoded as a 96 bit string
 (16 genes x 6 bits per gene). This chromosome uses the simplified indexing
-scheme described previously in~\ref{5_altjail}.
+scheme described previously in section~\ref{5_altjail}.
 
 A population of these individuals, referred to as Simple GA (SGA) Players, was
 also simulated in this study.
+
+\section{House buying algorithm} \label{5_buy_house}
+
+The decision of when to buy houses or hotels was implemented using a simple rule
+based procedure. The procedure is summarized in Algorithm~\ref{alg_buyHouse}. 
+
+\begin{algorithm}
+\caption{House Buying Algorithm}
+\label{alg_buyHouse}
+\begin{algorithmic}
+\IF{not player has monopoly} 
+  \STATE exit
+\ENDIF
+
+\IF{not player has sufficient cash} 
+  \STATE exit
+\ENDIF
+
+\WHILE{player has sufficient cash}
+  \IF{player has less than 3 houses on all monopolies}
+    \STATE buy house for a property with less than 3 houses
+  \ELSE
+    \STATE buy 4th house or a hotel for a property
+  \ENDIF
+\ENDWHILE
+\end{algorithmic}
+\end{algorithm}
+
+The algorithm begins by checking that the player has a monopoly. If the player
+does not have a monopoly, the algorithm exits since the player cannot buy
+houses.
+
+Then the algorithm checks that the player has enough cash. We followed Frayn's
+procedure for computing the minimum cash a player should keep
+available~\cite{DBLP:conf/cig/Frayn05}. The minimum cash a player should keep
+available is 200 plus 1\% of the total net worth of all players in the game plus
+1\% of the average net worth of the players in the game plus 10\% of the cost of
+all houses and hotels currently on the board.
+\begin{equation*}
+200 + 0.01 \cdot totalNetWorth + 0.01 \cdot avgNetWorth + 0.1 \cdot costOfHouses
+\end{equation*}
+For the player to have enough cash to buy a house or a hotel, the player must
+have the minimum cash plus enough to buy a house or hotel for whichever
+monopolies the player owns. If the player does not have enough cash, the
+algorithm exits.
+
+If the player has enough cash, then the player buys houses for all monopolies
+that have less than 3 houses on them\footnote{The greatest return for a player
+occurs when building 3 houses on all properties, and not building 4 houses or a
+hotel until all monopolies have 3 houses~\cite{orbanes2007monopoly}.}. If the
+player has more than one monopoly, houses are bought for groups in this order:
+Orange, Light Blue, Red, Purple, Dark Blue, Yellow, Green, Brown. This order was
+chosen based on previous statistical analysis of the value of various property
+groups~\cite{Ash1972,Abbott1997,DBLP:conf/cig/Frayn05}. If all monopolies owned
+by a player have at least 3 houses on all propeerties, the algorithm will buy a
+4th house, and then a hotel for the properties owned by the player.
+
+\section{Property Trading Algorithm} \label{5_trade_property}
+
+For the evolutionary phase of this research, the genetic algorithm players
+played without the ability to trade properties. This allowed the players to
+evolve strategies for buying properties independent of the option for trading
+properties. With the ability to trade, players could learn to forego better
+properties in the expectation that the property could be acquired later through
+a trade. Also, players might learn to buy less valuable properties at a higher
+rate than expected so that the properties could be traded.
+
+However, when it came time to play-test the GA players against human players, a
+trading algorithm was needed so that human players would not be bored by a game
+that was simply about which player was luckiest in landing on valuable
+properties, or which player was lucky enough to acquire a monopoly by chance.
+
+A trading algorithm was implemented based on research by Yasumura, et
+al,~\cite{Yasumura2001Negotiate} as the basis for property trading by the A.I.
+players in the human-A.I. competition. The human players were, of course, free
+to use their own criteria for evaluating whether or not to trade properties. As
+we briefly discussed in Section~\ref{3_trading}, Yasumura, et al, developed an
+evaluation function that was the sum of some combination of expected gains
+(Algorithms~\ref{alg_stg}, \ref{alg_mtg}, and \ref{alg_ltg}) minus expected
+losses (Algorithms~\ref{alg_stl} and \ref{alg_mtl}); which gains and losses
+are included in the summation is based on the ownership situation of the
+properties (See Algorithm~\ref{alg_bigU}. The player's decision would be based
+on the result of the evaluation function and whether the player was weighted more towards avoiding losses or
+seeking gains.
+
+Expected short term gain \(E_S\) for player \(s\) getting a property card in a
+trade is the sum of the probabilities that another player \(i\) will land on the
+traded property or one of the properties in the same group in one dice throw
+(\(P_S(i)\)) multiplied by the rental fee of the color group (\(R(M)\)) if the
+owner used all their available cash \(M\) to buy houses for the color group.
+\begin{algorithm} 
+\caption{Compute Short Term Gain}
+\label{alg_stg}
+\begin{algorithmic}
+   \STATE $E_S \gets \sum P_S(i) \cdot R(M)$ 
+\end{algorithmic}
+\end{algorithm}
+
+Expected mid term gain \(E_M\) is the sum of the probabilities that another
+player will land on the traded property or one of the properties in the same group in
+one trip around the board multiplied by the rental fee of the color group if the
+owner were used all their available cash to buy houses for the color group.
+\begin{algorithm} 
+\caption{Compute Mid Term Gain}
+\label{alg_mtg}
+\begin{algorithmic}
+   \STATE $E_M \gets \sum P_M(i) \cdot R(M)$ 
+\end{algorithmic}
+\end{algorithm}
+
+Expected long term gain \(E_L\) is the sum of the probabilities that another
+player will land on the traded property or one of the properties in the same group in
+one trip around the board multiplied by the rental fee of the color group if the
+owner had \$1000 to buy houses for the color group.
+\begin{algorithm} 
+\caption{Compute Long Term Gain}
+\label{alg_ltg}
+\begin{algorithmic}
+   \STATE $E_L \gets \sum P_M(i) \cdot R(1000)$ 
+\end{algorithmic}
+\end{algorithm}
+
+The short term loss is simply the probability that the player \(s\) making the
+trade will land on the property being traded on the next dice roll, multiplied by the
+rent for that property if the new owner used all their cash to buy houses for
+that property.
+\begin{algorithm} 
+\caption{Compute Short Term Loss}
+\label{alg_stl}
+\begin{algorithmic}
+   \STATE $L_S \gets P_S(s) \cdot R(M)$ 
+\end{algorithmic}
+\end{algorithm}
+
+The potential mid-term loss is the probability that the player \(s\) making the
+trade will land on the location in one trip around the board multiplied by the rent
+for that property.
+\begin{algorithm} 
+\caption{Compute Mid Term Loss}
+\label{alg_mtl}
+\begin{algorithmic}
+   \STATE $L_M \gets P_M(s) \cdot R(M)$ 
+\end{algorithmic}
+\end{algorithm}
+
+Finally, the various expected gains and losses are summed based on the property
+ownership situation. There are 4 cases to evaluate: 1) the player \(s\) would
+receive one card \(c\) of a given color group; 2) the player would have two
+cards in a color group and one would be in the bank; 3) the player would have two cards in
+a color group, and another player would have the remaining card(s); or 4) the
+player would have a monopoly after the trade.
+\begin{algorithm} 
+\caption{Evaluate Property}
+\label{alg_bigU}
+\begin{algorithmic}
+  \IF {Case~1}
+    \STATE $f(c) \gets \phi(c) \gets 1/2 \cdot FV(c) + E_L(c)$
+    \COMMENT FV(c) is the face value, or cost, of the property card \(c\)
+  \ENDIF
+  \IF {Case~2}
+    \STATE $f(c) \gets 2 \cdot \phi(c) + E_M(c)$
+  \ENDIF
+  \IF {Case~3}
+    \STATE $f(c) \gets 2 \cdot \phi(c) + E_M(c) + E_S(c)$
+  \ENDIF
+  \IF {Case~4}
+    \STATE $f(c) \gets 3 \cdot \phi(c) + \alpha \cdot (E_M(c) + E_S(c))$
+  \ENDIF
+
+  \REQUIRE $\omega_1 + \omega_2 = 1$
+
+  $U \gets \omega_1(\sum f(c) + M) - \omega_2(L_S + L_M)$
+\end{algorithmic}
+\end{algorithm}
+
+After summing the gains, and weighting the sum by \(\omega_1\), the function
+subtracts a weighted sum of the short-term and mid-term losses. The factor
+\(\omega_1\) biases the function towards gain seeking; a high \(\omega_1\) means
+the player will favor gains over avoiding losses. The factor \(\omega_2\) biases
+the function towards avoiding losses; when \(\omega_2\) is high the player will
+avoid trades that lead to potential losses. If the value of the function, \(U\)
+exceeds a given threshold, the player will propose the trade, or accept a
+proposed trade. 
+
+Yasumura, et al, evaluated 5 thresholds from a low value of 100
+to a high value of 500. They found the best profits were generated by agents
+that used the lowest threshold, so the the algorithm used in the human versus
+computer competitions used a threshold of 100 also. However, it appears that
+this threshold may have led to poor performance of the RGA players during the
+human versus computer competition. This is discussed in detail in Section 6.x.
 
 \section{Fitness Evaluation} \label{5_fitnesseval}
 
