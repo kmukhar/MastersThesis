@@ -638,11 +638,12 @@ In this research, we follow Frayn's lead by starting with a population size of
 1000. However, to implement a modified single elimination tournament competition
 it will be necessary to modify this value slightly to be 1024. In addition,
 based on the results of some of the comparative studies of competitive fitness
-functions~\cite{Angeline:1993:CEE:645513.657590,Panait02acomparative,Jaskowski:2008:FC:1389095.1389161},
-we also investigate the behavior of smaller population sizes such as 32, 128,
-and 512. The value 32 is chosen because it is similar to the population sizes of
-those other studies; the other two sizes of 128 and 512 were chosen to provide
-intermediate population sizes between 32 and 1024.
+functions~\cite{Angeline:1993:CEE:645513.657590, Panait02acomparative,
+Jaskowski:2008:FC:1389095.1389161}, we also investigate the behavior of smaller
+population sizes such as 32, 128, and 512. The value 32 is chosen because it is
+similar to the population sizes of those other studies; the other two sizes of
+128 and 512 were chosen to provide intermediate population sizes between 32 and
+1024.
 
 We feel comfortable with an initial assumption that valid results might be
 obtained with a population size as small as 32. Chapter~\ref{chap:background}
@@ -665,26 +666,27 @@ only some state space configurations will allow houses or hotels. Assume
 monopolies. Then the number of additional state space configurations for either
 group is
 \begin{equation*}
-4 \cdot 8 \cdot 5^{26} \approx 10^{19.7}
+4 \cdot 10 \cdot 5^{26} \approx 10^{19.8}
 \end{equation*}
-where 4 is the number of players that could have the monopoly, 8 is the number
-of houses (2 streets with up to 4 houses each), and \(5^{26}\) is the state
-space for the remaining 26 locations on the board. If there is a single monopoly
+where 4 is the number of players that could have the monopoly, 10 is the number
+of houses (2 streets with up to 4 houses or 1 hotel each), and \(5^{26}\) is the
+state space for the remaining 26 locations on the board. If there is a single monopoly
 in one of the other color groups (with 3 streets in the group), then the
 calculation is
 \begin{equation*}
-4 \cdot 12 \cdot 5^{25} \approx 10^{19.2}
+4 \cdot 15 \cdot 5^{25} \approx 10^{19.3}
 \end{equation*}
 So, considering just properties and single monopolies, the total state space
 is
 \begin{equation*}
-5^{28} + 2 \cdot 4 \cdot 8 \cdot 5^{26} + 6 \cdot 4 \cdot 12 \cdot 5^{25}
-\approx 10^{20.3}
+5^{28} + 2 \cdot 4 \cdot 10 \cdot 5^{26} + 6 \cdot 4 \cdot 15 \cdot 5^{25}
+\approx 10^{20.4}
 \end{equation*}
 As we consider multiple monopolies, the size of the state space will continue to
 grow, but at a slower rate. This is because the exponential term becomes smaller
 (e.g. for two monopolies the exponential term is \(5^{22}\), \(5^{23}\), or
-\(5^{24}\)) and because there is a limit to the number of houses. Thus it is
+\(5^{24}\) and the total complexity only rises to \(\approx10^{20.5}\)) and
+because there is a limit to the number of houses that can be bought. Thus it is
 clear the game has a state space complexity less than that of Othello at
 \(\approx10^{30}\).
 

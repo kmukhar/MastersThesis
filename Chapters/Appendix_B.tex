@@ -1,9 +1,14 @@
-%\clearpage
+\clearpage
 \begin{landscape}
-\thispagestyle{empty}
-\addcontentsline{toc}{chapter}{Appendix B: Intrapopulation Validation Data Charts}
-\setcounter{secnumdepth}{0}
-\appendix{{\Large \bf Appendix B: Intrapopulation Validation Data Charts}}\label{sec:appendixB}
+%\thispagestyle{empty}
+%\addcontentsline{toc}{chapter}{Appendix B: Intrapopulation Validation Data}
+% Charts}
+%\setcounter{secnumdepth}{1}
+%\appendix{{\Large \bf Appendix B: Intrapopulation Validation Data
+% Charts}}\label{sec:appendixB}
+\newpage
+\chapter{Intrapopulation Validation Data Charts}
+\label{sec:appendixB}
 
 The tables that follow document the results of the intrapopulation validation
 tests. Tables are organized based on population size, of which there are 4: 32,
@@ -98,8 +103,8 @@ player500 and player250, and that player500 is better than player250.
 
     \end{tabularx}%
   \label{tab:intrapop128_numwins}%
-  \caption{Each row represents a single population. The best player from
-  Generation 250, 500, 750, and 999 were competed against each other for 100
+  \caption[Intrapopulation validation, population size 128, Evaluated by finish
+  order]{Each row represents a single population. The best player from Generation 250, 500, 750, and 999 were competed against each other for 100
   games. The fitness of each player is evaluated using number of wins (3 points
   for each win). The score in the average fitness column is the average of
   fitness scores for that player over 50 trials of 100 games per trial. To
