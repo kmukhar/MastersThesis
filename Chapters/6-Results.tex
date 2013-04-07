@@ -62,34 +62,35 @@ generation were competed in various combinations to validate the results.
 \end{enumerate}
 First, an intra-population validation was performed where the best players from
 different generations within a population were competed against each other.
-For example, given an RGA population of size 1024, with the NET\_WORTH fitness
-evaluator, evolved using 100 games per generation, select the best player from
-generations 250, 500, 750, and 999. Compete those 4 players in a set of 50 games
-and record the cumulative fitness using FINISH\_ORDER and
-NUM\_WINS\footnote{Regardless of the original fitness evaluator used in
-evolution, the validation experiments use FINISH\_ORDER and NUM\_WINS to
-compare players.}. Repeat this process 30 times without further evolution of the
-players. We then analyze the player's performance over the 30 trials to
-determine if players fitness improved over time. For most populations, players
-in later generations were better than players in earlier generations, which
-suggests that the genetic algorithm was successful in evolving players. We will
-also show that populations that play more games per generation tended to evolve
-better players than populations with less games per generation. 
+For example, using the RGA-1024-100-NetW population (a population of RGA players
+of size 1024, evolved using 100 games per generation, with the NET\_WORTH
+fitness evaluator) select the best player from generations 250, 500, 750, and
+999. Compete those 4 players in a set of 100 games and record the cumulative
+fitness using FINISH\_ORDER and NUM\_WINS\footnote{Regardless of the original
+fitness evaluator used in evolution, the validation experiments use
+FINISH\_ORDER and NUM\_WINS to compare players.}. Repeat this process 50 times
+without further evolution of the players. We then analyze the player's
+performance over the 50 trials to determine if players fitness improved over
+time. For most populations, players in later generations were better than
+players in earlier generations, which suggests that the genetic algorithm was
+successful in evolving players. We will also show that populations that play
+more games per generation tended to evolve better players than populations with
+less games per generation.
 
 Second, players were also validated with an inter-population validation. That
 is, the best players from different populations were competed against each other
-in various combinations. For example, given an RGA population of size 1024,
-evolved using 100 games per generation, select the best player from each fitness
-evaluator and from generation 999. This will result in 6 players which then play
-50 games against the other players;  record the cumulative fitness using
-FINISH\_ORDER and NUM\_WINS. Repeat this process 30 times without further
-evolution of the players. We then analyze the player's performance over the 30
-trials to determine if different fitness evaluators were better than others.
-Since the first analysis showed that populations that played more games per
-generation tended to evolve better players, only players from the populations
-that played 100 games per generation were competed\footnote{Except for
-TOURNAMENT in which the most games per generation was 9, for the population size
-1024.}. In this validation, various fitness evaluators were compared to see
+in various combinations. For example, given the various RGA-1024-100
+(chromosome type-population size-games per generation) populations, select the
+best player from each fitness evaluator and from generation 999. This will
+result in 6 players which then play 100 games against the other players; 
+record the cumulative fitness using FINISH\_ORDER and NUM\_WINS. Repeat this
+process 50 times without further evolution of the players. We then analyze the player's
+performance over the 50 trials to determine if different fitness evaluators were
+better than others. Since the first analysis showed that populations that played
+more games per generation tended to evolve better players, only players from the
+populations that played 100 games per generation were competed\footnote{Except
+for TOURNAMENT in which the most games per generation was 9, for the population
+size 1024.}. In this validation, various fitness evaluators were compared to see
 which fitness evaluator evolved the best players.
 
 The results from the intra- and inter-population competitions are discussed in
@@ -130,14 +131,13 @@ actual results matched the expected results quite closely.
 For example, it can clearly be seen that the fitness distribution looks like a
 binomial distribution when the FINISH\_ORDER fitness evaluator is used.
 Figure~\ref{figure-RGA-G000-N100-FO-initial_fitness} shows the fitness
-distribution for the first generation of an RGA population with the
-FINISH\_ORDER fitness evaluator. The figure shows a binomial shaped distribution
-which appears to be centered around the population average of 150\footnote{Because
-the FINISH\_ORDER evaluator assigns 1, 2, and 3 points to the players in a game, for
-a total of 6 points per game, the average fitness for any single game is \(6/4\)
-or 1.5. So for \(n\) games the average fitness is \(n * 1.5\).
-For a population that plays 100 games per generation, we expect that the fitness
-scores in any generation will have a distribution that is centered on the
+distribution for the first generation of the RGA-1024-100-FO population. The
+figure shows a binomial shaped distribution which appears to be centered around
+the population average of 150\footnote{Because the FINISH\_ORDER evaluator
+assigns 1, 2, and 3 points to the players in a game, for a total of 6 points per
+game, the average fitness for any single game is \(6/4\) or 1.5. So for \(n\)
+games the average fitness is \(n * 1.5\). For a population that plays 100 games
+per generation, the fitness distribution will be centered on the
 average score of 150.}.
 
 \begin{figure}
@@ -158,7 +158,8 @@ fitness. The distribution is similar to a binomial distribution.}
 \centering
 \includegraphics[width=1.0\linewidth]{Figures/RGA_1024_G000_N100_FO.png}
 \caption[RGA Finish Order Fitness Distribution, Initial Generation]{RGA
-chromosome, generation 0, 100 games per generation, finish order fitness evaluator.}
+chromosome, size 1024, 100 games per generation, finish order
+fitness evaluator, generation 0.}
 \label{figure-RGA-G000-N100-FO-initial_fitness}
 \end{minipage}
 \end{figure}
@@ -176,7 +177,8 @@ appears to be centered around the population average of 75.
 \centering
 \includegraphics[width=1.0\linewidth]{Figures/RGA_1024_G000_N100_NW.png}
 \caption[RGA Num Wins Fitness Distribution, Initial Generation]{RGA chromosome,
-generation 0, 100 games per generation, number of wins fitness evaluator.}
+size 1024, 100 games per generation, number of wins fitness evaluator,
+generation 0.}
 \label{figure-RGA-G000-N100-NW-initial_fitness}
 \end{minipage}%
 \hspace{0.06\linewidth}%
@@ -185,7 +187,8 @@ generation 0, 100 games per generation, number of wins fitness evaluator.}
 \centering
 \includegraphics[width=1.0\linewidth]{Figures/RGA_1024_G000_N100_NetW.png}
 \caption[Historgram of RGA Net Worth Fitness Distribution, Initial
-Generation]{RGA chromosome, generation 0, 100 games per generation, net worth fitness evaluator.}
+Generation]{RGA chromosome, size 1024, 100 games per generation, net worth
+fitness evaluator, generation 0.}
 \label{figure-RGA-G000-N100-NetW-initial_fitness}
 \end{minipage}
 \\[\intextsep]
@@ -195,7 +198,8 @@ Generation]{RGA chromosome, generation 0, 100 games per generation, net worth fi
 %%----start of third figure----
 \includegraphics[width=1.0\linewidth]{Figures/RGA_1024_G000_N100_NM.png}
 \caption[RGA Num Monopolies Fitness Distribution, Initial Generation]{RGA
-chromosome, generation 0, 100 games per generation, number of monopolies evaluator.}
+chromosome, size 1024, 100 games per generation, number of monopolies
+evaluator, generation 0.}
 \label{figure-RGA-G000-N100-NM-initial_fitness}
 \end{minipage}%
 \hspace{0.06\linewidth}%
@@ -204,7 +208,8 @@ chromosome, generation 0, 100 games per generation, number of monopolies evaluat
 \centering
 \includegraphics[width=1.0\linewidth]{Figures/RGA_1024_G000_N100_NP.png}
 \caption[RGA Num Properties Fitness Distribution, Initial Generation]{RGA
-chromosome, generation 0, 100 games per generation, number of properties fitness evaluator.}
+chromosome, size 1024, 100 games per generation, number of properties fitness
+evaluator, generation 0.}
 \label{figure-RGA-G000-N100-NP-initial_fitness}
 
 \end{minipage}
@@ -226,26 +231,25 @@ shows that the evolutionary approach we have taken appears to be correct.
 
 \subsection{Results for Subsequent Generations}
 
-As a population co-evolves under a competitive fitness function the average and
-best fitness scores do not increase. Rather the average fitness will remain the
-same as the initial population, and the worst and best fitness scores should
-tend to converge towards the average. As the players get better and the
-population is more evenly matched, most players will tend to win half the games
-they play. This is because competitive fitness is measured by awarding points to
-players as they play against each other in games. So, as poor players are
-removed from the population, the remaining players will tend to be near each
-other in ``ability.'' Thus, the distribution of fitness scores will become much
-tighter around the average score, and no single player will be able to dominate
-the other players.
+As a population co-evolves under a competitive fitness function the average
+fitness will remain the same as the initial population, and the worst and best
+fitness scores should tend to converge towards the average. As the players get
+better and the population is more evenly matched, most players will tend to win
+half the games they play. This is because competitive fitness is measured by
+awarding points to players as they play against each other in games. So, as poor
+players are removed from the population, the remaining players will tend to be
+near each other in ``ability.'' Thus, the distribution of fitness scores will
+become much tighter around the average score, and no single player will be able
+to dominate the other players.
 
-For an example of this we look at generation 100 of an RGA population with the
-FINISH\_ORDER fitness evaluator. Figure~\ref{figure-100th_gen_fitness} shows
-the actual fitness distribution for this population. As predicted, it can be
-seen that the mean remained the same, but the variance has appeared to decrease.
-Whereas the fitness scores in generation 0 ranged from 103 to 193, in generation
-100 they ranged from 115 to 186. The distribution around the mean tightened
-relatively quickly (it can clearly be seen in generation 100), and then remained
-fairly constant over the course of the simulation which was 1000 generations.
+For an example of this we look at generation 100 of the RGA-1024-100-FO
+population. Figure~\ref{figure-100th_gen_fitness} shows the actual fitness
+distribution for this population. As predicted, it can be seen that the mean
+remained the same, but the variance has appeared to decrease. Whereas the
+fitness scores in generation 0 ranged from 103 to 193, in generation 100 they
+ranged from 115 to 186. The distribution around the mean tightened relatively
+quickly (it can clearly be seen in generation 100), and then remained fairly
+constant over the course of the simulation which was 1000 generations.
 
 \begin{figure}[htp]
 \centerline{\includegraphics[width=0.75\columnwidth]{Figures/RGA_1024_G100_N100_FO.png}}
@@ -270,8 +274,9 @@ fitness evaluator is the FINISH\_ORDER evaluator.
 \begin{minipage}[t]{0.47\linewidth}
 \centering
 \includegraphics[width=1.0\linewidth]{Figures/RGA_1024_G250_N100_FO.png}
-\caption[RGA Fitness Distribution, 250th Generation]{RGA chromosome, generation
-250, 100 games per generation, finish order fitness evaluator.} 
+\caption[RGA Fitness Distribution, 250th Generation]{RGA chromosome, size 1024,
+100 games per generation, finish order fitness evaluator, generation
+250.}
 \label{figure-RGA-250th_gen_fitness}
 \end{minipage}%
 \hspace{0.06\linewidth}%
@@ -279,8 +284,9 @@ fitness evaluator is the FINISH\_ORDER evaluator.
 \begin{minipage}[t]{0.47\linewidth}
 \centering
 \includegraphics[width=1.0\linewidth]{Figures/RGA_1024_G500_N100_FO.png}
-\caption[RGA Fitness Distribution, 500th Generation]{RGA chromosome, generation
-500, 100 games per generation, finish order fitness evaluator.} 
+\caption[RGA Fitness Distribution, 500th Generation]{RGA chromosome, size 1024,
+100 games per generation, finish order fitness evaluator, generation
+500.}
 \label{figure-RGA-500th_gen_fitness}
 \end{minipage}
 
@@ -288,8 +294,9 @@ fitness evaluator is the FINISH\_ORDER evaluator.
 \centering
 %%----start of third figure----
 \includegraphics[width=1.0\linewidth]{Figures/RGA_1024_G750_N100_FO.png}
-\caption[RGA Fitness Distribution, 750th Generation]{RGA chromosome, generation
-750, 100 games per generation, finish order fitness evaluator.} 
+\caption[RGA Fitness Distribution, 750th Generation]{RGA chromosome, size 1024,
+100 games per generation, finish order fitness evaluator, generation
+750.}
 \label{figure-RGA-750th_gen_fitness}
 \end{minipage}%
 \hspace{0.06\linewidth}%
@@ -297,8 +304,9 @@ fitness evaluator is the FINISH\_ORDER evaluator.
 \begin{minipage}[t]{0.47\linewidth}
 \centering
 \includegraphics[width=1.0\linewidth]{Figures/RGA_1024_G999_N100_FO.png}
-\caption[RGA Fitness Distribution, 999th Generation]{RGA chromosome, generation
-999, 100 games per generation, finish order fitness evaluator.} 
+\caption[RGA Fitness Distribution, 999th Generation]{RGA chromosome, size 1024,
+100 games per generation, finish order fitness evaluator, generation
+999.}
 \label{figure-RGA-999th_gen_fitness}
 \end{minipage}
 \end{figure}
@@ -315,9 +323,7 @@ population can continue to improve even though the fitness appears to plateau.
 This will be further discussed later in this Chapter.} that the population
 average fitness reaches a plateau. This is also demonstrated by looking at some
 of the descriptive statistics for each generation. These are shown in
-Table~\ref{table-stats-for-s1024-n100-fo} for a single RGA population with a
-size of 1024 individuals; each player in the population played 100 games per
-generation and the fitness evaluator was the FINISH\_ORDER evaluator.
+Table~\ref{table-stats-for-s1024-n100-fo} for the RGA-1024-100-FO population.
 
 \begin{table}[ht]
 \begin{center}
@@ -332,8 +338,8 @@ Generation & Min & Max & Average & Variance & Std Dev \\ \hline \hline
 999 & 113 & 188 & 150 & 121.10 & 11.00 \\ \hline
 \end{tabular}
 \caption[RGA, Finish Order, statistics]{Descriptive statistics for various
-generations of a single RGA population, size 1024, Finish Order fitness
-evaluator, 100 games per generation}
+generations of a single RGA population, size 1024, 100 games per generation,
+Finish Order fitness evaluator.}
 \label{table-stats-for-s1024-n100-fo}
 \end{center}
 \end{table}
@@ -343,19 +349,20 @@ remaining generations (250, 500, 750, and 999) the standard deviation appears to
 fluctuate around 11.05. We did not attempt to determine whether this difference
 in variance between generations is statistically significant\footnote{To test
 the hypothesis that the standard deviations are not equal between generations
-would require running (in this example) a population of size 1024 through 1000
-generations, and then repeating that 1000 generation trial enough times to
-get a statistically significant sample. Based on the work performed for this
-research, doing this for the largest population would take approximately 10
-hours for each trial. Even though the smallest population could run a complete
-set of 30 trials in approximately 15 hours, it was decided that a better use of
-resources would be to do a comparative test between players of different
-generations and populations.}.
+would require running (in this example) a population of size 1024 through at
+least 250 generations, and then repeating that 250 generation trial enough
+times to get a statistically significant sample. Based on the work performed for
+this research, doing this for the all of the populations would have taken
+several weeks of processing time. It was decided that a better use of resources
+would be to do a comparative test between players of different generations and
+populations.}.
 
-Table~\ref{table-stats-for-s1024-n100-netw} shows the statistics for a single
-RGA population with a size of 1024 individuals; each player in the population
-played 100 games per generation and the fitness evaluator was the NET\_WORTH
-evaluator.
+Additional population statistics are in
+Table~\ref{table-stats-for-s1024-n100-netw} for the RGA-1024-100-NetW
+population, Table~\ref{table-stats-for-s1024-n100-nm} for the RGA-1024-100-NM
+population, Table~\ref{table-stats-for-s1024-n100-np} for the RGA-1024-100-NP
+population, and Table~\ref{table-stats-for-s1024-n100-nw} for the
+RGA-1024-100-NW population.
 
 \begin{table}[ht]
 \begin{center}
@@ -369,16 +376,11 @@ Generation & Min & Max & Average & Variance & Std Dev \\ \hline \hline
 999 & 5306 &  9831 & 7499.96 &  649001.83 &  805.61 \\ \hline
 \end{tabular}
 \caption[RGA, Net Worth, statistics]{Descriptive statistics for various
-generations of a single RGA population, size 1024, Net Worth fitness evaluator,
-100 games per generation}
+generations of a single RGA population, size 1024, 100 games per generation, Net
+Worth fitness evaluator}
 \label{table-stats-for-s1024-n100-netw}
 \end{center}
 \end{table}
-
-Table~\ref{table-stats-for-s1024-n100-nm} shows the statistics for a single
-RGA population with a size of 1024 individuals; each player in the population
-played 100 games per generation and the fitness evaluator was the NUM\_MONOPOLIES
-evaluator.
 
 \begin{table}[ht]
 \begin{center}
@@ -392,16 +394,11 @@ Generation & Min & Max & Average & Variance & Std Dev \\ \hline \hline
 999 & 17 & 217 & 116.52 &  734.49 & 27.10 \\ \hline
 \end{tabular}
 \caption[RGA, Number of Monopolies, statistics]{Descriptive statistics for
-various generations of a single RGA population, size 1024, Number of Monopolies fitness
-evaluator, 100 games per generation}
+various generations of a single RGA population, size 1024, 100 games per
+generation, Number of Monopolies fitness evaluator}
 \label{table-stats-for-s1024-n100-nm}
 \end{center}
 \end{table}
-
-Table~\ref{table-stats-for-s1024-n100-np} shows the statistics for a single
-RGA population with a size of 1024 individuals; each player in the population
-played 100 games per generation and the fitness evaluator was the NUM\_PROPERTIES
-evaluator.
 
 \begin{table}[ht]
 \begin{center}
@@ -415,16 +412,11 @@ Generation & Min & Max & Average & Variance & Std Dev \\ \hline \hline
 999 & 438 & 1007 & 697.79 &   6095.32 &  78.07 \\ \hline
 \end{tabular}
 \caption[RGA, Number of Properties, statistics]{Descriptive statistics for
-various generations of a single RGA population, size 1024, Number of Properties
-fitness evaluator, 100 games per generation}
+various generations of a single RGA population, size 1024, 100 games per
+generation, Number of Properties fitness evaluator}
 \label{table-stats-for-s1024-n100-np}
 \end{center}
 \end{table}
-
-Table~\ref{table-stats-for-s1024-n100-nw} shows the statistics for a single
-RGA population with a size of 1024 individuals; each player in the population
-played 100 games per generation and the fitness evaluator was the NUM\_WINS
-evaluator.
 
 \begin{table}[ht]
 \begin{center}
@@ -451,53 +443,90 @@ generations can still be improving in fitness. In fact, we show later in this
 chapter that players in the last generation are statistically better (i.e., they
 win more games) than players in the earliest generations.
 
-In general, a similar pattern of statistics is seen in all the other
-RGA and TGA populations that we evolved in this study. The SGA populations,
-however, were more varied and are discussed in more detail in
-Section~\ref{6_SGA}.
+This section has focused primarily on the RGA-1024-100 sets of populations. As
+will be seen in Section~\ref{6_Validation} this set of populations, and
+particularly the RGA-1024-100-FO and RGA-1024-100-NW populations, generally
+produced the players that competed best against other evolved players. In
+general, though, a similar pattern of statistics is seen in all the other RGA
+and TGA populations that were evolved in this study.
+
+The SGA populations,
+however, were more varied and are discussed in more detail in Section~\ref{6_SGA}.
 
 \subsection{Genome Changes Over Time}
 
-The genome for one of the fittest players is shown in
-Figure~\ref{figure-genome}. It can be seen that in general, for the property
-buying decision, the genome matches the strategy described previously. In
-general, the gene values for buying a location are higher when a player already
-owns one of the properties of a group compared to when two other players own
-properties in the group. Although it is not shown in Figure~\ref{figure-genome},
-the gene values for buying when one opponent owns are generally higher than when
-two opponents own a property in the group.
+We now look at the change in a genome between the initial and final
+generaitons of a population. Using the RGA-1024-100-FO population, part of
+the genome for the best player from generation 0 is shown in
+Figure~\ref{figure-genome0} and part of the genome for the best player from
+generation 999 is shown in Figure~\ref{figure-genome999}. For easier comparison,
+the chromosome values from the chart are also shown in
+Table~\ref{table_chromosome}.
 
 \begin{figure}[htp]
 \centerline{\includegraphics[width=0.75\columnwidth]{Figures/genome.png}}
-\caption[Illustration of Genome]{This chart shows part of the genome of the
-fittest player in the last generation. This chart compares the chromosome used
-when the player already owns a property in the group (represented by the circle
-symbol) against the chromosome used when two other players own a property in the
-group (the diamond symbol). These two genes show agreement with the heuristic
-strategy: the player is more likely to buy a property when there is a chance of
-gaining a monopoly, and less likely to buy a property when other players are
-blocking the group from being monopolized.}
-\label{figure-genome}
+\caption[Illustration of Genome, Generation 0]{This chart shows part of the
+genome of the fittest player in the first generation of the RGA-1024-100-FO
+population. This chart compares the chromosome used when the player already owns
+a property in the group (represented by the circle symbol) against the
+chromosome used when two other players own a property in the group (the diamond
+symbol).}
+\label{figure-genome0}
 \end{figure}
+
+\begin{figure}[htp]
+\centerline{\includegraphics[width=0.75\columnwidth]{Figures/genome.png}}
+\caption[Illustration of Genome, Generation 999]{This chart shows part of the
+genome of the fittest player in the last generation of the RGA-1024-100-FO
+population. This chart compares the chromosome used when the player already owns
+a property in the group (represented by the circle symbol) against the
+chromosome used when two other players own a property in the group (the diamond
+symbol). These two genes show agreement with the heuristic strategy: the player
+is more likely to buy a property when there is a chance of gaining a monopoly,
+and less likely to buy a property when other players are blocking the group from
+being monopolized.}
+\label{figure-genome999}
+\end{figure}
+
+\begin{table}[ht]
+\begin{center}
+\begin{tabular}{ | r || r | r | r | r | r |}
+\hline                        
+ &  &  &  &  &  \\ \hline \hline
+ &  &  &  &  &  \\ \hline 
+\end{tabular}
+\caption[chromosome]{a chromosome.}
+\label{table_chromosome}
+\end{center}
+\end{table}
+
+It can be seen that in general, for the property buying decision, the genome
+matches the strategy described previously. In general, the gene values for
+buying a location are higher when a player already owns one of the properties of
+a group compared to when two other players own properties in the group. Although
+it is not shown in Figure~\ref{figure-genome999}, the gene values for buying
+when one opponent owns are generally higher than when two opponents own a property in
+the group. Tables for other genomes can be found in Appendix~\ref{sec:appendixB}
 
 When compared to the strategy list from~\ref{m_gamestrategies}, there might
 appear to be an inconsistency in the genome. For example, the strategy says
 always buy a property if no one else owns it. However, only the gene value for
 Park Place approaches a probability of 1.0 which is implied by the strategy.
 This can easily be explained by the fact that if the player declines a property
-with probability p, the probability of subsequently buying the property is
-higher. This is because when a player declines a property, it is then auctioned
-to any player including the declining player. Since the declining player makes
-the bid decision based on the same chromosome, the probability of buying the
-property then becomes
-
-That is, for the player to not obtain a property requires the player to decline
-to buy it twice (the second decline being the loss of the auction). Since these
-are independent events, the probability of losing an auction is approximately
-\(P_{decline} * P_{decline}\). The probability of obtaining a property is 1
-minus that product. Thus, even when the probability of buying is as low as 0.6,
-the probability of declining is 0.4, and the probability of obtaining the
-property becomes 0.84.
+with probability \(p_{decline} = 1-p_{buy}\), the probability of subsequently
+buying the property is higher. This is because when a player declines a
+property, it is then auctioned to any player including the declining player, and
+the declining player uses the same chromosome to make the bid decision
+independently of the buy decision. So the probability of deciding to buy a
+property is
+\begin{equation*}
+1-p_{decline} \cdot p_{decline}
+\end{equation*}
+For example, even when the probability of a positive buy decision in the
+chromosome is as low as 0.6, the probability of declining is 0.4, and the
+probability of attempting to buy the property is 0.84. the probability of
+actually obtaining the property is slightly lower, however, since it is
+dependent on winning the auction.
 
 \section{SGA Player} \label{6_SGA}
 
@@ -526,7 +555,7 @@ distribution for the generation 289 of an SGA population.}
 \label{figure-sga_gen289}
 \end{figure}
 
-\section{TGA Player}
+\section{TGA Player} \label{6_TGS}
 
 Finally, the same simulation was conducted using TGA players. The results for
 the TGA player were essentially the same as for the RGA player.
@@ -541,7 +570,7 @@ depend mostly on buying property (in which the RGA and TGA genomes are
 identical), and not on getting out of jail which was the difference between the
 two genomes.
 
-\section{Validation}
+\section{Validation} \label{6_Validation}
 
 As with other research that used competitive fitness functions, validations of
 the various populations were performed to test if the populations were actually
@@ -587,8 +616,17 @@ generations.}
 
 \subsection{Interpopulation validation II}
 
-The best players from the last generation of various populations that used
-the same fitness evaluators were also played against each other. This was done
+Based on the results of the evolutionary phase of this study, a set of RGA
+players was selected and competed againt human players to validate the
+evolutionary results. The results of these competitions is presented here.
+
+The intra- and iter-population analysis showed that the best results came from
+populations with high population size, many games per generation, and from the
+latest generations of the evolution. For those reasons, players for this
+validation were selected from the RGA-1024-100 population. 
+
+ The best players from the last generation of various
+populations that used the same fitness evaluators were also played against each other. This was done
 to see if the populations that were smaller could produce comparable
 players as the larger populations. As seen in Chapter~\ref{chap:background},
 many previous studies used small populations to produce their results, whereas
@@ -612,50 +650,52 @@ generations.}
       % Table generated by Excel2LaTeX from sheet 'Pivot table'
       \begin{table}[htbp]
         \centering
-        \caption{Add caption}
-          \begin{tabular}{rrrr}
+        \caption[Human versus RGA results, initial]{Results of Human versus RGA
+        player competitions, with initial trading algorithm}
+          \begin{tabular}{r|rrr}
           \toprule
-                 & Values &        &  \\
+                 & Results &        &  \\
           \midrule
-          Row Labels & Average of finish & Average of networth & Count of games \\
-          \multicolumn{1}{l}{gen250} & 2.8    & 1170.1 & 85.0 \\
+          Players & Average finish & Average networth & Count of games
+          \\ \\
+          \multicolumn{1}{l|}{gen250} & 2.8    & 1170.1 & 85.0 \\
           \hline
-          \multicolumn{1}{l}{player0040.dat} & 2.6    & 2207.0 & 26.0 \\
-          \multicolumn{1}{l}{player0191.dat} & 2.5    & 765.2  & 15.0 \\
-          \multicolumn{1}{l}{player0478.dat} & 3.0    & 416.2  & 22.0 \\
-          \multicolumn{1}{l}{player0752.dat} & 3.0    & 974.6  & 22.0 \\
-          \multicolumn{1}{l}{gen500} & 2.8    & 1137.4 & 78.0 \\
+          \multicolumn{1}{l|}{player0040.dat} & 2.6    & 2207.0 & 26.0 \\
+          \multicolumn{1}{l|}{player0191.dat} & 2.5    & 765.2  & 15.0 \\
+          \multicolumn{1}{l|}{player0478.dat} & 3.0    & 416.2  & 22.0 \\
+          \multicolumn{1}{l|}{player0752.dat} & 3.0    & 974.6  & 22.0 \\ \\
+          \multicolumn{1}{l|}{gen500} & 2.8    & 1137.4 & 78.0 \\
           \hline
-          \multicolumn{1}{l}{player0028.dat} & 2.8    & 902.8  & 25.0 \\
-          \multicolumn{1}{l}{player0445.dat} & 2.9    & 1291.4 & 21.0 \\
-          \multicolumn{1}{l}{player0913.dat} & 2.7    & 404.6  & 19.0 \\
-          \multicolumn{1}{l}{player0923.dat} & 2.8    & 2410.8 & 13.0 \\
-          \multicolumn{1}{l}{gen750} & 2.7    & 1367.1 & 92.0 \\
+          \multicolumn{1}{l|}{player0028.dat} & 2.8    & 902.8  & 25.0 \\
+          \multicolumn{1}{l|}{player0445.dat} & 2.9    & 1291.4 & 21.0 \\
+          \multicolumn{1}{l|}{player0913.dat} & 2.7    & 404.6  & 19.0 \\
+          \multicolumn{1}{l|}{player0923.dat} & 2.8    & 2410.8 & 13.0 \\ \\
+          \multicolumn{1}{l|}{gen750} & 2.7    & 1367.1 & 92.0 \\
           \hline
-          \multicolumn{1}{l}{player0453.dat} & 2.9    & 332.1  & 28.0 \\
-          \multicolumn{1}{l}{player0474.dat} & 2.6    & 1910.8 & 28.0 \\
-          \multicolumn{1}{l}{player0524.dat} & 2.6    & 1195.1 & 18.0 \\
-          \multicolumn{1}{l}{player0750.dat} & 2.6    & 2303.2 & 18.0 \\
-          \multicolumn{1}{l}{gen999} & 2.9    & 954.7  & 72.0 \\
+          \multicolumn{1}{l|}{player0453.dat} & 2.9    & 332.1  & 28.0 \\
+          \multicolumn{1}{l|}{player0474.dat} & 2.6    & 1910.8 & 28.0 \\
+          \multicolumn{1}{l|}{player0524.dat} & 2.6    & 1195.1 & 18.0 \\
+          \multicolumn{1}{l|}{player0750.dat} & 2.6    & 2303.2 & 18.0 \\ \\
+          \multicolumn{1}{l|}{gen999} & 2.9    & 954.7  & 72.0 \\
           \hline
-          \multicolumn{1}{l}{player0101.dat} & 3.0    & 762.1  & 18.0 \\
-          \multicolumn{1}{l}{player0423.dat} & 3.1    & 730.9  & 14.0 \\
-          \multicolumn{1}{l}{player0667.dat} & 2.7    & 1645.2 & 13.0 \\
-          \multicolumn{1}{l}{player0928.dat} & 3.0    & 866.6  & 27.0 \\
-          \multicolumn{1}{l}{human} & 1.6    & 7484.0 & 109.0 \\
+          \multicolumn{1}{l|}{player0101.dat} & 3.0    & 762.1  & 18.0 \\
+          \multicolumn{1}{l|}{player0423.dat} & 3.1    & 730.9  & 14.0 \\
+          \multicolumn{1}{l|}{player0667.dat} & 2.7    & 1645.2 & 13.0 \\
+          \multicolumn{1}{l|}{player0928.dat} & 3.0    & 866.6  & 27.0 \\ \\
+          \multicolumn{1}{l|}{human} & 1.6    & 7484.0 & 109.0 \\
           \hline
-          \multicolumn{1}{l}{A} & 1.6    & 7926.6 & 19.0 \\
-          \multicolumn{1}{l}{B} & 1.3    & 9141.6 & 24.0 \\
-          \multicolumn{1}{l}{C} & 2.3    & 5443.4 & 8.0 \\
-          \multicolumn{1}{l}{E} & 1.9    & 6311.3 & 12.0 \\
-          \multicolumn{1}{l}{G} & 2.3    & 3030.3 & 3.0 \\
-          \multicolumn{1}{l}{H} & 1.6    & 7371.2 & 13.0 \\
-          \multicolumn{1}{l}{S} & 1.5    & 7644.7 & 23.0 \\
-          \multicolumn{1}{l}{K} & 1.0    & 11473.0 & 3.0 \\
-          \multicolumn{1}{l}{V} & 2.5    & 5654.5 & 2.0 \\
-          \multicolumn{1}{l}{L} & 2.0    & 0.0    & 1.0 \\
-          \multicolumn{1}{l}{T} & 3.0    & 0.0    & 1.0 \\
-          \multicolumn{1}{l}{Grand Total} & 2.5    & 2748.7 & 436.0 \\
+          \multicolumn{1}{l|}{A} & 1.6    & 7926.6 & 19.0 \\
+          \multicolumn{1}{l|}{B} & 1.3    & 9141.6 & 24.0 \\
+          \multicolumn{1}{l|}{C} & 2.3    & 5443.4 & 8.0 \\
+          \multicolumn{1}{l|}{E} & 1.9    & 6311.3 & 12.0 \\
+          \multicolumn{1}{l|}{G} & 2.3    & 3030.3 & 3.0 \\
+          \multicolumn{1}{l|}{H} & 1.6    & 7371.2 & 13.0 \\
+          \multicolumn{1}{l|}{S} & 1.5    & 7644.7 & 23.0 \\
+          \multicolumn{1}{l|}{K} & 1.0    & 11473.0 & 3.0 \\
+          \multicolumn{1}{l|}{V} & 2.5    & 5654.5 & 2.0 \\
+          \multicolumn{1}{l|}{L} & 2.0    & 0.0    & 1.0 \\
+          \multicolumn{1}{l|}{T} & 3.0    & 0.0    & 1.0 \\ \\
+          \multicolumn{1}{l|}{Grand Total} & 2.5    & 2748.7 & 436.0 \\
           \bottomrule
           \end{tabular}%
         \label{tab:addlabel}%
