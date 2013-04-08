@@ -744,6 +744,7 @@ competitive fitness functions, we expected that the TOURNAMENT fitness evaluator
 would produce less fit players than at least some of the other fitness
 evaluators.
 
+RESULTS PENDING
 
 \section{Human versus RGA competition}
 
@@ -882,4 +883,26 @@ players, the following was noted:
 
  \subsection{Human versus computer validation II}
  
+ Based on the results of the first human versus computer competition, the traindg
+ algorithm was updated by raising the threshold for accepting or proposing a trade
+ to either 200 or 400 potential gain, and changing \(\omega\) to be either
+ 0.65, 0.80, or 0.95.
+ 
+ Human volunteers then played the game again. Preliminary results show some 
+ improvement in trading behavior: the RGA players propose less trades, and the
+ trades the do propose are more sensible than they were previously.
+ 
+ However this did not improve their game play enough. Preliminary results show 
+ the human players winning approximately 39 games to the RGA players' 11 wins.
+ 
+ Final results a re pending.
+ 
+ \section{Summary}
+ 
+ Although it appears that evolutionary computing can be used to learn when to
+ make property buying decisions in the game of Monopoly, the RGA players were
+ hampered in this experiment by having a trading algorithm that sometimes
+ resulted in making bad trades which led to losses against human players. That
+ is probably partly due to the trading algorithm and partly due to
+ implementation decisions made when the algorithm was coded.
  
