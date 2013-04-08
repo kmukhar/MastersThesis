@@ -32,7 +32,7 @@ validation process is listed below. Because the evolution of SGA and TGA
 chromosomes do not provide any useful information, the validation of the evolved
 players focuses exclusively on results obtained from the RGA chromosomes.
 
-\begin{enumerate} 
+\begin{enumerate}
   \item {Intra-population validation}
   \begin{enumerate}
     \item {For each RGA population select the best player from generation 250,
@@ -43,17 +43,17 @@ players focuses exclusively on results obtained from the RGA chromosomes.
     \item {Use Student's t-test to compare average fitness}
   \end{enumerate}
   \item {Inter-population validation for fitness evaluator}
-  \begin{enumerate} 
+  \begin{enumerate}
     \item {From generation 999 of a set of populations differing only by
     original fitness evaluator, select the best player under each fitness
-    evaluator (results in 6 players)} 
+    evaluator (results in 6 players)}
     \item {Compete the 6 players in 50 games}
     \item {Record the fitness scores for FINISH\_ORDER}
     \item {Repeat 30 times}
     \item {Use Student's t-test to compare average fitness}
   \end {enumerate}
   \item {Real-world validation 1}
-  \begin{enumerate} 
+  \begin{enumerate}
     \item {Select the top 4 players from generations 250, 500, 750, and 999 from
     the RGA-1024-100-FO population}
     \item {compete the players randomly against human players}
@@ -61,10 +61,10 @@ players focuses exclusively on results obtained from the RGA chromosomes.
     \item {Compare average fitness and average net worth among all players}
   \end {enumerate}
   \item {Real-world validation 2}
-  \begin{enumerate} 
-    \item {Select the top 4 players from generation 999 from the RGA-1024-100-FO 
+  \begin{enumerate}
+    \item {Select the top 4 players from generation 999 from the RGA-1024-100-FO
     population}
-    \item {Compete the players randomly against human players using an updated 
+    \item {Compete the players randomly against human players using an updated
     property trading algorithm}
     \item {Record the fitness scores for FINISH\_ORDER}
     \item {Compare average fitness and average net worth among all players}
@@ -130,7 +130,7 @@ play. The distribution of fitness scores should follow a distribution similar to
 the binomial distribution (See Figure~\ref{figure-binomial}).
 
 When the initial populations of players was run through a single generation, the
-actual results matched the expected results quite closely. 
+actual results matched the expected results quite closely.
 
 Figure~\ref{figure-RGA-G000-N100-FO-initial_fitness} shows the fitness
 distribution for the first generation of the RGA-1024-100-FO population. The
@@ -265,7 +265,7 @@ Figure~\ref{figure-RGA-250th_gen_fitness},
 Figure~\ref{figure-RGA-500th_gen_fitness},
 Figure~\ref{figure-RGA-750th_gen_fitness}, and
 Figure~\ref{figure-RGA-999th_gen_fitness}. Each of these figures shows the
-RGA-1024-100-FO population at various points in the evolution process. 
+RGA-1024-100-FO population at various points in the evolution process.
 
 \begin{figure}
 \centering
@@ -328,10 +328,10 @@ Table~\ref{table-stats-for-s1024-n100-fo} for the RGA-1024-100-FO population.
 \begin{center}
 \caption[RGA-1024-100-FO statistics]{Descriptive statistics for RGA-1024-100-FO}
 \begin{tabular}{ | r || r | r | r | r | r |}
-\hline                        
+\hline
 Generation & Min & Max & Average & Variance & Std Dev \\ \hline \hline
 0   & 103 & 193 & 150 & 227.43 & 15.08 \\ \hline
-100 & 115 & 186 & 150 & 126.81 & 11.26 \\ \hline 
+100 & 115 & 186 & 150 & 126.81 & 11.26 \\ \hline
 250 & 110 & 179 & 150 & 122.02 & 11.05 \\ \hline
 500 & 119 & 189 & 150 & 120.44 & 10.97 \\ \hline
 750 & 117 & 184 & 150 & 124.63 & 11.16 \\ \hline
@@ -365,7 +365,7 @@ RGA-1024-100-NW population.
 \begin{center}
 \caption[RGA-1024-100-NetW statistics]{Descriptive statistics for RGA-1024-100-NetW}
 \begin{tabular}{ | r || r | r | r | r | r |}
-\hline                        
+\hline
 Generation & Min & Max & Average & Variance & Std Dev \\ \hline \hline
 0   & 4728 & 11186 & 7499.99 & 1137919.23 & 1066.73 \\ \hline
 250 & 4285 & 10374 & 7499.80 &  649447.67 &  805.88 \\ \hline
@@ -381,10 +381,10 @@ Generation & Min & Max & Average & Variance & Std Dev \\ \hline \hline
 \begin{center}
 \caption[RGA-1024-100-NM statistics]{Descriptive statistics for RGA-1024-100-NM}
 \begin{tabular}{ | r || r | r | r | r | r |}
-\hline                        
+\hline
 Generation & Min & Max & Average & Variance & Std Dev \\ \hline \hline
 0   &  8 & 209 &  80.42 & 1014.77 & 31.86 \\ \hline
-250 & 37 & 226 & 110.88 &  758.92 & 27.55 \\ \hline 
+250 & 37 & 226 & 110.88 &  758.92 & 27.55 \\ \hline
 500 & 43 & 199 & 111.20 &  707.89 & 26.61 \\ \hline
 750 & 44 & 199 & 113.97 &  732.09 & 27.06 \\ \hline
 999 & 17 & 217 & 116.52 &  734.49 & 27.10 \\ \hline
@@ -397,7 +397,7 @@ Generation & Min & Max & Average & Variance & Std Dev \\ \hline \hline
 \begin{center}
 \caption[RGA-1024-100-NP statistics]{Descriptive statistics for RGA-1024-100-NP}
 \begin{tabular}{ | r || r | r | r | r | r |}
-\hline                        
+\hline
 Generation & Min & Max & Average & Variance & Std Dev \\ \hline \hline
 0   & 309 & 1094 & 698.18 &  10271.47 & 101.35 \\ \hline
 250 & 504 &  929 & 697.75 &   5322.08 &  72.95 \\ \hline
@@ -413,7 +413,7 @@ Generation & Min & Max & Average & Variance & Std Dev \\ \hline \hline
 \begin{center}
 \caption[RGA-1024-100-NW statistics]{Descriptive statistics for RGA-1024-100-NW}
 \begin{tabular}{ | r || r | r | r | r | r |}
-\hline                        
+\hline
 Generation & Min & Max & Average & Variance & Std Dev \\ \hline \hline
 0   & 27 & 126 & 75.00 & 286.43 & 16.92 \\ \hline
 250 & 36 & 120 & 75.00 & 155.68 & 12.48 \\ \hline
@@ -457,7 +457,7 @@ provides details on whether the populations did improve or not.
     RGA-0032-007-FO & 250    & 4      & 17     & 10.50  & 9.23   & 3.04 \\
     RGA-0032-007-FO & 500    & 5      & 16     & 10.50  & 10.13  & 3.18 \\
     RGA-0032-007-FO & 750    & 2      & 19     & 10.50  & 12.71  & 3.57 \\
-    RGA-0032-007-FO & 999    & 5      & 16     & 10.50  & 10.26  & 3.20 \\ 
+    RGA-0032-007-FO & 999    & 5      & 16     & 10.50  & 10.26  & 3.20 \\
     \bottomrule
     \end{tabular}
   \label{tab:6_RGA-0032-007-FO}%
@@ -577,7 +577,7 @@ since it is dependent on winning the auction.
 
 After evolving the population of RGA Players, the simulation was conducted again
 using SGA Players. SGA players are those players with a binary string
-chromosome. 
+chromosome.
 
 The fitness distribution in the first generation shows the same general
 similarity to the binomial distribution (Figure~\ref{figure-sga_gen0}), although
@@ -604,7 +604,7 @@ Although not shown in this thesis, Generations 500 and 750, for the
 SGA-1024-100-FO population, show the same general fitness distribution: a long
 tail of low fitness scores, with a peak at higher scores. The fitness
 distribution for Generation 999 shows the same pattern and can be seen in
-Appendix~\ref{appendix:SGAFitness}. 
+Appendix~\ref{appendix:SGAFitness}.
 
 Appendix~\ref{appendix:SGAFitness} also contains sample fitness distributions
 from other SGA populations. They all show the same pattern. At generation 0,
@@ -619,17 +619,19 @@ problems~\cite{goldberg1989genetic}.
 
 Not only did the fitness distributions show problems, but some initial play
 testing of a few of the ``best'' SGA players showed that they performed much
-more poorly than the RGA and TGA players, losing in every trial. It was only 
+more poorly than the RGA and TGA players, losing in every trial. It was only
 after this that we found the following from Fogel~\cite{fogel1999intelligence}:
 
-\quote{We must also admit that several previous theoretical speculations in 
-evolutionary computation have proven to be incorrect. [\ldots] Davis (1991),
+\begin{quote}
+We must also admit that several previous theoretical speculations in
+evolutionary computation have proven to be incorrect. \ldots~Davis (1991),
 Michalewicz (1992), B\"ack and Schwefel (1993), Fogel and Stayton (1994), and
-many others, have reported better and faster results in continuous optimization 
+many others, have reported better and faster results in continuous optimization
 problems when using real-valued representations instead of bit strings. \ldots
 so the proper conclusion is to use the representation that follows naturally
-from the problem and gives you the best insight into discovering improved 
-solutions.}
+from the problem and gives you the best insight into discovering improved
+solutions.
+\end{quote}
 
 Based on the poor results of the SGA players, and the conclusion that the
 chromosome for a problem should not automatically be a bit string, but should be
@@ -668,7 +670,7 @@ the best player in generations 250, 500, and 750. 100 games were played with the
 same set of 4 best players. If the population was actually evolving better
 players, we expect that on average, the best player in the last generation will
 win more games then the other players; and the best player in the 250th
-generation should lose more games on average. 
+generation should lose more games on average.
 
 After 100 games were played, this same trial was repeated 50 times, without
 evolution. At the start of validation, 50 games repeated for 100 trials was
@@ -678,24 +680,36 @@ Appendix~\ref{appendix:intravalidation} presents the complete set of results for
 the RGA-0128 and the RGA-1024 populations. What the tables in the appendix show
 is that the populations did improve over time, at least when played against each
 other. Table~\ref{tab:validationRGA0128} is an excerpt of the validation results
-for the RGA-0128 population (the complete table is in the appendix). 
+for the RGA-0128 population (the complete table is in the appendix).
 
-% Table generated by Excel2LaTeX from sheet 'Finish Order (2)'
+% Table generated by Excel2LaTeX from sheet 'Finish Order'
 \begin{table}[htbp]
   \centering
-  \caption{Interpopulation Validation, RGA-0128 partial}
-    \begin{tabular}{rrrrrrr}
-    \toprule
-           &        & \multicolumn{2}{c}{Avg fitness} & \multicolumn{3}{c}{One tailed t test} \\
-    \midrule
-    Number of games per generation in original population & original fitness evaluator & \multicolumn{1}{c}{Generation 250} & \multicolumn{1}{c}{Generation 500} & \multicolumn{1}{c}{t test G250 vs G500} & \multicolumn{1}{c}{t test G500 vs G750} & \multicolumn{1}{c}{t test G750 vs G999} \\
-    \multicolumn{1}{l}{\multirow{5}[10]{*}{100}} & finish order & 1389.42 & 1489.52 & 0.00   & 0.00   & 0.00 \\
-    \multicolumn{1}{l}{} & net worth & 1426.96 & 1472.62 & 0.00   & 0.00   & 0.00 \\
-    \multicolumn{1}{l}{} & num monop & 1464.06 & 1494.22 & 0.00   & 0.15   & 0.00 \\
-    \multicolumn{1}{l}{} & num props & 1438.08 & 1487.34 & 0.00   & 0.00   & 0.00 \\
-    \multicolumn{1}{l}{} & num wins & 1418.00 & 1493.70 & 0.00   & 0.00   & 0.04 \\
-    \bottomrule
-    \end{tabular}%
+  \caption{Intrapopulation validation, population size 128, Evaluated by finish order}
+    \begin{tabularx}{\linewidth}{|p{1in}|p{1in}|r|r|r|r|r|}
+    \cline{3-7}
+    \multicolumn{1}{l}{} &  & \multicolumn{2}{c|}{Avg fitness} & \multicolumn{3}{c|}{One tailed t test} \\
+    \cline{1-7}
+    Number of games per generation in original population
+    & Original fitness evaluator
+    & \multicolumn{1}{p{0.7in}|}{Generation 250}
+    & \multicolumn{1}{p{0.7in}|}{Generation 500}
+    & \multicolumn{1}{X|}{t test G250 vs G500}
+    & \multicolumn{1}{X|}{t test G500 vs G750}
+    & \multicolumn{1}{X|}{t test G750 vs G999} \\
+    \cline{1-7}
+      \multirow{5}{*}{100}
+      & finish order & 1389.42 & 1489.52 & 0.0000 & 0.0000 & 0.0000 \\
+      \cline{2-7}
+      & net worth & 1426.96 & 1472.62 & 0.0000 & 0.0000 & 0.0000 \\
+      \cline{2-7}
+      & num monop & 1464.06 & 1494.22 & 0.0001 & 0.1532 & 0.0000 \\
+      \cline{2-7}
+      & num props & 1438.08 & 1487.34 & 0.0000 & 0.0003 & 0.0000 \\
+      \cline{2-7}
+      & num wins & 1418.00 & 1493.70 & 0.0000 & 0.0000 & 0.0403 \\
+      \cline{1-7}
+    \end{tabularx}%
   \label{tab:validationRGA0128}%
 \end{table}%
 
@@ -706,7 +720,7 @@ player is evaluated using finish order evaluator. The score in the average
 fitness column is the average fitness scores for that player over 50 trials of
 100 games per trial. To evaluate whether players in later generations were
 better than players in earlier generations, a one-tailed Student's t-test was
-performed with H_{0} that the average fitness is the same for each generation.
+performed with $H_{0}$ that the average fitness is the same for each generation.
 In most cases, the null hypothesis is rejected, indicating that the average
 fitness scores are different. Since average fitness increases over time, the
 one-tailed t-test says that not only are the fitness scores different, the
@@ -729,7 +743,7 @@ close to each other. For example, looking at the RGA-0128 table in the Appendix,
 when the number of games per generation is 7, The null hypothesis is accepted
 14 out of 25 trials at the 0.05 significance level. Looking at the same table,
 the null hypothesis is accepted most often when comparing Generation 500 to 750
-(accepted 9 times), and when comparing Generation 750 to 999 (accepted 8 times). 
+(accepted 9 times), and when comparing Generation 750 to 999 (accepted 8 times).
 
 The conclusion from this set of experiments is that better players evolved in
 larger populations that played large numbers of games per generation.
@@ -755,13 +769,13 @@ evolutionary results. The results of these competitions is presented here.
 The intra- and iter-population analysis showed that the best results came from
 populations with high population size, many games per generation, and from the
 latest generations of the evolution. For those reasons, players for this
-validation were selected from the RGA-1024-100-FO population. 
+validation were selected from the RGA-1024-100-FO population.
 
 \subsection{Human versus computer validation I}
 
 The first competition was conducted after implementing the trading algorithm
 proposed by Yasumura, et al, in ``Negotiation strategy of agents in the MONOPOLY
-game~\cite{Yasumura2001Negotiate}''. 
+game~\cite{Yasumura2001Negotiate}.''
 
 The algorithm evaluates the ownership situation of the properties being traded,
 and then sums various combinations of gains based on that situation. For
@@ -785,21 +799,21 @@ algorithm was compared to the game play of human experts, the algorithm matched
 the humans when gains and losses were balanced \(\omega \approx 0.5\)), and when
 the threshold was relatively low (approximately 100).
 
-So the algorithm was implemented with those parameters: \(\omega = 0.5\)), and 
+So the algorithm was implemented with those parameters: \(\omega = 0.5\)), and
 threshold of 100.
 
-The best 4 players from generations 250, 500, 750, and 999 of the 
+The best 4 players from generations 250, 500, 750, and 999 of the
 RGA-1024-100-FO populations were selected. They then competed in a Monopoly game
-player against a single human player. For each game, the game chose 3 RGA 
+player against a single human player. For each game, the game chose 3 RGA
 opponents at random. So usually the human player was playing against a mix of
 players from the 4 generations. This was done to perform a secondary validation
 of the fact that players from later generation should be better than players
 from earlier generations. If that was the case as proved in the intra-population
-validation, then regardless of how the RGA players played against the human 
-players in aggregate, the players from generation 999 should still do better 
+validation, then regardless of how the RGA players played against the human
+players in aggregate, the players from generation 999 should still do better
 than the players from generation 250.
 
-The results of this initial human versus computer validation are shown in 
+The results of this initial human versus computer validation are shown in
 Table~\ref{tab:human_rga_I}.
 
       % Table generated by Excel2LaTeX from sheet 'Pivot table'
@@ -865,44 +879,43 @@ lost) was higher than the average net worth of every computer player.
 After analyzing the results and conducting interviews with several of the human
 players, the following was noted:
 
-\begin{itemize} 
+\begin{itemize}
   \item {The RGA players tended to propose a lot of trades, as often
   as once per turn.}
   \item {The human players who participated in this competition rarely proposed
-  trades. Part of that is because it was easier to let the RGA player make a 
-  proposal, and accept or reject that. Another reason is that the trade 
-  threshold for the human players was much higher than 100 threshold of the RGA 
+  trades. Part of that is because it was easier to let the RGA player make a
+  proposal, and accept or reject that. Another reason is that the trade
+  threshold for the human players was much higher than 100 threshold of the RGA
   players.}
-  \item {These proposed trades, while they may have exceeded the profit 
-  threshold for the player, were often obviously bad trades for the RGA player 
-  (for example, trading a property that resulted in a monopoly for the human, 
+  \item {These proposed trades, while they may have exceeded the profit
+  threshold for the player, were often obviously bad trades for the RGA player
+  (for example, trading a property that resulted in a monopoly for the human,
   but no monopoly for the RGA player).}
   \item {Although being able to buy property is useful, it is just as important
   in this game to be able to trade well.}
 \end{itemize}
 
  \subsection{Human versus computer validation II}
- 
- Based on the results of the first human versus computer competition, the traindg
+
+ Based on the results of the first human versus computer competition, the trading
  algorithm was updated by raising the threshold for accepting or proposing a trade
  to either 200 or 400 potential gain, and changing \(\omega\) to be either
  0.65, 0.80, or 0.95.
- 
- Human volunteers then played the game again. Preliminary results show some 
+
+ Human volunteers then played the game again. Preliminary results show some
  improvement in trading behavior: the RGA players propose less trades, and the
  trades the do propose are more sensible than they were previously.
- 
- However this did not improve their game play enough. Preliminary results show 
+
+ However this did not improve their game play enough. Preliminary results show
  the human players winning approximately 39 games to the RGA players' 11 wins.
- 
- Final results a re pending.
- 
+
+ Final results are pending.
+
  \section{Summary}
- 
+
  Although it appears that evolutionary computing can be used to learn when to
  make property buying decisions in the game of Monopoly, the RGA players were
  hampered in this experiment by having a trading algorithm that sometimes
  resulted in making bad trades which led to losses against human players. That
  is probably partly due to the trading algorithm and partly due to
  implementation decisions made when the algorithm was coded.
- 
