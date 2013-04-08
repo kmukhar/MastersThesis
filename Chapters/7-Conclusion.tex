@@ -7,19 +7,51 @@ simulated environment in which they evolved. These players also appear to use
 strategies similar to those that have been developed heuristically by real-world
 players.
 
-Based on the results and other questions encountered during this study,
-additional research can be conducted in the following areas:
+Monopoly is game with a large random component. Every turn brings another roll
+of the dice and no game is ever the same. This seemed to analogous to the
+research conducted in to games with noise introduced into the
+experiments~\cite{Panait02acomparative}. In those experiments, good players were
+able to evolve with small populations and relatively small numbers of
+generations.
 
-\begin{enumerate}
-  \item The players in this simulation do not make property trades. The
-  literature on Monopoly claims that this is a vital part of the game. This
-  functionality should be implemented and tested to see if the evolved players
-  do better.
-  \item The fitness distribution for the SGA player diverged from the mean over
-  many generations rather than converged as was expected. Further investigation
-  is needed to determine whether this is an anomaly or if there is some logical
-  reason for this.
-  \item Further play with multiple evolved players (both low and high simulation
-  fitness) against real or AI players should be conducted to evaluate the real
-  (rather than simulated fitness) of the population.
-\end{enumerate}
+However, what was found in this research is that the random component of
+Monopoly introduces a great deal of noise, and makes the search space
+significantly larger than for games used in earlier research. So much so that
+the smaller populations in this study were not able to evolve players as well as
+the larger populations, or as well as populations that played large numbers of
+games.
+
+We also found that as much as the decision to buy property is important to
+playing the game of Monopoly, property trading is also a significant component.
+The first human versus computer validation for the evolved Monopoly players was
+based on previous research which indicated that player's should propose trades
+often, and propose trades that balanced gains and
+losses~\cite{Yasumura2001Negotiate}. 
+
+What we found under actual play conditions is that the AI players did better
+when they valued gains much more than losses, and when they used a higher
+threshold for accepting a trade that gave them a gain. This seems to contradict
+the previous research into trading strategies that the trading algorithm was
+based on. Of course, the evolutionary aspect of the players was not involved in
+the trading algorithm, so the RGA players were not able to evolve better
+strategies during the competition, unlike the human players who undoubtedly
+learned as they participated in the competition.
+
+At this point the author thinks that this thesis supports the following:
+\begin{itemize} 
+  \item {The poor evolution of a simple bit string chromosome (the SGA players) 
+  confirms what has been found in other problem domains: the chromosome for any
+  evolutionary computing algorithm should be matched to the problem domain.} 
+  \item {All the literature cited in this thesis regarding tournament fitness 
+  evaluations used simple two-player competitions. This research showed that 
+  these competitions could be extended to 4 player games with successful 
+  results. The author thinks that this is generalizable to n-player games with
+  the appropriate adjustments, but that is only suggested, not supported, by 
+  this set of experiments.}
+  \item {The improved performance of the RGA players after the property trading 
+  strategy was improved shows that in games where one can acquire resources
+  directly or trade for resources, both components are important to success.}
+  \item {In the face of large amounts of randomness (noise) in a problem domain,
+  evolutionary computing can still be robust (given proper evolutionary 
+  parameters) to find solutions to the problem domain.}
+\end{itemize}
