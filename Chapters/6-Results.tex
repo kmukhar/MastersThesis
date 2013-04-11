@@ -8,15 +8,20 @@ in this experiment. One thousand generations were evolved for every combination
 of chromosome type (RGA, SGA, and TGA), population size (32, 128, 512, and
 1024), number of games played by each chromosome per generation (7, 25, 50,
 100), and fitness evaluator (FINISH\_ORDER (FO), NET\_WORTH (NetW),
-NUM\_MONOPOLIES (NM), NUM\_PROPERTIES (NP), NUM\_WINS (NW), and TOURNAMENT
-(TO)\footnote{For the tournament fitness evaluator the number of games was
-determined by the population size and was not independent. So for TOURNAMENT,
-1000 generations were evolved for every combination of population size and
-chromosome type}). In this chapter, those four features are used to identify the
-different populations: for example, RGA-512-50-NP refers the to RGA chromosome
-population of size 512, where each player played 50 games per generation and the
-fitness evaluator was NUM\_PROPERTIES. Results of the evolutionary process are
-presented in the first section of this Chapter.
+NUM\_MONOPOLIES (NM), NUM\_PROPERTIES (NP), and NUM\_WINS (NW). In this chapter,
+those four features are used to identify the different populations: for example,
+RGA-512-50-NP refers the to RGA chromosome population of size 512, where each
+player played 50 games per generation and the fitness evaluator was
+NUM\_PROPERTIES. Results of the evolutionary process are presented in the first
+section of this Chapter.
+
+A sixth fitness evaluator, TOURNAMENT (TO) was also tested. For the tournament
+fitness evaluator the number of games was determined by the population size and
+the results of each tournament, and so was not independent. Each match in the
+evolution of the population was an entire single elimination tournament as
+described in Section~\ref{5_fitnesseval}. There were 20 matches in every
+generation. For TOURNAMENT, 1000 generations were evolved for every combination
+of population size and chromosome type.
 
 Results for the RGA chromosome are presented first, and in a large amount
 detail. We also look briefly at the results for the SGA chromosomes, even though
@@ -756,7 +761,7 @@ null hypothesis is accepted most often when comparing Generation 500 to 750
 The conclusion from this set of experiments is that better players evolved in
 populations that played large numbers of games per generation.
 
-\subsection{Interpopulation validation}
+\subsection{Interpopulation validation} \label{6_interpopValidation}
 
 Next, the best players from the last generation of similar populations that used
 different fitness evaluators were played against each other. This was done to
@@ -779,7 +784,7 @@ populations with high population size, many games per generation, and from the
 latest generations of the evolution. For those reasons, players for this
 validation were selected from the RGA-1024-100-FO population.
 
-\subsection{Human versus computer validation I}
+\subsection{Human versus computer validation I}\label{6_humanVRGA1}
 
 The first competition was conducted after implementing the trading algorithm
 proposed by Yasumura, et al, in ``Negotiation strategy of agents in the MONOPOLY
@@ -903,7 +908,7 @@ players, the following was noted:
   in this game to be able to trade well.}
 \end{itemize}
 
- \subsection{Human versus computer validation II}
+ \subsection{Human versus computer validation II} \label{6_humanVRGA2}
 
  Based on the results of the first human versus computer competition, the trading
  algorithm was updated by raising the threshold for accepting or proposing a trade

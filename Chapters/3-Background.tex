@@ -114,10 +114,10 @@ allowed to reproduce to the next generation.
 
 In this example, the basic elements of a competitive fitness functions are
 present: 1) individuals in the population 2) compete against some other player
-and 3) are awarded points for winnning, losing, or drawing. In this study, the
+and 3) are awarded points for winnning, losing, or drawing. In Fogel's study, the
 individuals in the population competed against static players from outside the
 population. However, individuals in a population can also compete against each
-other in a process known as coevolution.
+other in a process known as co-evolution.
 
 \subsection{Checkers}
 
@@ -149,9 +149,9 @@ generations, it played just below expert level, and after 840 generations their
 evolved ANN player was able to play at Expert level, well above the average
 human player.
 
-This is an example of coevolution. In this work the competitive fitness function
-consists of individuals competing against other individuals in the same
-population. However, each individual only competes consists of a subset of the
+This is an example of co-evolution. In this work the competitive fitness
+function consists of individuals competing against other individuals in the same
+population. However, each individual only competes against a subset of the
 population.
 
 \subsection{Othello}
@@ -180,7 +180,7 @@ were not used to guide the evolution. As the population evolved, competition
 against the computer player showed that the neural networks were indeed playing
 at higher levels, achieving master level at about the 800th generation.
 
-This example of coevolution is very similar to the previous example.
+This example of co-evolution is very similar to the previous example.
 
 \subsection{State Space Complexity}
 We could continue to cite other research into genetic algorithms and games, and
@@ -235,6 +235,42 @@ While not as well studied as the two player games mentioned previously, there
 has been some research on using evolutionary computation to create winning
 strategies for non-deterministic games. In this section we look at three games
 to which evolutionary computing has been applied: Rummy, Acquire, and Monopoly.
+
+\subsection{Co-evolution versus temporal-difference learning for Rummy}
+
+Rummy is a card game in which players attempt to collect different sets of 
+cards, either runs of three or more cards in sequence, or set of cards with the
+same face value. This is obviously a stochastic game as the cards are shuffled
+for every new game.
+
+Kotnik and Kalita performed a comparison of Rummy players trained through 
+co-evolution to players trained through temporal difference (TD) 
+training~\cite{kotnik2003significance}.
+
+The TD algorithm was adapted from work on the game of Backgammon by 
+Tesauro~\cite{tesauro1992practical,tesauro1995temporal}. The TD-Rummy process
+uses a neural network which is used to determine the player's next move in the
+game. After the next move is determined, a custom back-propagation algorithm
+adjusts the weights of the network based on the outcome of the game.
+
+The comparison technique called Evo-Rummy, uses a simple population of two 
+players. The players played two pairs of games; each pair of games uses an 
+identical starting state, but the player and opponent are reversed in each 
+game. After the sets of games, the opponents network is randomly mutated by
+a small amount. The player's network is unchanged if the player wins two or
+more games, otherwise the weights of the player's network are moved 5\% in
+the direction of the weights in the opponent's network.
+
+With just two players this is the simplest co-evolutionary environment among 
+the studies cited here. Nevertheless, Kotnik and Kalita reported that their
+Evo-Rummy players outperformed the TD-Rummy players. The worst Evo-Rummy player
+won 65\% of the games it played in the validation phase, whereas the best 
+TD-Rummy player only won 56.25\* of its games.
+
+In this example of co-evolution the two individuals in the population competed
+against each other; however, rather than gaining fitness points, the losing
+player mutates the network weight to be closer to the winning player's network
+weights.
 
 \subsection{Acquire: Evolving Board Evaluation Functions for a Complex Strategy
 Game}
@@ -428,14 +464,14 @@ The research cited above into Checkers, Othello, Acquire, and Monopoly all used
 K-Random
 Opponents~\cite{Fogel2000Anaconda,journals/tec/ChellapillaF01,ChongTW05,Anthony2002,DBLP:conf/cig/Frayn05}.
 
-\subsection{Fitnessless Coevolution}
+\subsection{Fitnessless Co-evolution}
 
-More recently Ja\'{s}kowski, Krawiec, and Wieloch realized that when a
+More recently Ja\'{s}kowski, Krawiec, and Wieloch showed that when a
 competitive fitness function was being used as part of a genetic algorithm, one
 could skip the fitness evaluation component and use the competitions directly in the
 selection phase of the algorithm~\cite{Jaskowski:2008:FC:1389095.1389161}. 
 
-When using fitnessless coevolution, the fitness evaluation step is skipped
+When using fitnessless co-evolution, the fitness evaluation step is skipped
 completely. The genetic algorithm then proceeds to the selection phase where
 individuals are selected for propagation to the next generation, either
 directly, or as part of reproduction. For each new individual in the next
@@ -444,23 +480,23 @@ the current generation. The individuals in \(S\) then compete in a single
 elimination tournament and the winner of the tournament becomes a candidate for
 being directly added to the next generation, or becoming a parent of a new
 individual in the next generation. The size \(t\) of sample set \(S\) can be
-varied. If \(t=1\), fitnessless coevolution is the same as Single
+varied. If \(t=1\), fitnessless co-evolution is the same as Single
 Elimination Tournament.
 
-Ja\'{s}kowski, Krawiec, and Wieloch evaluated fitnessless coevolution against a
+Ja\'{s}kowski, Krawiec, and Wieloch evaluated fitnessless co-evolution against a
 similar set of problems as Panait and Luke (a single version of Nim, the
 Rosenbrock function, and the Rastrigin function) and additionally tested it with
-Tic-Tac-Toe. They found that fitnessless coevolution was competitive with Single
+Tic-Tac-Toe. They found that fitnessless co-evolution was competitive with Single
 Elimination Tournament and K-Random Opponents. It usually outperformed Single
 Elimination Tournament, and like Single Elimination Tournament only performed
 more poorly than K-Random Opponents when there was a noise percentage more than
 30\%. It simplifies the competitive fitness genetic algorithm by eliminating
 numerical fitness and the evaluation phase of the genetic algorithm. Also,
-fitnessless coevolution works best with tasks that satisfy the transitivity
+fitnessless co-evolution works best with tasks that satisfy the transitivity
 condition: in a game, if \(Player_{i}\) beats \(Player_{j}\) and \(Player_{j}\)
 beats \(Player_{k}\), then \(Player_{i}\) beats \(Player_{k}\) for all i, j, k.
 
-However, while fitnessless coevolution simplifies the genetic algorithm by
+However, while fitnessless co-evolution simplifies the genetic algorithm by
 eliminating numerical fitness, this can also be a disadvantage. In many of the
 studies discussed above, the best individuals in a generation were often
 validated by competing them against some other benchmark player, either a

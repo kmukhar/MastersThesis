@@ -157,6 +157,9 @@ the fitness of the solution, and relatively easy to modify the starting
 population into a new population. These features map onto the general flow of a
 genetic algorithm which is illustrated in Figure~\ref{figure-gaflow}. A brief,
 high-level overview of genetic algorithms is given in the sections that follow.
+The summary in the remainder of this section is based on the work of
+Holland~\cite{Holland1992}, Goldberg~\cite{goldberg1989genetic}, Haupt and
+Haupt~\cite{haupt2004practical}, and De Jong~\cite{dejong2006evolutionary}.
 
 \begin{figure}[htp]
 \centerline{\includegraphics[width=1.0\columnwidth]{Figures/GAFlow.png}}
@@ -175,13 +178,13 @@ Applying a genetic algorithm to a problem requires that a solution to the
 problem can be encoded into a data structure. A single data structure is
 referred to as a chromosome. A given chromosome represents a single individual
 in the population. In its simplest form a chromosome might consist of a binary
-string, that is, a string of 1s and 0s. The interpretation of the chromosome is
-problem dependent. If the problem domain is creating a melody, the 0s and 1s in
-the chromosome might encode specific notes and other musical features; if the
-problem domain is the traveling salesman problem, substrings in the chromosome
-might represent the cities that are visited; if the problem domain is the set of
-moves in a game, substrings in the chromosome might represent a particular game
-move.
+string, that is, a string of 1s and 0s~\cite{Holland1992,goldberg1989genetic}.
+The interpretation of the chromosome is problem dependent. If the problem domain
+is creating a melody, the 0s and 1s in the chromosome might encode specific
+notes and other musical features; if the problem domain is the traveling
+salesman problem, substrings in the chromosome might represent the cities that
+are visited; if the problem domain is the set of moves in a game, substrings in
+the chromosome might represent a particular game move.
 
 The genetic algorithm for any problem begins by initializing the chromosomes
 that represent solutions. This is usually done by randomly generating the data
@@ -198,7 +201,8 @@ resources than is necessary.
 
 After a population of solutions is encoded, the next step is usually to measure
 the fitness of the solution. Some kind of function is applied to each
-chromosome, and the value of the function becomes the fitness of the chromosome.
+chromosome, and the value of the function becomes the fitness of the 
+chromosome~\cite{haupt2004practical}.
 
 If the problem domain is creating a melody, the fitness function might be a
 comparison of the melody encoded by the chromosome to the desired melody (which
@@ -212,7 +216,7 @@ payoff for making the move specified by the chromosome.
 
 After fitness is measured, the algorithm evaluates whether to stop or not. One
 can stop after finding an exact solution, after solutions stop improving, or
-after a set number of generations.
+after a set number of generations~\cite{dejong2006evolutionary}.
 
 Obviously, if the algorithm has found an exact solution to a problem, there is
 no point in proceeding further. This is often the case when optimizing a
@@ -235,7 +239,8 @@ take the best solution at that point.
 \subsection{Selection}
 
 After fitness is measured, the fitness is used to guide the selection of
-individuals for propagation into the next generation. 
+individuals for propagation into the next
+generation~\cite{haupt2004practical,dejong2006evolutionary}.
 
 One method for performing this is to assign a weight to each individual
 equal to the ratio of the individual's fitness to the total fitness of the
@@ -254,7 +259,8 @@ propagation phase.
 
 Propagation of the current population usually occurs in conjunction with the
 selection phase. The most common methods for creating a new population from the
-current population are reproduction, recombination, and mutation.
+current population are reproduction, recombination, and
+mutation~\cite{goldberg1989genetic,haupt2004practical,DeJong:1989:UGA:93126.93172}.
 
 In reproduction, individuals are copied from the current population directly
 into the new population. This might consist of choosing the highest quality
@@ -308,19 +314,21 @@ the chromosome. When attempting to optimize some mathematical function, that is
 easy to do. The chromosome becomes an input to the function, and the objective
 measure is simply the function output. For other problems, though, there may not
 be an objective function. For example, when applying a genetic algorithm to art
-or music, a subjective fitness function is used. For these applications a human
-is usually used to provide an assessment of the quality of the solution.
+or music, a subjective fitness function is used~\cite{eiben2003introduction}.
+For these applications a human is usually used to provide an assessment of the
+quality of the solution.
 
 And then there are times when there is neither an objective nor a subjective
 fitness function. When applying genetic algorithms to games, especially games
-that have a stochastic component, there is no good fitness function. If a
-chromosome is designed to output moves for a game, how does one know whether
-the strategy encoded by the chromosome is a good? Just because an individual
-wins a game does not make the individual high quality: it could be a poor
-quality individual but played against a worse player. Similarly, just because an
-individual loses a game does not make the individual poor quality: it could have
-lost just because of chance. In this case, one uses a competitive fitness
-function. We discuss these in much more detail in Chapter~\ref{chap:background}.
+that have a stochastic component, there is no good objective fitness function.
+If a chromosome is designed to output moves for a game, how does one know
+whether the strategy encoded by the chromosome is a good? Just because an
+individual wins a game does not make the individual high quality: it could be a
+poor quality individual but played against a worse player. Similarly, just
+because an individual loses a game does not make the individual poor quality: it
+could have lost just because of chance. In this case, one uses a competitive
+fitness function~\cite{fogel1999intelligence}. We discuss competitive fitness 
+functions in more detail in Chapter~\ref{chap:background}.
 
 \section{Recombination and mutation} \label{2-recombination}
 
