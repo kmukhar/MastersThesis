@@ -42,11 +42,11 @@ In complexity theory, there are a number of classes that are used to categorize
 problems~\cite{alsuwaiyel1999algorithms,Cormen:2009:IAT:1614191}. The simplest
 of those classes is the class P: those problems which can be deterministically
 solved in polynomial time. Using big O notation, we write
-
-\(P \in O(n^{k})\)
-
+\begin{equation*}
+P \in O(n^{k})
+\end{equation*}
 where \(n\) is the size of the problem, \(k\) is some constant, and the
-notation \(O()\) refers to the time complexity of the problem.
+notation \(O()\) refers to the asymptotic time complexity of the problem.
 
 A very brief subset of problems that are in the P complexity class are listed
 below~\cite{greenlaw1991compendium}.
@@ -222,7 +222,7 @@ Obviously, if the algorithm has found an exact solution to a problem, there is
 no point in proceeding further. This is often the case when optimizing a
 mathematical function. If one knows ahead of time that the minimum or maximum of
 a function is a particular value, and a genetic algorithm finds a solution that
-produces that minimum or maximum, then if there is no reason to search for
+produces that minimum or maximum, and if there is no reason to search for
 additional solutions, the algorithm can terminate.
 
 More often, though, the optimal fitness value is not known a priori. In this

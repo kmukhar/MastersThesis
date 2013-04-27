@@ -190,7 +190,7 @@ the board, the corresponding bit in the index is set to 1 if the property is
 owned by some other player; otherwise, it is set to 0. For example, there are
 six properties on the west side of the board. In board order they are St Charles
 Place, Virginia Ave, States Ave, St James Place, New York Ave, and Tennessee
-Ave. If opponents owned the first three, then the index would be $000111_2$. The
+Ave. If opponents owned the first three, the index would be $000111_2$. The
 second index is formed similarly. The two indices are then used to access an
 element in the array.
 
@@ -235,7 +235,7 @@ an integer, then each gene will have some value from 0 to 63. Each value is also
 interpreted as the chance of making a positive decision. Just as with the RGA
 chromosome, when a decision is required, a random integer between 0 and 63
 inclusive is generated; if that random value is less than the chromosome value,
-then the player has ``decided'' to buy the property. Thus, each gene has a
+the player has ``decided'' to buy the property. Thus, each gene has a
 coarseness of approximately 1.56\% for each decision.
 
 We then take all the genes and concatenate them into a single string. So, for
@@ -295,7 +295,7 @@ have the minimum cash plus enough to buy a house or hotel for whichever
 monopolies the player owns. If the player does not have enough cash, the
 algorithm exits.
 
-If the player has enough cash, then the player buys houses for all monopolies
+If the player has enough cash, the player buys houses for all monopolies
 that have less than 3 houses on them\footnote{The greatest return for a player
 occurs when building 3 houses on all properties, and not building 4 houses or a
 hotel until all monopolies have 3 houses~\cite{orbanes2007monopoly}.}. If the
@@ -477,6 +477,12 @@ award fitness points to the players as follows.
   tournament tree.}
 \end{enumerate}
 
+Each player in a population competes in multiple games in every generation. Four
+different values for number of games were used in the evolution process: 7, 25,
+50, and 100 (See Section~\ref{5_compfit}). The player's total fitness for the
+generation is the sum of the player's fitness score for each game after all
+games in a generation are complete.
+
 The fitness evaluators FINISH\_ORDER and NUM\_WINS were developed directly from
 the work of Frayn, and indirectly from previous studies of genetic algorithms
 and games. Frayn competed chromosomes against each other in four-player games.
@@ -504,13 +510,13 @@ highest net worth (cash plus value of properties) in the game if not all players
 go bankrupt. Thus the winner of the game will always have the highest net worth.
 For each player in a game, NET\_WORTH computes the ratio of each player's net
 worth to the total net worth of a game (the sum of the net worth of all the
-players in the game). The ratio is then multiplied by 100 and the value is
+players in the game). The ratio is then multiplied by 300 and the value is
 awarded to the player as their score for the game.
 \begin{equation*}
-score = 100 \cdot net\_worth / total\_net\_worth
+score = 300 \cdot net\_worth / total\_net\_worth
 \end{equation*}
 Last is the TOURNAMENT fitness evaluator (discussed in more detail
-in~\ref{5_compfit}. A modified single elimination tournament is conducted in
+in~\ref{5_compfit}). A modified single elimination tournament is conducted in
 each generation. The fitness score of each player is the level the player
 attains in the tournament tree, starting at level 0. So, the losers of the first
 round get a score of 0, and the winners get +1. This continues until only two
@@ -661,7 +667,7 @@ group is
 where 4 is the number of players that could have the monopoly, 10 is the number
 of houses (2 streets with up to 4 houses or 1 hotel each), and \(5^{26}\) is the
 state space for the remaining 26 locations on the board. If there is a single monopoly
-in one of the other color groups (with 3 streets in the group), then the
+in one of the other color groups (with 3 streets in the group), the
 calculation is
 \begin{equation*}
 4 \cdot 15 \cdot 5^{25} \approx 10^{19.3}
@@ -669,7 +675,7 @@ calculation is
 So, considering just properties and single monopolies, the total state space
 is
 \begin{equation*}
-5^{28} + 2 \cdot 4 \cdot 10 \cdot 5^{26} + 6 \cdot 4 \cdot 15 \cdot 5^{25}
+5^{28} + (2 \cdot 4 \cdot 10 \cdot 5^{26}) + (6 \cdot 4 \cdot 15 \cdot 5^{25})
 \approx 10^{20.4}
 \end{equation*}
 As we consider multiple monopolies, the size of the state space will continue to
@@ -698,11 +704,10 @@ populations that play small numbers of games per generation (e.g. pop. size=1024
 and number of games=7) it is less likely to occur.}. However, because Panait
 and Luke, and Ja\'{s}kowski et al., had success with smaller values of K for the
 optimization problems they studied, this research also looks at K-Random
-Opponents where the number of games played by a player is \(K=21\) (7 games),
-\(K=75\) (25 games), and \(K=150\) (50 games). After each player completes a
+Opponents where the number of games played by a player is \(K=21\) (7~games),
+\(K=75\) (25~games), and \(K=150\) (50~games). After each player completes a
 game, a fitness score is computed by one of the fitness evaluators described
-earlier. The player's total fitness is the sum of scores after all games in a
-generation are complete.
+earlier.
 
 This research will also use a modified version of Single Elimination Tournament
 (SET). With two player games, SET pairs the players in a generation, competes
@@ -765,8 +770,47 @@ Table~\ref{table-evoparams}.
            & NUM\_MONOPOLIES \\
            & NET\_WORTH \\ 
            & TOURNAMENT \\ \hline
-  Propagation: & Elitism and reproduction, with crossover and mutation \\ \hline  
+  Propagation: & 10\%Elitism \\
+               & 30\% reproduction by roulette selection \\
+               & 30\% reproduction with mutation by roulette selection \\ 
+               & 30\% recombination by roulette selection \\ \hline  
 \end{tabular}
 \label{table-evoparams}
 \end{center}
 \end{table}
+
+\subsection{Evolutionary Algorithm}
+
+The evolutionary algorithm proceeds as shown in Algorithm~\ref{alg_evo}. A
+population is created for each set of game parameters (chromosome type,
+population size, number of matches per generation, and fitness evaluator).
+Each population is initialized. The population is divided into random groups of
+four players, and each group competes in a game. At the completion of each game,
+the fitness scores for the players in that game are computed and the scores are
+added to the cumulative score for each player. That constitutes one match. The
+population is randomly redivided into new groups of four players, and another
+match is executed. When the number of matches for that population is met, the
+population is evolved and propagated. This repeats for 1000 generations.
+
+\begin{algorithm}
+\caption{Evolutionary Algorithm}
+\label{alg_evo}
+\begin{algorithmic}
+\FORALL{chromosome~types}
+\FORALL{population~sizes}
+\FORALL{number~of~matches~per~generation}
+\FORALL{fitness~evaluators}
+\STATE{create~population}
+\REPEAT
+\REPEAT
+\STATE{divide population into groups of 4}
+\STATE{play all groups in a game, record fitness}
+\UNTIL{number of matches}
+\STATE{evolve population}
+\UNTIL{1000 generations}
+\ENDFOR
+\ENDFOR
+\ENDFOR
+\ENDFOR
+\end{algorithmic}
+\end{algorithm}
