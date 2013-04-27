@@ -74,13 +74,13 @@ polynomial time. However, there may be nondeterministic algorithms which can
 produce a solution in polynomial time. If a solution to such a problem is
 produced by a nondeterministic algorithm, and the solution can be verified by a
 deterministic algorithm in polynomial time, then the problem is a member of the
-class NP.\footnote{NP problems can be further classified into additional
+class NP\footnote{NP problems can be further classified into additional
 classes such as NP-Hard and NP-Complete. However, for the purposes of this
 chapter the two classes P and NP are sufficient. Interested readers can find
 more information in any reference on algorithms, including the references cited
 above, \emph{Algorithms: Design Techniques and Analysis} by M. H.
 Alsuwaiyel~\cite{alsuwaiyel1999algorithms} and \emph{Introduction to Algorithms}
-by Cormen et al~\cite{Cormen:2009:IAT:1614191}.}
+by Cormen et al~\cite{Cormen:2009:IAT:1614191}.}.
 
 A very brief list of some problems that are in the NP complexity class are
 below~\cite{garey1979computers}.
@@ -220,17 +220,17 @@ after a set number of generations~\cite{dejong2006evolutionary}.
 
 Obviously, if the algorithm has found an exact solution to a problem, there is
 no point in proceeding further. This is often the case when optimizing a
-mathematical function. If one knows ahead of time that the minima of a function
-is 0 and a genetic algorithm finds a solution that produces that minima, then,
-if there is no reason to search for additional solutions, the algorithm can
-terminate.
+mathematical function. If one knows ahead of time that the minimum or maximum of
+a function is a particular value, and a genetic algorithm finds a solution that
+produces that minimum or maximum, then if there is no reason to search for
+additional solutions, the algorithm can terminate.
 
 More often, though, the optimal fitness value is not known a priori. In this
 case, one can measure the improvement in fitness between generations and stop
 the algorithm when the solutions stop improving or when the improvement in
 fitness between generations drops below some threshold.
 
-A third criteria for stopping a genetic algorithm is when a preset number of
+A third criterion for stopping a genetic algorithm is when a preset number of
 populations have evolved. Computer resources can be constrained, and although
 an algorithm might find the optimal solution given enough CPU time, one can 
 decide before starting the algorithm to terminate after \(n\) generations, and
