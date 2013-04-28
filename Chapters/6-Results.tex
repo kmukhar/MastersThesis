@@ -12,10 +12,10 @@ NUM\_MONOPOLIES (NM), NUM\_PROPERTIES (NP), and NUM\_WINS (NW). In this chapter,
 those four features are used to identify the different populations: for example,
 RGA-512-50-NP refers the to RGA chromosome population of size 512, where each
 player played 50 games per generation and the fitness evaluator was
-NUM\_PROPERTIES. Results of the evolutionary process are presented in the first
-section of this Chapter.
+NUM\_PROPERTIES. Results of the evolutionary process are presented in
+Section~\ref{6_evoresults}.
 
-A sixth fitness evaluator, TOURNAMENT (TO) was also tested. For the tournament
+The sixth fitness evaluator, TOURNAMENT (TO) was also tested. For the tournament
 fitness evaluator the number of games was determined by the population size and
 the results of each tournament, and so was not independent. Each match in the
 evolution of the population was an entire single elimination tournament as
@@ -59,19 +59,27 @@ players focuses exclusively on results obtained from the RGA chromosomes.
   \end {enumerate}
   \item {Real-world validation 1}
   \begin{enumerate}
+    \item {Pick the 3 best players from RGA-1024-100-FO}
+    \item {Select parameters for the trading algorithm}
+    \item {Compete these players against human players}   
+    \item {Record the finish order and net worth}
+    \item {Compare average fitness and average net worth among all players}
+  \end{enumerate}
+  \item {Real-world validation 2}
+  \begin{enumerate}
     \item {Select the top 4 players from generations 250, 500, 750, and 999 from
     the RGA-1024-100-FO population}
-    \item {compete the players randomly against human players}
-    \item {Record the fitness scores for FINISH\_ORDER}
+    \item {Compete the players randomly against human players}
+    \item {Record the finish order and net worth}
     \item {Compare average fitness and average net worth among all players}
   \end {enumerate}
-  \item {Real-world validation 2}
+  \item {Real-world validation 3}
   \begin{enumerate}
     \item {Select the top 4 players from generation 999 from the RGA-1024-100-FO
     population}
     \item {Compete the players randomly against human players using an updated
     property trading algorithm}
-    \item {Record the fitness scores for FINISH\_ORDER}
+    \item {Record the finish order and net worth}
     \item {Compare average fitness and average net worth among all players}
   \end {enumerate}
 \end{enumerate}
@@ -87,40 +95,47 @@ fitness evaluator used in evolution, the validation experiments use
 FINISH\_ORDER and NUM\_WINS to compare players.}. Repeat this process 50 times
 without further evolution of the players. We then analyze the player's
 performance over the 50 trials to determine if players in later generations were
-better than players in earlier generations.
+better than players in earlier generations. Results from this validation are
+discussed in Section~\ref{6_intraPopValidation}.
 
 Second, players were also validated with an inter-population validation. That
 is, the best players from different populations were competed against each other
-in various combinations. For example, given the various RGA-1024-100
+in various combinations. For example, given the various RGA-1024-100-*
 populations, select the best player from each fitness evaluator and from
 generation 999. This will result in 6 players which then play 50 games against
 the other players; record the cumulative fitness using FINISH\_ORDER. Repeat
 this process 30 times without further evolution of the players\footnote{The
 results of the first validation were extremely strong, which implied that 50
 trials and 100 games per trial was excessive; thus the validation parameters
-were relaxed for the second validation.}. We then analyze the player's
-performance over the 30 trials to determine if different fitness evaluators were
-better than others.
+were relaxed for the second validation.}. The players' performance over the 30
+trials was analyzed to determine if different fitness evaluators were better
+than others. The results of this analysis can be found in
+Section~\ref{6_interPopValidation}.
 
-The results from the intra- and inter-population competitions are discussed in
-the second section of this Chapter.
-
-In the last section of this Chapter, results from games where RGA players played
+In Section~\ref{6_humanValidation}, results from games where RGA players played
 against human players are presented. Based on the previous intra- and
-inter-population validations performed, we picked 4 players from generations
-250, 500, 750, and 999 of a population. These evolved RGA players from
-various generations were competed against human players. In general, we found
-that though the RGA players competed well against other RGA players, they did
-relatively poorly against human players. We believe this is due to the property
-trading algorithm that was implemented for this competition.
+inter-population validations performed, the 3 best players from the
+RGA-1024-100-FO population were selected. These players competed against human
+players in two trials. The results are documented in Section~\ref{6_humanVRGA1}.
+In general, we found that though the RGA players competed well against other RGA
+players, they did relatively poorly against human players. This was probably
+due to the property trading algorithm that was implemented for this competition.
 
-The property trading algorithm was adjusted and a second competition was
-performed, using only the best players from the last generation of a population.
-With the adjusted trading algorithm, the AI players performed a little better,
-but still not at the same level as human players. The results of the second
-competition are also documented in the final section of the chapter.
+After the first set of validation competitions, an effort was made to improve
+the performance of the AI players. Four players each were picked from
+generations 250, 500, 750, and 999 of the RGA-1024-100-FO population. These
+players were competed against human players. There was a little improvement in
+the performance of the AI players which is documented in
+Section~\ref{6_humanVRGA2}.
 
-\section{Results of the Evolutionary Process}
+The property trading algorithm was adjusted again and a third competition was
+performed, again using only the best players from the last generation of a
+population. With the adjusted trading algorithm, the performance of the AI
+players improved over the second validation, but it was still not at the same
+level as human players. The results of the third competition are documented in
+the Section~\ref{6_humanVRGA3}.
+
+\section{Results of the Evolutionary Process}\label{6_evoresults}
 
 In this section we look at the results of the evolutionary process. Looking at
 the fitness distributions and the chromosomes at the completion of evolution
@@ -129,11 +144,12 @@ probability than others.
 
 \subsection{Results for Initial RGA Generations}
 
-In a competitive fitness evolutionary process, we expect that the players will
-be randomly spread in their ability to win games. Some players will win games,
-some will lose games, and the average player will win about half the games they
-play. The distribution of fitness scores should follow a distribution similar to
-the binomial distribution (See Figure~\ref{figure-binomial}).
+In a competitive fitness evolutionary process, the individuals in the population
+should be randomly spread in their fitness. When competing against each other,
+some individuals will win, some will lose, and the average individual will win
+about half of the competitions. The distribution of fitness scores should follow
+a distribution similar to the binomial distribution (See
+Figure~\ref{figure-binomial}).
 
 When the initial populations of players was run through a single generation, the
 actual results matched the expected results quite closely.
@@ -154,10 +170,11 @@ of 150.}.
 \begin{minipage}[t]{0.47\linewidth}
 \centering
 \includegraphics[width=1.0\linewidth]{Figures/binomial.png}
-\caption[Binomial Distribution]{The expected fitness distribution for the first
-generation of a population that uses a competitive fitness function such as
-FINSIH\_ORDER or NUM\_WINS. A peak is expected around the average population
-fitness. The distribution is similar to a binomial distribution.}
+\caption[Binomial Distribution]{An example of the expected fitness distribution
+for the first generation of a population that uses a competitive fitness
+function such as FINSIH\_ORDER or NUM\_WINS. A peak is expected around the
+average population fitness. The distribution is similar to a binomial
+distribution.}
 \label{figure-binomial}
 \end{minipage}%
 \hspace{0.06\linewidth}%
@@ -234,7 +251,7 @@ The TOURNAMENT population will be examined in detail in the validation section.
 
 All of the other populations, regardless of population size, fitness evaluator,
 or number of games per generation, show similar results for the initial
-generation. These fitness distributions are not surprising. Three of the fitness
+generation. These fitness distributions are not surprising. Four of the fitness
 evaluators are competitive fitness functions (NUM\_MONOPOLIES and
 NUM\_PROPERTIES are not directly competitive, since the player with the most
 monopolies or properties is not necessarily the winner of the game). The fact
@@ -243,21 +260,22 @@ shows that the evolutionary approach we have taken appears to be correct.
 
 \subsection{Results for Subsequent RGA Generations}
 
-As the players get better and the population is more evenly matched, most
-players will tend to win half the games they play. As poor players are removed
-from the population, the remaining players will tend to be nearer each other in
-``ability.'' Thus, the distribution of fitness scores will become much tighter
-around the average score, and no single player will be able to dominate the
-other players.
+In a population that co-evolves under a competitive fitness function, the
+average and best scores in the population will not increase. As poor players are
+removed from the population, the remaining players will tend to be nearer each
+other in ``ability.'' Thus, the distribution of fitness scores will become much
+tighter around the average score, and no single player will be able to dominate
+the other players.
 
-For an example of this we look at generation 100 of the RGA-1024-100-FO
-population. Figure~\ref{figure-100th_gen_fitness} shows the actual fitness
-distribution for this population. The mean remained the same, but the variance
-has appeared to decrease. Whereas the fitness scores in generation 0 ranged from
-103 to 193, in generation 100 they ranged from 115 to 186. The distribution
-around the mean tightened relatively quickly (it can clearly be seen in
-generation 100), and then remained fairly constant over the course of the
-simulation which was 1000 generations.
+This is seen in all the RGA populations. As the populations evolved, the
+variance in fitness scores in later generations tended to decrease. A
+representative example of this can be seen in generation 100 of the
+RGA-1024-100-FO population. Figure~\ref{figure-100th_gen_fitness} shows the
+actual fitness distribution for this population. The mean remained the same, but
+the variance has appeared to decrease. Whereas the fitness scores in generation
+0 ranged from 103 to 193, in generation 100 they ranged from 115 to 186. The
+distribution around the mean tightened relatively quickly (it can clearly be
+seen in generation 100). 
 
 \begin{figure}[htp]
 \centerline{\includegraphics[width=0.75\columnwidth]{Figures/RGA_1024_G100_N100_FO.png}}
@@ -266,6 +284,7 @@ simulation which was 1000 generations.
 \label{figure-100th_gen_fitness}
 \end{figure}
 
+This behavior remained fairly constant over the remaining generations.
 Additional plots of the distribution of fitness scores can be seen in
 Figure~\ref{figure-RGA-250th_gen_fitness},
 Figure~\ref{figure-RGA-500th_gen_fitness},
@@ -322,13 +341,11 @@ Inspecting Figures~\ref{figure-RGA-250th_gen_fitness} through
 of data generated by the simulations, data for every generation was not output
 by the simulation. Instead fitness data was output and saved for the initial
 population, the 100th generation, and every 250th generation. Thus, the point at
-which the population average fitness reaches the plateau cannot be calculated.
-However, in a coevolutionary environment this is not a problem. A coevolutionary
-population can continue to improve even though the fitness appears to plateau.
-This will be further discussed later in this Chapter.} that the population
-average fitness reaches a plateau. This is also demonstrated by looking at some
-of the descriptive statistics for each generation. These are shown in
-Table~\ref{table-stats-for-s1024-n100-fo} for the RGA-1024-100-FO population.
+which the population average fitness reaches the plateau cannot be calculated.}
+that the population average fitness reaches a plateau. This is also demonstrated
+by looking at some of the descriptive statistics for each generation. These are
+shown in Table~\ref{table-stats-for-s1024-n100-fo} for the RGA-1024-100-FO
+population.
 
 \begin{table}[ht]
 \begin{center}
@@ -547,27 +564,27 @@ monopolized.}
   \label{tab:chromo_compare}%
 \end{table}%
 
-It can be seen that in general, for the property buying decision, the genome
-matches the strategy described previously. The gene values for buying a location
-are generally higher when no player owns one of the properties of a group
-compared to when two other players own properties in the group. Although it is
-not shown in Figure~\ref{figure-genome999}, the gene values for buying when the
-player already owns a property in the group, or when one opponent owns a
-property in the group, are generally higher than when two opponents own a
-property in the group. A few additional Figures and Tables for some genomes can
-be found in Appendix~\ref{appendix:chromos}.
+For the property buying decision, the genome matches the strategy described
+previously. The gene values for buying a location are generally higher when no
+player owns one of the properties of a group compared to when two other players
+own properties in the group. Although it is not shown in
+Figure~\ref{figure-genome999}, the gene values for buying when the player
+already owns a property in the group, or when one opponent owns a property in
+the group, are generally higher than when two opponents own a property in the
+group. A few additional Figures and Tables for some genomes can be found in
+Appendix~\ref{appendix:chromos}.
 
-When compared to the strategy list from~\ref{m_gamestrategies}, there might
-appear to be an inconsistency in the genome. For example, the strategy says
-always buy a property if no one else owns a property in the same group. However,
-the greatest gene value in the genome from generation 999 is for Park Place at
-0.82. This can easily be explained by the fact that if the player declines a
-property with probability \(p_{decline} = 1-p_{buy}\), the probability of
-subsequently buying the property is higher. This is because when a player
-declines a property, it is then auctioned to any player including the declining
-player, and the declining player uses the same chromosome to make the bid
-decision independently of the buy decision. So the probability of deciding to
-buy a property is
+When compared to the strategy list from Section~\ref{m_gamestrategies}, there
+might appear to be an inconsistency in the genome. For example, the strategy
+says always buy a property if no one else owns a property in the same group.
+However, the greatest gene value in the genome from generation 999 is for Park
+Place at 0.82. This can easily be explained by the fact that if the player
+declines a property with probability \(p_{decline} = 1-p_{buy}\), the
+probability of subsequently buying the property is higher. This is because when
+a player declines a property, it is then auctioned to any player including the
+declining player, and the declining player uses the same chromosome to make the
+bid decision independently of the buy decision. So the probability of deciding
+to buy a property is
 \begin{equation*}
 1-(p_{decline} \cdot p_{decline})
 \end{equation*}
@@ -618,15 +635,33 @@ they are generally symmetric, but sometime prior to generation 250, the
 distribution skews so that there is a long tail of low fitness scores, and a
 peak of scores higher than the expected average.
 
-At the start of this research, the author thought that the SGA chromosomes would
-perform as well as the RGA or TGA chromosomes. Early researchers in genetic
-algorithms thought that simple chromosomes would work for most, if not all
-problems~\cite{goldberg1989genetic}.
+The descriptive statistics for these populations can be found in
+Appendix~\ref{appendix:sgastats}. These tables show in numeric form what is seen
+graphically in the figures. The later generations of the SGA populations have a
+larger variance in fitness scores, than the earlier generations. Also, the
+variance does not appear to monotonically increase, but can be larger or smaller
+from one generation sample to another.
+
+The SGA chromosome was designed for these experiments with the assumption that
+the SGA chromosomes would perform as well as the RGA or TGA chromosomes. This
+was based on previous research in genetic algorithms that proposed that simple
+chromosomes would work for most, if not all problems~\cite{goldberg1989genetic}.
 
 Not only did the fitness distributions show problems, but some initial play
 testing of a few of the ``best'' SGA players showed that they performed much
-more poorly than the RGA and TGA players, losing in every trial. It was only
-after this that we found the following from Fogel~\cite{fogel1999intelligence}:
+more poorly than the RGA and TGA players, losing in every trial. This is likely
+due to the increased noise in the chromosome, compared to the RGA and TGA
+chromosomes. In the RGA chromosomes, the genes in the chromosome that correspond
+to properties that cannot be owned are completely ignored in the game, and have
+no effect on other genes during the evolution phase. However, those same genes
+in the SGA can and do impact the chromosome in the evolution phase, since
+crossover can cause those unused genes to move from an unused part of the
+chromosome to a part used for property buying decisions, thus introducing
+additional noise into the evolutionary process. These ``junk'' genes appear to
+have caused noticeably impaired performance by the SGA chromosomes.
+
+The poor performance of the SGA chromosomes exemplifies Fogel's conclusion
+regarding simple chromosomes~\cite{fogel1999intelligence}:
 
 \begin{quote}
 We must also admit that several previous theoretical speculations in
@@ -645,7 +680,7 @@ one best suited to the problem domain, the effort to improve or validate the SGA
 chromosome players was not pursued after the initial evolution phase of this
 research.
 
-\subsection{TGA Players} \label{6_TGS}
+\subsection{TGA Players} \label{6_TGA}
 
 Finally, the same simulation and evolution was conducted using TGA players. The
 results for the TGA player were essentially the same as for the RGA player.
@@ -671,7 +706,7 @@ As with other research that used competitive fitness functions, validations of
 the various populations were performed to test if the populations were actually
 getting better.
 
-\subsection{Intrapopulation validation}
+\subsection{Intrapopulation validation}\label{6_intraPopValidation}
 
 For every population, the best player in generation 999 was played against
 the best player in generations 250, 500, and 750. 100 games were played with the
@@ -762,7 +797,7 @@ null hypothesis is accepted most often when comparing Generation 500 to 750
 The conclusion from this set of experiments is that better players evolved in
 populations that played large numbers of games per generation.
 
-\subsection{Interpopulation validation} \label{6_interpopValidation}
+\subsection{Interpopulation validation} \label{6_interPopValidation}
 
 Next, the best players from the last generation of similar populations that used
 different fitness evaluators were played against each other. This was done to
@@ -774,7 +809,7 @@ evaluators.
 
 RESULTS PENDING
 
-\section{Human versus RGA competition}
+\section{Human versus RGA competition}\label{6_humanValidation}
 
 Based on the results of the evolutionary phase of this study, a set of RGA
 players was selected and competed against human players to validate the
@@ -786,6 +821,10 @@ latest generations of the evolution. For those reasons, players for this
 validation were selected from the RGA-1024-100-FO population.
 
 \subsection{Human versus computer validation I}\label{6_humanVRGA1}
+
+results
+
+\subsection{Human versus computer validation 2} \label{6_humanVRGA2}
 
 The first competition was conducted after implementing the trading algorithm
 proposed by Yasumura, et al, in ``Negotiation strategy of agents in the MONOPOLY
@@ -909,27 +948,27 @@ players, the following was noted:
   in this game to be able to trade well.}
 \end{itemize}
 
- \subsection{Human versus computer validation II} \label{6_humanVRGA2}
+\subsection{Human versus computer validation 3} \label{6_humanVRGA3}
 
- Based on the results of the first human versus computer competition, the trading
- algorithm was updated by raising the threshold for accepting or proposing a trade
- to either 200 or 400 potential gain, and changing \(\omega\) to be either
- 0.65, 0.80, or 0.95.
+Based on the results of the first human versus computer competition, the trading
+algorithm was updated by raising the threshold for accepting or proposing a
+trade to either 200 or 400 potential gain, and changing \(\omega\) to be either
+0.65, 0.80, or 0.95.
 
- Human volunteers then played the game again. Preliminary results show some
- improvement in trading behavior: the RGA players propose less trades, and the
- trades the do propose are more sensible than they were previously.
+Human volunteers then played the game again. Preliminary results show some
+improvement in trading behavior: the RGA players propose less trades, and the
+trades the do propose are more sensible than they were previously.
 
- However this did not improve their game play enough. Preliminary results show
- the human players winning approximately 39 games to the RGA players' 11 wins.
+However this did not improve their game play enough. Preliminary results show
+the human players winning approximately 39 games to the RGA players' 11 wins.
 
- Final results are pending.
+Final results are pending.
+ 
+\section{Summary}
 
- \section{Summary}
-
- Although it appears that evolutionary computing can be used to learn when to
- make property buying decisions in the game of Monopoly, the RGA players were
- hampered in this experiment by having a trading algorithm that sometimes
- resulted in making bad trades which led to losses against human players. That
- is probably partly due to the trading algorithm and partly due to
- implementation decisions made when the algorithm was coded.
+Although it appears that evolutionary computing can be used to learn when to
+make property buying decisions in the game of Monopoly, the RGA players were
+hampered in this experiment by having a trading algorithm that sometimes
+resulted in making bad trades which led to losses against human players. That is
+probably partly due to the trading algorithm and partly due to implementation
+decisions made when the algorithm was coded.

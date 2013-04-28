@@ -86,10 +86,15 @@ depending on the state of the game: one strategy for early in the game when few
 properties are owned; a different strategy for later in the game when many
 properties are owned. Frayn used a similar strategy, except in his study
 chromosomes represented the valuation of properties, which depended on ownership
-and development factors~\cite{DBLP:conf/cig/Frayn05}.
+and development factors~\cite{DBLP:conf/cig/Frayn05}. Also, Frayn used only 
+three chromosomes for house valuations. 
 
 Additionally, this study used genetic algorithms for just two decisions the
 player would make: the buy property decision and the get out of jail decision.
+The Get Out Of Jail chromosome is another departure from Frayn; from his paper,
+it appears that Frayn's Get Out Of Jail decision was based on two genes from a
+chromosome that also controlled other game decisions.
+ 
 The other two decisions, whether to build a house and whether to trade a
 property, were not implemented using genetic computation. The house buying
 decision was implemented as a rule based algorithm and is discussed further in
@@ -110,17 +115,21 @@ described.
 
 \subsection{Chromosomes for Buying Property}
 
-The first set of chromosomes consists of 4 arrays of real numbers, 40 elements
-per array (See Table \ref{table-chromo}). In this thesis, this chromosome is
-referred to as the RGA Player (RGA for Real-valued Genetic Algorithm). Each
-element of the array represents the probability that the player will purchase
-the property represented by the array element. There are 40 locations on the
-Monopoly board, so each location corresponds to an element in the array. The
-``Go'' space is element 0, with subsequent locations assigned successive element
-indices. However, only 28 locations can be owned by a player, so 12 of the array
-elements are ignored.\footnote{The chromosome could have been designed with
-only 28 locations, but by using 40 elements, the need to create a mapping
-between locations and array elements is avoided (improved code readability and
+After deciding on a multi-chromosome representation for an individual, the
+structure of those chromosomes was designed. Considering that one set of
+chromosomes would be used to control whether to buy a property, and that there
+are four states a property group can be in, it was decided that the first set of
+chromosomes would consist of 4 arrays of real numbers, 40 elements per array
+(See Table \ref{table-chromo}). This chromosome is referred to as the RGA Player
+(RGA for Real-valued Genetic Algorithm). Each element of the array represents
+the probability that the player will purchase the property represented by the
+array element. There are 40 locations on the Monopoly board, so each location
+corresponds to an element in the array. The ``Go'' space is element 0, with
+subsequent locations assigned successive element indices.
+However, only 28 locations can be owned by a player, so 12 of the array elements
+are ignored.\footnote{The chromosome could have been designed with only 28
+locations, but by using 40 elements, the need to create a mapping between
+locations and array elements is avoided (improved code readability and
 maintainability) at a small cost of memory for the 12 unused elements.}
 
 Each array corresponds to one of the following game states:
@@ -747,9 +756,11 @@ uses parameters similar to those used by Frayn, but with some modifications.
   new children. The child chromosomes are created by arithmetic crossover using
   the formulas 
   
-  \(child_{1} = \beta \cdot parent_{1} + (1 - \beta ) \cdot parent_{2}\)
+\(child_{1} = \beta \cdot parent_{1} + (1 - \beta ) \cdot parent_{2}\)
 
-  \(child_{2} = (1 - \beta ) \cdot parent_{1} + \beta \cdot parent_{2}\)}
+\(child_{2} = (1 - \beta ) \cdot parent_{1} + \beta \cdot parent_{2}\)
+
+where beta is a random real number, \(0 < \beta < 1\)}
 \end{itemize}
 
 The parameters used for the genetic algorithm are summarized in
