@@ -18,8 +18,8 @@ realize an optimal strategy.
 
 In Chapter \ref{chap:algorithm} the design of the genetic algorithms used for
 this research is presented. The decisions made for those algorithms have a basis
-in research that applied genetic algorithms to the study of various games. In
-the remainder of this chapter we review some of that research.
+in research that applied genetic algorithms to the study of various problems. In
+the remainder of this chapter some of that research is reviewed.
 
 \section{Deterministic zero sum games}
 
@@ -99,7 +99,7 @@ some games the only thing that can be measured is which player won the game and
 which lost; but the winner does not necessarily have high fitness and the loser
 does not necessarily have low fitness. A mediocre player could get a large
 number of wins if many of the opponents are worse players. In these cases, a
-competitive fitness function is used. In the remainder of this section we look
+competitive fitness function is used. The remainder of this section looks
 at several studies that used competitive fitness functions.
 
 \subsection{Tic-Tac-Toe}
@@ -243,8 +243,8 @@ game.
 
 While not as well studied as the two player games mentioned previously, there
 has been some research on using evolutionary computation to create winning
-strategies for non-deterministic games. In this section we look at three games
-to which evolutionary computing has been applied: Rummy, Acquire, and Monopoly.
+strategies for non-deterministic games. Three examples of games
+to which evolutionary computing has been applied are Rummy, Acquire, and Monopoly.
 
 \subsection{Co-evolution versus temporal-difference learning for Rummy}
 
@@ -312,7 +312,7 @@ was played against the best player in each previous generation.
 
 \subsection{Strategies for the Game of Monopoly}
 
-The last game we look at in this section is the game of Monopoly, which is the
+The last game in this section is the game of Monopoly, which is also the
 subject of this research. A detailed overview of the game is presented in
 Chapter~\ref{chap:monopoly}, but it will be helpful to understand a few basics
 about the game here. 
@@ -320,8 +320,8 @@ about the game here.
 In the game of Monopoly, players can purchase specific locations on the game
 board. Some of those locations are known as streets, and streets are further
 grouped into one of eight color groups (See Figure~\ref{figure-monoboard}). When
-a player lands on a location owned by another player, the first player pays rent
-to the owner. If a player owns all the streets in a color group, the player can
+a player lands on a location owned by another player, the player pays rent
+to the owner. If a player owns all the streets in a color group, the owner can
 build houses or hotels which dramatically increases the rent.
 
 \subsubsection{Monopoly as a Markov Process}
@@ -386,8 +386,7 @@ gave the best results.
 When used in optimization problems, genetic algorithms usually rely on an
 objective fitness function. However in the particular case of games, there is no
 objective way to measure fitness, and so as seen previously in this chapter a
-competitive fitness function must be used. In this section we review some of the
-research into competitive fitness functions.
+competitive fitness function must be used.
 
 \subsection{Competitive Environments Evolve Better Solutions for Complex Tasks}
 

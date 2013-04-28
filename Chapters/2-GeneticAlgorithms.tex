@@ -16,22 +16,22 @@ mutation. Over time, the population tends to have more fit solutions.
 Genetic algorithms can be used to find approximate solutions to problems that
 are considered to be intractable.
 
-We begin with a very brief summary of the complexity class
-NP~\cite{alsuwaiyel1999algorithms,Cormen:2009:IAT:1614191} and list some
-examples of those types of problems. There are various ways to tackle NP
+First, a brief summary of the complexity class
+NP~\cite{alsuwaiyel1999algorithms,Cormen:2009:IAT:1614191} presented and some
+examples of those types of problems are listed. There are various ways to tackle NP
 problems such as approximation, the Monte Carlo method, and
 heuristics~\cite{russell2010artificial}. None of those methods can guarantee an
 exact solution, just a ``good enough'' solution.
 
 Another way to get an approximate solution is to use a genetic algorithm. A
 genetic algorithm is similar to the Monte Carlo method, in that a set of
-solutions is created randomly. But unlike randomization, we do not continue to
-generate more random solutions in the hopes of stumbling on a better solution.
+solutions is created randomly. But unlike randomization, additional 
+random solutions are not generated in the hopes of stumbling on a better solution.
 The development of better solutions in a genetic algorithm is guided by
 selection pressures which eliminate poor solutions and evolve good solutions
 into better solutions.
 
-After looking at the basic genetic algorithm, we briefly discuss various ways to
+After looking at the basic genetic algorithm, there is a brief discussion of various ways to
 modify the standard genetic algorithm to expand its ability to find solutions to
 problems. These enhancements allow genetic algorithms to be applied to a large
 set of problems.
@@ -41,7 +41,7 @@ set of problems.
 In complexity theory, there are a number of classes that are used to categorize
 problems~\cite{alsuwaiyel1999algorithms,Cormen:2009:IAT:1614191}. The simplest
 of those classes is the class P: those problems which can be deterministically
-solved in polynomial time. Using big O notation, we write
+solved in polynomial time. Using big O notation, this is written
 \begin{equation*}
 P \in O(n^{k})
 \end{equation*}
@@ -68,8 +68,8 @@ defined as ``\ldots those decision problems for which there exists a
 nondeterministic algorithm that runs in polynomial time.'' Cormen et al, provide
 this simple definition of NP: ``The class NP consists of those problems that are
 `verifiable' in polynomial time~\cite{Cormen:2009:IAT:1614191}.'' By combining
-those definitions we can say there are some problems for which no deterministic
-algorithm has yet been found which can produce an exact or optimal solution in
+those definitions it can be said that there are some problems for which no
+deterministic algorithm has yet been found which can produce an exact or optimal solution in
 polynomial time. However, there may be nondeterministic algorithms which can
 produce a solution in polynomial time. If a solution to such a problem is
 produced by a nondeterministic algorithm, and the solution can be verified by a
@@ -287,9 +287,9 @@ After the new population is created, the process repeats.
 \section{Genetic Algorithm Extensions}
 
 A large amount of research has been conducted into extending various features of
-the basic algorithm to cover a larger number of problems. We briefly look at
-some of those extensions here, with additional coverage of specific fitness
-measurement extensions in Chapter~\ref{chap:background}.
+the basic algorithm to cover a larger number of problems. This section takes a
+brief look at some of those extensions. Also, additional details about different
+ways to measure fitness are presented in Chapter~\ref{chap:background}.
 
 \subsection{Chromosomes}
 
@@ -327,8 +327,8 @@ individual wins a game does not make the individual high quality: it could be a
 poor quality individual but played against a worse player. Similarly, just
 because an individual loses a game does not make the individual poor quality: it
 could have lost just because of chance. In this case, one uses a competitive
-fitness function~\cite{fogel1999intelligence}. We discuss competitive fitness 
-functions in more detail in Chapter~\ref{chap:background}.
+fitness function~\cite{fogel1999intelligence}. Competitive fitness 
+functions are discussed in more detail in Chapter~\ref{chap:background}.
 
 \section{Recombination and mutation} \label{2-recombination}
 

@@ -23,11 +23,16 @@ described in Section~\ref{5_fitnesseval}. There were 20 matches in every
 generation. For TOURNAMENT, 1000 generations were evolved for every combination
 of population size and chromosome type.
 
-Results for the RGA chromosome are presented first, and in a large amount
-detail. We also look briefly at the results for the SGA chromosomes, even though
+Results of the evolution of the RGA chromosome are presented first. An analysis
+of the fitness distributions and descriptive statistics for various RGA populations
+shows that the chromosomes are evolving. 
+
+Results for the SGA chromosomes are presented next, even though
 players with this chromosome tended to evolve poorly. This is most likely due to
 the fact that the data structure used for the SGA chromosomes is not well suited
-to the problem domain. Finally, results for the TGA chromosomes are very briefly
+to the problem domain. 
+
+Finally, results for the TGA chromosomes are very briefly
 discussed, but these players were essentially identical to the RGA chromosomes
 and so do not provide any additional insight.
 
@@ -93,8 +98,8 @@ fitness evaluator) select the best player from generations 250, 500, 750, and
 fitness using FINISH\_ORDER and NUM\_WINS\footnote{Regardless of the original
 fitness evaluator used in evolution, the validation experiments use
 FINISH\_ORDER and NUM\_WINS to compare players.}. Repeat this process 50 times
-without further evolution of the players. We then analyze the player's
-performance over the 50 trials to determine if players in later generations were
+without further evolution of the players. The players'
+performance over the 50 trials is then analyzed to determine if players in later generations were
 better than players in earlier generations. Results from this validation are
 discussed in Section~\ref{6_intraPopValidation}.
 
@@ -117,7 +122,7 @@ against human players are presented. Based on the previous intra- and
 inter-population validations performed, the 3 best players from the
 RGA-1024-100-FO population were selected. These players competed against human
 players in two trials. The results are documented in Section~\ref{6_humanVRGA1}.
-In general, we found that though the RGA players competed well against other RGA
+In general, even though the RGA players competed well against other RGA
 players, they did relatively poorly against human players. This was probably
 due to the property trading algorithm that was implemented for this competition.
 
@@ -137,9 +142,9 @@ the Section~\ref{6_humanVRGA3}.
 
 \section{Results of the Evolutionary Process}\label{6_evoresults}
 
-In this section we look at the results of the evolutionary process. Looking at
+In this section the results of the evolutionary process are presented. Looking at
 the fitness distributions and the chromosomes at the completion of evolution
-will show that the players did learn to buy some properties with greater
+shows that the players did evolve and did learn to buy some properties with greater
 probability than others.
 
 \subsection{Results for Initial RGA Generations}
@@ -256,7 +261,7 @@ evaluators are competitive fitness functions (NUM\_MONOPOLIES and
 NUM\_PROPERTIES are not directly competitive, since the player with the most
 monopolies or properties is not necessarily the winner of the game). The fact
 that the results match previous research into competitive fitness functions
-shows that the evolutionary approach we have taken appears to be correct.
+shows that the evolutionary approach that was taken appears to be correct.
 
 \subsection{Results for Subsequent RGA Generations}
 
@@ -364,11 +369,11 @@ Generation & Min & Max & Average & Variance & Std Dev \\ \hline \hline
 \end{center}
 \end{table}
 
-In the initial generation, the standard deviation is 15.08, drops to 11.26 by
+In the initial generation, the standard deviation is 15.08, it drops to 11.26 by
 the 100th generation, and then in the remaining generations (250, 500, 750, and
-999) the standard deviation appears to fluctuate around 11.05. We did not
-attempt to determine whether this difference in variance between generations is
-statistically significant\footnote{To test the hypothesis that the standard
+999) the standard deviation appears to fluctuate around 11.05. No test was
+made to determine whether this difference in variance between
+generations is statistically significant\footnote{To test the hypothesis that the standard
 deviations are not equal between generations would require running (in this
 example) a population of size 1024 through at least 250 generations, and then
 repeating that 250 generation trial enough times to get a statistically
@@ -451,10 +456,10 @@ Generation & Min & Max & Average & Variance & Std Dev \\ \hline \hline
 In all of the tables, the average population fitness stays approximately
 the same, and the variance in population fitness decreases. Even though it
 appears that the variance has plateaued in these examples, players in later
-generations can still be improving in fitness. In fact, we show later in this
-chapter that players in the last generation are statistically better (i.e., they
-win more games) than players in the earliest generations.
-
+generations can still be improving in fitness. In fact, 
+later in this chapter statistical tests show that players in the last generation
+are better (i.e., they win more games) than players in the earliest generations.
+§
 This section has focused primarily on the RGA-1024-100 sets of populations. In
 general, a similar pattern of statistics is seen in most of the other RGA and
 TGA populations that were evolved in this study. Some of the populations,
@@ -488,7 +493,7 @@ provides details on whether the populations did improve or not.
 
 \subsection{Genome Changes Over Time}
 
-We now look at the change in a genome between the initial and final
+This section looks at the changes in a genome between the initial and final
 generations of a population. Using the RGA-1024-100-FO population, part of
 the genome for the best player from generation 0 is shown in
 Figure~\ref{figure-genome0} and part of the genome for the best player from
@@ -711,7 +716,7 @@ getting better.
 For every population, the best player in generation 999 was played against
 the best player in generations 250, 500, and 750. 100 games were played with the
 same set of 4 best players. If the population was actually evolving better
-players, we expect that on average, the best player in the last generation will
+players, on average, the best player in the last generation will
 win more games then the other players; and the best player in the 250th
 generation should lose more games on average.
 
@@ -776,14 +781,14 @@ The table above shows 3 of the tests: generation 250 compared to generation 500,
 indicate that almost every later generation is better than every earlier
 generation. One of the exceptions in the table above is for the NUM\_MONOPOLIES
 evaluator in the comparison of generation 500 to generation 750. For the
-significance level \(\alpha=0.01\) we accept the null hypothesis for that
-test and must conclude that the players from those two generations have the same
-ability.
+significance level \(\alpha=0.01\) the null hypothesis is accepted for that
+test and the conclusion is that the players from those two generations have the
+same ability.
 
-However, looking at all the results in Appendix~\ref{appendix:intravalidation},
-we reject the null hypothesis for most of the tests.
+However, looking at all the results in Appendix~\ref{appendix:intravalidation}, 
+the null hypothesis is rejected for most of the tests.
 
-Where we tend to accept the null hypothesis most often is for populations with a
+Where the null hypothesis is most often accepted is for populations with a
 small number of games per generation, and for populations that are temporally
 close to each other. For example, looking at
 Table~\ref{tab:intrapop128_finorder} in Appendix~\ref{appendix:intravalidation},

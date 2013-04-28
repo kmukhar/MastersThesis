@@ -38,14 +38,15 @@ player over the 50 trials.
 
 In the example row above, the average fitness for the player from Generation 250
 (player250) is 643.38, and the average fitness for player500 is 744.78. These
-look different, and so we could say that player500 is better than player250, and
+look different, and so it could said that player500 is better than player250, and
 likewise player750 looks better than player250 and player500, and player999
 looks like the best player. But just because they look different does not mean
 they are different.
 
 To test whether the players really are better in later generations, the
 Student's t-test is applied to the results. The null hypothesis ($H_{0}$) is
-that the average scores are the same for each player. We test $H_{0}$ using a
+that the average scores are the same for each player. The hypothesis $H_{0}$ 
+is tested using a
 one-tailed Student's t-test. The test values are given in the last 6 columns of
 the table. For a given significance level (alpha), $H_{0}$ is rejected if the
 t-statistic is less than alpha.
