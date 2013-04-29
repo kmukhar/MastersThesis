@@ -3,22 +3,23 @@
 
 The first step in applying a genetic algorithm to a problem is to define the
 data structure that represents the solution to the problem. This study looks at
-optimizing a game player that can play a game of Monopoly. So this chapter starts with a
-study of the game and existing strategies, and use information that to guide the development of
-a genome that represents the game strategy of a player.
+optimizing a game player that can play a game of Monopoly. So this chapter
+starts with a study of the game and existing strategies, and use information
+that to guide the development of a genome that represents the game strategy of a
+player.
 
 Next, the fitness functions are developed. As seen in
 Chapter~\ref{chap:background}, when applying machine learning techniques to
 games, it is often necessary to apply a competitive fitness function. For this
-study some pure competitive fitness functions were developed, but 
-other techniques for measuring fitness that are not directly competitive were also
+study some pure competitive fitness functions were developed, but other
+techniques for measuring fitness that are not directly competitive were also
 developed.
 
 Finally, the mechanics of the evolution strategy are developed. The parameters
 of the evolution can have a big impact on the results of the evolution. As just
 one example, it is well understood that if a population is not allowed to evolve
 through enough generations, the solutions that develop are not optimal; however
-letting a population evolve for too long wastes computing resources.  
+letting a population evolve for too long wastes computing resources.
 
 \section{Game Strategy} \label{5_strategy}
 
@@ -87,8 +88,8 @@ depending on the state of the game: one strategy for early in the game when few
 properties are owned; a different strategy for later in the game when many
 properties are owned. Frayn used a similar strategy, except in his study
 chromosomes represented the valuation of properties, which depended on ownership
-and development factors~\cite{DBLP:conf/cig/Frayn05}. Also, Frayn used only 
-three chromosomes for house valuations. 
+and development factors~\cite{DBLP:conf/cig/Frayn05}. Also, Frayn used only
+three chromosomes for house valuations.
 
 Additionally, this study used genetic algorithms for just two decisions the
 player would make: the buy property decision and the get out of jail decision.
@@ -101,8 +102,8 @@ property, were not implemented using genetic computation. The house buying
 decision was implemented as a rule based algorithm and is discussed further in
 section~\ref{5_buy_house}. The property trading decision was implemented by
 adapting a property evaluation function proposed by Yasumura, Oguchi, and
-Nitta~\cite{Yasumura2001Negotiate}. The property trading decision is discussed in
-Section~\ref{5_trade_property}.
+Nitta~\cite{Yasumura2001Negotiate}. The property trading decision is discussed
+in Section~\ref{5_trade_property}.
 
 \section{Chromosome description} \label{5_chromo}
 
@@ -178,12 +179,12 @@ number is generated, and if that random number is less than the gene value, the
 player has ``decided'' to buy that street.
 
 Based on the game strategies listed earlier (Section \ref{m_gamestrategies}),
-the 4th chromosome will tend to have values that are generally
-less than the values in the 1st, 2nd and 3rd chromosomes. That is, the player
-will tend to decide to buy property more often when no other player owns any
-properties in the group (1st chromosome), and when the property is needed to
-complete a monopoly (2nd chromosome), and when the property is needed to block
-another player (3rd chromosome).
+the 4th chromosome will tend to have values that are generally less than the
+values in the 1st, 2nd and 3rd chromosomes. That is, the player will tend to
+decide to buy property more often when no other player owns any properties in
+the group (1st chromosome), and when the property is needed to complete a
+monopoly (2nd chromosome), and when the property is needed to block another
+player (3rd chromosome).
 
 \subsection{Chromosomes for Paying Bail}
 
@@ -204,10 +205,11 @@ Ave. If opponents owned the first three, the index would be $000111_2$. The
 second index is formed similarly. The two indices are then used to access an
 element in the array.
 
-The value at the element is a real number which represents the probability that the
-player will choose to pay the bail. When the player is in jail, if a randomly
-generated number is less than the gene value, the player has ``decided" to pay
-bail. Note that this scheme automatically accounts for different game states:
+The value at the element is a real number which represents the probability that
+the player will choose to pay the bail. When the player is in jail, if a
+randomly generated number is less than the gene value, the player has ``decided"
+to pay bail. Note that this scheme automatically accounts for different game
+states:
 early in the game very few of the properties are owned (none when the game
 begins) so the indices will be near (0, 0); later in the game, if many
 properties are owned by other players, the indices will be near (63, 63). It
@@ -235,8 +237,8 @@ follows R and S alphabetically.}.
 
 Goldberg described the chromosome structure of the SGA in \emph{Genetic
 Algorithms in Search, Optimization, and Machine
-Learning}~\cite{goldberg1989genetic}. The SGA uses a single string of
-binary bits for its chromosome. Although the primary population used in this thesis
+Learning}~\cite{goldberg1989genetic}. The SGA uses a single string of binary
+bits for its chromosome. Although the primary population used in this thesis
 consists of real valued chromosomes described above, the same information could
 be encoded into a binary strings.
 
@@ -245,13 +247,13 @@ an integer, then each gene will have some value from 0 to 63. Each value is also
 interpreted as the chance of making a positive decision. Just as with the RGA
 chromosome, when a decision is required, a random integer between 0 and 63
 inclusive is generated; if that random value is less than the chromosome value,
-the player has ``decided'' to buy the property. Thus, each gene has a
-coarseness of approximately 1.56\% for each decision.
+the player has ``decided'' to buy the property. Thus, each gene has a coarseness
+of approximately 1.56\% for each decision.
 
-All the genes are concatenated into a single string. So, for
-example, the first chromosome of 40 elements in the RGA becomes a single string
-of 240 bits (6 bits * 40 elements). Each of the other property buying
-chromosomes is encoded in the same way.
+All the genes are concatenated into a single string. So, for example, the first
+chromosome of 40 elements in the RGA becomes a single string of 240 bits (6 bits
+* 40 elements). Each of the other property buying chromosomes is encoded in the
+same way.
 
 Likewise, the 4x4 chromosome for paying bail is then encoded as a 96 bit string
 (16 genes x 6 bits per gene). This chromosome uses the simplified indexing
@@ -263,7 +265,7 @@ also simulated in this study.
 \section{House buying algorithm} \label{5_buy_house}
 
 The decision of when to buy houses or hotels was implemented using a simple rule
-based procedure. The procedure is summarized in Algorithm~\ref{alg_buyHouse}. 
+based procedure. The procedure is summarized in Algorithm~\ref{alg_buyHouse}.
 
 \begin{algorithm}
 \caption{House Buying Algorithm}
@@ -617,8 +619,8 @@ opponents (3 different opponents for each game). So the competitive fitness
 function used by Frayn is K-Random Opponents with \(K\approx300\). K is
 approximate because the three opponents are selected independently for each
 game, so it is possible for the same opponent to be selected in more than one
-game. Over the total span of his study, Frayn reported that his project
-included over 377 million simulated games.
+game. Over the total span of his study, Frayn reported that his project included
+over 377 million simulated games.
 
 \subsection{Evolutionary parameters used in this research}
 
@@ -640,20 +642,18 @@ Ja\'{s}kowski et al., introduced Fitnessless Coevolution, they used population
 sizes comparable to those used in previous research that used the same
 optimization problems~\cite{Jaskowski:2008:FC:1389095.1389161}.
 
-This research uses a population size similar to Frayn's size of
-1000. However, to implement a modified single elimination tournament competition
-it will be necessary to modify this value slightly to be 1024. Based on the 
-results of the studies of competitive fitness
-functions~\cite{Angeline:1993:CEE:645513.657590, Panait02acomparative,
-Jaskowski:2008:FC:1389095.1389161}, the behavior of smaller
-population sizes such as 32, 128, and 512 is also investigated. 
-The value 32 is chosen because it is
-similar to the population sizes of those other studies; the other two sizes of
-128 and 512 were chosen to provide intermediate population sizes between 32 and
-1024.
+This research uses a population size similar to Frayn's size of 1000. However,
+to implement a modified single elimination tournament competition it will be
+necessary to modify this value slightly to be 1024. Based on the results of the
+studies of competitive fitness functions~\cite{Angeline:1993:CEE:645513.657590,
+Panait02acomparative, Jaskowski:2008:FC:1389095.1389161}, the behavior of
+smaller population sizes such as 32, 128, and 512 is also investigated.
+The value 32 is chosen because it is similar to the population sizes of those
+other studies; the other two sizes of 128 and 512 were chosen to provide
+intermediate population sizes between 32 and 1024.
 
-The initial assumption that valid results might be
-obtained with a population size as small as 32 seems reasonable.
+The initial assumption that valid results might be obtained with a population
+size as small as 32 seems reasonable.
  Chapter~\ref{chap:background}
 listed the state space complexity of various games to which genetic algorithms
 had been applied. If the state space complexity of Monopoly is comparable to
@@ -664,7 +664,7 @@ Note that there are 28 locations on the Monopoly board that can be owned by a
 player. Any location can be unowned, or can be owned by one of the four players.
 This gives an initial state space estimate of \(5^{28}\), or approximately
 \(10^{19.6}\). This is within two orders of magnitude of Checkers at
-\(\approx10^{18}\). 
+\(\approx10^{18}\).
 
 Now consider that houses can be built by a player on a property. Since houses
 can only be built when one player owns all street locations in a property group,
