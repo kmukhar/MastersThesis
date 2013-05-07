@@ -485,7 +485,7 @@ award fitness points to the players as follows.
   \item {Number of wins (NUM\_WINS); the winner of each game receives three
   points; all other players receive zero points.}
   \item {Tournament level (TOURNAMENT); players compete in a modified single
-  elimination tournament. The fitness score is the level attained in the
+  elimination tournament (MSET). The fitness score is the level attained in the
   tournament tree.}
 \end{enumerate}
 
@@ -528,11 +528,11 @@ awarded to the player as their score for the game.
 score = 300 \cdot net\_worth / total\_net\_worth
 \end{equation*}
 Last is the TOURNAMENT fitness evaluator (discussed in more detail
-in~\ref{5_compfit}). A modified single elimination tournament is conducted in
-each generation. The fitness score of each player is the level the player
-attains in the tournament tree, starting at level 0. So, the losers of the first
-round get a score of 0, and the winners get +1. This continues until only two
-players remain.
+in~\ref{5_compfit}). A Modified Single Elimination Tournament (MSET) is
+conducted in each generation. The fitness score of each player is the level the
+player attains in the tournament tree, starting at level 0. So, the losers of
+the first round get a score of 0, and the winners get +1. This continues until
+only two players remain.
 
 The NUM\_WINS, FINISH\_ORDER, NET\_WORTH, and TOURNAMENT evaluators are the
 evaluators that are direct competitive fitness functions. When using those
@@ -643,22 +643,20 @@ sizes comparable to those used in previous research that used the same
 optimization problems~\cite{Jaskowski:2008:FC:1389095.1389161}.
 
 This research uses a population size similar to Frayn's size of 1000. However,
-to implement a modified single elimination tournament competition it will be
-necessary to modify this value slightly to be 1024. Based on the results of the
-studies of competitive fitness functions~\cite{Angeline:1993:CEE:645513.657590,
-Panait02acomparative, Jaskowski:2008:FC:1389095.1389161}, the behavior of
-smaller population sizes such as 32, 128, and 512 is also investigated.
-The value 32 is chosen because it is similar to the population sizes of those
-other studies; the other two sizes of 128 and 512 were chosen to provide
-intermediate population sizes between 32 and 1024.
+to implement a MSET competition it will be necessary to modify this value
+slightly to be 1024. Based on the results of the studies of competitive fitness
+functions~\cite{Angeline:1993:CEE:645513.657590, Panait02acomparative,
+Jaskowski:2008:FC:1389095.1389161}, the behavior of smaller population sizes
+such as 32, 128, and 512 is also investigated. The value 32 is chosen because it
+is similar to the population sizes of those other studies; the other two sizes
+of 128 and 512 were chosen to provide intermediate population sizes between 32
+and 1024.
 
 The initial assumption that valid results might be obtained with a population
-size as small as 32 seems reasonable.
- Chapter~\ref{chap:background}
-listed the state space complexity of various games to which genetic algorithms
-had been applied. If the state space complexity of Monopoly is comparable to
-those games, then the use of a small population size is a reasonable initial
-assumption.
+size as small as 32 seems reasonable. Chapter~\ref{chap:background} listed the
+state space complexity of various games to which genetic algorithms had been
+applied. If the state space complexity of Monopoly is comparable to those games,
+then the use of a small population size is a reasonable initial assumption.
 
 Note that there are 28 locations on the Monopoly board that can be owned by a
 player. Any location can be unowned, or can be owned by one of the four players.
@@ -700,8 +698,7 @@ clear the game has a state space complexity less than that of Othello at
 
 \subsubsection{Competitive fitness} \label{5_compfit}
 
-The populations are tested using both K-Random Opponents and a modified
-version of Single Elimination Tournament.
+The populations are tested using both K-Random Opponents and MSET.
 
 Again following Frayn, each player in the population competes in 100 games per
 generation, which equates to approximately 300 opponents\footnote{The number of
@@ -726,12 +723,12 @@ This research will also use a modified version of Single Elimination Tournament
 each pair, and eliminates the losers, until a single player is left.
 Fitness is the number of games won, or equivalently the level attained in the
 tournament tree. Since four players compete in every Monopoly game in this
-research, SET is modified by eliminating the bottom two players in each game and
-advancing the top two players to the next level. At the final level, the last
-two remaining players get the same fitness score.
+research, we use a modified SET (MSET) in which the bottom two players in each
+game are eliminated and the top two players advance to the next level. At the
+final level, the last two remaining players get the same fitness score.
 
 The number of players in a generation is set to a multiple of four so that
-SET is easier to implement. Population numbers that are not multiples of
+MSET is easier to implement. Population numbers that are not multiples of
 four would require implementing the simulator to give some players
 byes\footnote{A bye is when a participant in a tournament automatically
 advances to the next level automatically without playing a game at the current

@@ -1,57 +1,183 @@
 \clearpage
 \chapter{Conclusion}\label{chap:conclusion}
 
+This thesis has explored the ability to use genetic algorithms to create
+computer players for the game of Monopoly. A number of different genotypes were
+investigated, evolved, and tested. In this chapter, we present a summary of the
+methodologies used to develop the algorithms, the results of the experiments,
+the limitations that were found, and final conclusions. The chapter concludes
+with a look at potential future work.
+
+\section{Research Summary}
+
+This thesis began with a summary of genetic algorithms. Genetic algorithms are a
+technique for finding optimal or near optimal solutions to problems which cannot
+be deterministically solved in polynomial time. If a potential solution to such
+a problem can be encoded into some data structure, then a genetic algorithm can
+encode a population of solutions, evaluate them, and evolve them. Because this
+provides an efficient way to search a large search space, this technique can
+lead to optimal solutions much quicker than a brute force approach.
+
+Much research has been conducted into  applying genetic algorithms to games and
+game like problems. Chapter 3 showed that genetic algorithms had been applied to
+many different games, including some that were more complex than Monopoly.
+However, there is no objective way to measure whether a game strategy that has
+been evolved is a good strategy or not. To resolve this problem, the technique
+of competitive fitness functions was adopted for these experiments.
+
+Monopoly is game with a large random component. Every turn brings another roll
+of the dice and no game is ever the same. This seems analogous to the research
+conducted into games where noise is introduced into the game
+results~\cite{Panait02acomparative}. In those experiments, genetic algorithms
+were able to use small populations and relatively small numbers of generations
+to evolve good players using the technique of K-Random opponents. For that
+reason, K-Random Opponents was chosen as the primary competitive mechanism for
+this research. However, we also developed a modified Single Elimination
+Tournament procedure to apply Tournament Competition to fitness evaluation.
+
+The rules of the game were described in the next part of this thesis. This led
+to a decision about which parts of the game strategy could be encoded into a
+data structure. The strategy used by a player depends a lot on the state of the
+game. To accommodate this, a multi-chromosome strategy was chosen to encode the
+genome of the players. The property buying decision was encoded into 4 different
+chromosomes, where each chromosome was used for a different state of the
+property group begin evaluated. Another chromosome controlled when a player
+would pay to get out of jail. The other two major decisions in the game were not
+encoded for the genetic algorithm.
+
+Multiple values were chosen for most of the various genetic algorithm
+parameters, including chromosome type, population size, fitness evaluator, and
+number of games per generation. This required the evolution of over 250
+different populations through 1000 generations. When the evolution of all these
+populations was complete, the results were evaluated.
+
+\section{Experimental Results}
+
 This study showed that evolutionary computing can be used to evolve players for
 the non-deterministic game Monopoly. These players can perform well in the
 simulated environment in which they evolved. These players also appear to use
 strategies similar to those that have been developed heuristically by real-world
 players.
 
-Monopoly is game with a large random component. Every turn brings another roll
-of the dice and no game is ever the same. This seemed to analogous to the
-research conducted in to games with noise introduced into the
-experiments~\cite{Panait02acomparative}. In those experiments, good players were
-able to evolve with small populations and relatively small numbers of
-generations.
-
 However, what was found in this research is that the random component of
 Monopoly introduces a great deal of noise, and makes the search space
-significantly larger than for games used in earlier research. So much so that
-the smaller populations in this study were not able to evolve players as well as
-the larger populations, or as well as populations that played large numbers of
-games.
+significantly larger than for games used in earlier research. There was so much
+randomness that the smaller populations in this study were not able to evolve
+players as well as the larger populations, or as well as populations that played
+large numbers of games.
 
-We also found that as much as the decision to buy property is important to
-playing the game of Monopoly, property trading is also a significant component.
-The first human versus computer validation for the evolved Monopoly players was
-based on previous research which indicated that player's should propose trades
-often, and propose trades that balanced gains and
-losses~\cite{Yasumura2001Negotiate}. 
+Intra-population validations showed that for most of the populations, players in
+later generations were usually better than players in earlier generations.
+Competitions between the computer players in different generations also showed
+that the Number of Wins and Finish Order fitness evaluators resulted in players
+with the best fitness.
 
-What we found under actual play conditions is that the AI players did better
-when they valued gains much more than losses, and when they used a higher
-threshold for accepting a trade that gave them a gain. This seems to contradict
-the previous research into trading strategies that the trading algorithm was
-based on. Of course, the evolutionary aspect of the players was not involved in
+We also found that for this problem space, the Tournament competitive fitness
+evaluation was not effective in evolving good players. This is due to the
+highly random nature of the game, and the fact that many players played few
+games in each generation, so the evolutionary pressure was not strong enough to
+create strong players.
+
+We then conducted competitions between human players and the computer players.
+For this competition, the trading algorithm proposed by Yasumura, et al, was
+implemented~\cite{Yasumura2001Negotiate}. Five different competitions were
+conducted between the human and computer players. For three of the competitions,
+the trading parameters used in the trading algorithm had fixed values; for the
+final two competitions, the values were allowed to change between games. 
+
+The decision to buy property is important to playing the game of Monopoly, but
+property trading is also a significant component. Yasumura, et al, claimed that
+players should propose trades often, and propose trades that balanced gains and
+losses~\cite{Yasumura2001Negotiate}.
+
+What we found under actual play conditions is that when the trading parameters
+were fixed, the AI players did have relatively better results when they balanced
+gains and losses, and when they used a lower threshold for accepting a trade
+that gave them a gain. However, they still played much more poorly than the
+human players.
+
+When trading parameters were allowed to fluctuate between games, the computer
+players did best when they favored gains more than losses, and when the trading
+threshold was set to a higher value. In fact, under these conditions, one of the
+evolved computer players was able to play better than the human players, in two
+different sets of games, a feat that was not achieved when the trading
+parameters were fixed.
+
+This seems to contradict the research that the trading algorithm was based on.
+Of course, the evolutionary aspect of the computer players was not involved in
 the trading algorithm, so the RGA players were not able to evolve better
 strategies during the competition, unlike the human players who undoubtedly
 learned as they participated in the competition.
 
-At this point the author thinks that this thesis supports the following:
+\section{Contributions}
+
+This work on applying genetic algorithms to the game of Monopoly has made the
+following contributions to the state of the art in genetic algorithms:
 \begin{itemize} 
   \item {The poor evolution of a simple bit string chromosome (the SGA players) 
   confirms what has been found in other problem domains: the chromosome for any
-  evolutionary computing algorithm should be matched to the problem domain.} 
-  \item {All the literature cited in this thesis regarding tournament fitness 
-  evaluations used simple two-player competitions. This research showed that 
-  these competitions could be extended to 4 player games with successful 
-  results. The author thinks that this is generalizable to n-player games with
-  the appropriate adjustments, but that is only suggested, not supported, by 
-  this set of experiments.}
-  \item {The improved performance of the RGA players after the property trading 
-  strategy was improved shows that in games where one can acquire resources
-  directly or trade for resources, both components are important to success.}
+  evolutionary computing algorithm should be matched to the problem domain.}
+   
+  \item {The literature regarding tournament fitness evaluations used simple
+  two-player competitions. This research showed that these competitions could be
+  extended to 4 player games. This is also probably generalizable to n-player
+  games with the appropriate adjustments, but that is only suggested, not
+  supported, by this set of experiments.}
+  
+  \item {The improved performance of the computer players after the property
+  trading strategy was improved shows that genetic algorithms can be used to
+  develop game strategies that are as good, and possibly better, than human
+  players.}
+  
   \item {In the face of large amounts of randomness (noise) in a problem domain,
-  evolutionary computing can still be robust (given proper evolutionary 
+  evolutionary computing can be robust enough (given proper evolutionary
   parameters) to find solutions to the problem domain.}
+
 \end{itemize}
+
+\section{Future Work}
+
+The trading algorithm for these experiments was implemented as a rule-base
+algorithm: if certain conditions were met, then propose a trade or accept a
+proposal. However, now that the algorithm proposed by Yasumura, et al, has been
+used in real-world competitions, we see that even though they had good reasons
+for choosing the parameters used by their algorithm, there might be better
+parameters possible. In the implementation used in the human versus computer
+competitions, only two parameters were modified. However, there are many other
+parameters in the algorithm that can be adjusted. Finding the best values for
+these parameters is the type of problem that could be investigated using genetic
+algorithms.
+
+In the evolution of populations for this research, the property buying
+chromosomes evolved without property trading. Would the evolution of parameters
+for property trading affect the evolution of property buying chromosomes? If so,
+how does the co-evolution of these two strategies affect the computer player?
+
+Another area that could be investigated further is the use of Modified Single
+Elimination Tournament (MSET). The largest generations that played the most
+games took upwards of 10 hours to evolve through 1000 generations of a single
+population on the hardware available for these experiments. That meant we needed
+over 200 hours to evolve just the RGA-1024-*-* populations.
+
+We had hoped that applying MSET would allow shorter evolution times and yet
+still produce players with the same or better ability as the other fitness
+evaluators. What we found, however, was that the players evolved under MSET were
+worse than most other players. Previous research has shown that noisy
+environments do impair the effectiveness of SET. Additional research could look
+into how noise impacts MSET and whether the evolutionary parameters for MSET
+could be adjusted to improve its performance in evolving game players while
+still taking less time than other fitness evaluators.
+
+Finally, this research had some success evolving players for the game of
+Monopoly, which has a lot of randomness or noise. Additional research could
+generalize these results by looking at the impact of noise or randomness on a
+genetic algorithm. How much more evolution is needed in terms of population
+size, number of generations, reproduction parameters, etc., to overcome a given
+amount of randomness? Is there a point at which the amount of randomness is so
+great that the problem becomes too hard for a genetic algorithm to solve?
+
+
+
+
+
+

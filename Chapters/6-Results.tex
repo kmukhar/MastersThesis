@@ -10,7 +10,7 @@ of chromosome type (RGA, SGA, and TGA), population size (32, 128, 512, and
 100), and fitness evaluator (FINISH\_ORDER (FO), NET\_WORTH (NetW),
 NUM\_MONOPOLIES (NM), NUM\_PROPERTIES (NP), and NUM\_WINS (NW). In this chapter,
 those four features are used to identify the different populations: for example,
-RGA-512-50-NP refers the to RGA chromosome population of size 512, where each
+RGA-512-50-NP refers to the RGA chromosome population of size 512, where each
 player played 50 games per generation and the fitness evaluator was
 NUM\_PROPERTIES. Results of the evolutionary process are presented in
 Section~\ref{6_evoresults}.
@@ -56,36 +56,36 @@ players focuses exclusively on results obtained from the RGA chromosomes.
   \begin{enumerate}
     \item {From generation 999 of a set of populations differing only by
     original fitness evaluator, select the best player under each fitness
-    evaluator (results in 6 players)}
-    \item {Compete the 6 players in 50 games}
+    evaluator (6 players are selected)}
+    \item {Create partial permutations of the 6 players taken 4 at a time}
+    \item {Compete each set of 4 players in 50 games}
     \item {Record the fitness scores for FINISH\_ORDER}
     \item {Repeat 30 times without evolution}
     \item {Use Student's t-test to compare average fitness}
   \end {enumerate}
   \item {Real-world validation 1}
   \begin{enumerate}
-    \item {Pick the 3 best players from RGA-1024-100-FO}
+    \item {Pick the 3 best players from the RGA-1024-100-FO population}
     \item {Select parameters for the trading algorithm}
     \item {Compete these players against human players}   
-    \item {Record the finish order and net worth}
-    \item {Compare average finish order and average net worth among all players}
+    \item {Record the finish order}
+    \item {Compare average finish order and number of wins among all players}
   \end{enumerate}
   \item {Real-world validation 2}
   \begin{enumerate}
-    \item {Select the top 4 players from generations 250, 500, 750, and 999 from
+    \item {Select the top 4 players from generations 250, 500, 750, and 999 of 
     the RGA-1024-100-FO population}
     \item {Compete the players randomly against human players}
-    \item {Record the finish order and net worth}
-    \item {Compare average finish order and average net worth among all players}
+    \item {Record the finish order}
+    \item {Compare average finish order and number of wins among all players}
   \end {enumerate}
   \item {Real-world validation 3}
   \begin{enumerate}
-    \item {Select the top 4 players from generation 999 from the RGA-1024-100-FO
+    \item {Select the top 4 players from generation 999 of the RGA-1024-100-FO
     population}
-    \item {Compete the players randomly against human players using an updated
-    property trading algorithm}
-    \item {Record the finish order and net worth}
-    \item {Compare average finsh order and average net worth among all players}
+    \item {Compete the players randomly against human players}
+    \item {Record the finish order}
+    \item {Compare average finish order and number of wins among all players}
   \end {enumerate}
 \end{enumerate}
 
@@ -107,15 +107,15 @@ Second, players were also validated with an inter-population validation. That
 is, the best players from different populations were competed against each other
 in various combinations. For example, given the various RGA-1024-100-*
 populations, select the best player from each fitness evaluator and from
-generation 999. This will result in 6 players which then play 50 games against
-the other players; record the cumulative fitness using FINISH\_ORDER. Repeat
-this process 30 times without further evolution of the players\footnote{The
-results of the first validation were extremely strong, which implied that 50
-trials and 100 games per trial was excessive; thus the validation parameters
-were relaxed for the second validation.}. The players' performance over the 30
-trials was analyzed to determine if different fitness evaluators were better
-than others. The results of this analysis can be found in
-Section~\ref{6_interPopValidation}.
+generation 999. This will select 6 players. These 6 players are then divided
+into sets of 4 using partial permutations. Each set of 4 players then play 50
+games; the cumulative fitness is recorded using FINISH\_ORDER. Repeat this
+process 30 times without further evolution of the players\footnote{The results
+of the first validation were extremely strong, which implied that 50 trials and
+100 games per trial was excessive; thus the validation parameters were relaxed
+for the second validation.}. The players' performance over the 30 trials was
+analyzed to determine if different fitness evaluators were better than others.
+The results of this analysis can be found in Section~\ref{6_interPopValidation}.
 
 In Section~\ref{6_humanValidation}, results from games where RGA players played
 against human players are presented. Based on the previous intra- and
@@ -130,15 +130,15 @@ After the first set of validation competitions, an effort was made to improve
 the performance of the AI players. Four players each were picked from
 generations 250, 500, 750, and 999 of the RGA-1024-100-FO population. These
 players were competed against human players. There was a little improvement in
-the performance of the AI players which is documented in
+the performance of the AI players. The results of these games are documented in
 Section~\ref{6_humanVRGA2}.
 
 The property trading algorithm was adjusted again and a third competition was
 performed, again using only the best players from the last generation of a
 population. With the adjusted trading algorithm, the performance of the AI
-players improved over the second validation, but it was still not at the same
-level as human players. The results of the third competition are documented in
-the Section~\ref{6_humanVRGA3}.
+players improved over the second validation. One computer player was able to
+outplay the human players. The results of the third competition are documented
+in the Section~\ref{6_humanVRGA3}.
 
 \section{Results of the Evolutionary Process}\label{6_evoresults}
 
@@ -165,9 +165,9 @@ figure shows a binomial shaped distribution which appears to be centered around
 the population average of 150\footnote{Because the FINISH\_ORDER evaluator
 assigns 1, 2, and 3 points to the players in a game, for a total of 6 points per
 game, the average fitness for any single game is \(6/4\) or 1.5. So for \(n\)
-games the average fitness is \(n * 1.5\). For a population that plays 100 games
-per generation, the fitness distribution will be centered on the average score
-of 150.}.
+games the average fitness is \(n \cdot 1.5\). For a population that plays 100
+games per generation, the fitness distribution will be centered on the average
+score of 150.}.
 
 \begin{figure}
 \centering
@@ -197,8 +197,8 @@ fitness evaluator, generation 0.}
 An example of the fitness distribution for the NUM\_WINS fitness evaluator is
 shown in Figure~\ref{figure-RGA-G000-N100-NW-initial_fitness}. The average
 fitness for a single game is \(3/4\) or 0.75; for \(n\) games the average
-fitness is \(n * 1.5\). The figure shows a binomial shaped distribution which
-appears to be centered around the population average of 75.
+fitness is \(n \cdot 1.5\). The figure shows a binomial shaped distribution
+which appears to be centered around the population average of 75.
 
 \begin{figure}
 \centering
@@ -252,7 +252,7 @@ Figure~\ref{figure-RGA-G000-N100-NP-initial_fitness}. The distribution for
 TOURNAMENT is not shown because it provides no useful information. For
 TOURNAMENT, half the population has a score of 0, half of the remainder has a
 score of 1, etc., until the final two players have a score of \(log_{2} n-1\).
-The TOURNAMENT population will be examined in detail in the validation section.
+The TOURNAMENT population will be discussed more in the validation section.
 
 All of the other populations, regardless of population size, fitness evaluator,
 or number of games per generation, show similar results for the initial
@@ -491,7 +491,7 @@ provides details on whether the populations did improve or not.
   \label{tab:6_RGA-0032-007-FO}%
 \end{table}%
 
-\subsection{Genome Changes Over Time}
+\subsection{Genome Changes Over Time} \label{6_genomeChanges}
 
 This section looks at the changes in a genome between the initial and final
 generations of a population. Using the RGA-1024-100-FO population, part of
@@ -505,10 +505,10 @@ Table~\ref{tab:chromo_compare}.
 \centerline{\includegraphics[width=0.75\columnwidth]{Figures/genome000.png}}
 \caption[Illustration of Genome, Generation 0]{This chart shows part of the
 genome of the fittest player in the first generation of the RGA-1024-100-FO
-population. This chart compares the chromosome used when no player owns
-any property in the group (represented by the square symbol) against the
-chromosome used when two other players own a property in the group (the triangle
-symbol).}
+population. This chart compares the chromosome used when no player owns any
+property in the group (represented by the square symbol) against the chromosome
+used when two other players own a property in the group (the triangle symbol).
+Note that the gene values appear to be randomly distributed in the chart.}
 \label{figure-genome0}
 \end{figure}
 
@@ -521,8 +521,8 @@ property in the group (the square symbol) against the chromosome used when two
 other players own a property in the group (the triangle symbol). These two genes
 show agreement with the heuristic strategy: the player is more likely to buy a
 property when no one owns a property in the group, and relatively less likely to
-buy a property when other players are blocking the group from being
-monopolized.}
+buy a property when other players are blocking the group from being monopolized.
+Note that the gene values are appear to be less random in this Figure.}
 \label{figure-genome999}
 \end{figure}
 
@@ -569,15 +569,14 @@ monopolized.}
   \label{tab:chromo_compare}%
 \end{table}%
 
-For the property buying decision, the genome matches the strategy described
-previously. The gene values for buying a location are generally higher when no
-player owns one of the properties of a group compared to when two other players
-own properties in the group. Although it is not shown in
-Figure~\ref{figure-genome999}, the gene values for buying when the player
-already owns a property in the group, or when one opponent owns a property in
-the group, are generally higher than when two opponents own a property in the
-group. A few additional Figures and Tables for some genomes can be found in
-Appendix~\ref{appendix:chromos}.
+For the property buying decision, the genome in Figure~\ref{figure-genome999}
+matches the strategy described previously. The gene values for buying a location
+are generally higher when no player owns one of the properties of a group
+compared to when two other players own properties in the group. Although it is
+not shown in Figure~\ref{figure-genome999}, the gene values for buying when the
+player already owns a property in the group, or when one opponent owns a
+property in the group, are generally higher than when two opponents own a
+property in the group.
 
 When compared to the strategy list from Section~\ref{m_gamestrategies}, there
 might appear to be an inconsistency in the genome. For example, the strategy
@@ -801,7 +800,9 @@ Each row represents a single population. The first row, for example, is a
 partial set of the scores and tests for the RGA-0128-100-FO population. The
 score in the average fitness column is the average fitness scores for that
 player over 50 trials of 100 games per trial. The table shows the average scores
-for Generation 250 and Generation 500.
+for Generation 250 and Generation 500. The average score in Generation 500
+appears to be better than the average score of Generation 250 for every
+population.
 
 To evaluate whether players in later generations were better than players in
 earlier generations, a one-tailed Student's t-test was performed with $H_{0}$
@@ -816,7 +817,7 @@ Table~\ref{tab:validationRGA0128} shows 3 of the tests: generation 250 compared
 to generation 500, 500 to 750, and 750 to 999. At almost any significance level,
 the results indicate that almost every later generation is better than every
 earlier generation. For two of the tests in Table~\ref{tab:validationRGA0128}
-the null hypothesis is accepted. One Of those is the test for the
+the null hypothesis is accepted. One of those is the test for the
 NUM\_MONOPOLIES evaluator in the comparison of generation 500 to generation 750.
 For the significance level \(\alpha=0.01\) the null hypothesis is accepted for
 that test and the conclusion is that the players from those two generations have
@@ -875,8 +876,7 @@ each other. For example, looking at Table~\ref{tab:validationRGA0128-007}
 (excerpted from Table~\ref{tab:intrapop128_finorder} in
 Appendix~\ref{appendix:intravalidation}), with a significance level of
 \(\alpha=0.01\), when the number of games per generation is 7 the null
-hypothesis is accepted more than half the time (14 out of 25 trials) at the 0.01
-significance level.
+hypothesis is accepted more than half the time (14 out of 25 trials).
 
 % Table generated by Excel2LaTeX from sheet 'Finish Order'
 \begin{table}[htbp]
@@ -1163,27 +1163,29 @@ high correlation between measuring fitness in terms of winning games, finish
 order, or net worth, and the number of games the player can subsequently win.
 However even though a player with a lot of monopolies or a lot of properties is
 more able to bankrupt other players, it also matters which properties or
-monopolies a player owns. Two players, one with 3 Red properties and the other
-with 3 Light Blue properties, have the same number of properties and the same
-number of monopolies, but most experts would say the player with the Red
-properties is more likely to win. Similarly, a player with a single high value
-monopoly like Red or Orange would be predicted as more likely to win than a
-player with two low value monopolies. So there is less correlation between
-number of properties or number of monopolies and winning a game.
+monopolies a player owns. Suppose there are two players, one with 3 Red
+properties and the other with 3 Light Blue properties, have the same number of
+properties and the same number of monopolies, but most experts would say the
+player with the Red properties is more likely to win. Similarly, a player with a
+single high value monopoly like Red or Orange would be predicted as more likely
+to win than a player with two low value monopolies. So there is less correlation
+between number of properties or number of monopolies and winning a game.
 
 The apparent weakness of the Tournament fitness evaluator also makes sense in
 light of previous research. Panait and Luke found that Single Elimination
 Tournament performed worse than K-Random Opponents when noise was introduced
-into the solution space~\cite{Panait02acomparative}. The average number of games
-played per generation for Tournament was only 2. That, and the high degree of
-randomness in each game, created a solution space with a large amount of noise,
-which led to the poor performance of Tournament fitness evaluator.
+into the solution space~\cite{Panait02acomparative}. The mean number of games
+played by each player per generation for Tournament was only 2 (the median was
+5). The low number of games per generation, and the high degree of randomness in
+each game, created a solution space with a large amount of noise, which led to
+the poor performance of Tournament fitness evaluator.
 
 Finally, although some of the results imply that NM and NP are similar in
-performance, while other results imply that NP is better than NM, this is most
-likely due to the confounding effect of having four players per game, rather
-than a two player competition. The presence of stronger or weaker players in the
-set of four players affects the results of the t-test between any two players.
+performance, other results imply that NP is better than NM. The fitness
+evaluator NP is probably better than NM; the ambiguous results are due to the
+confounding effect of having four players per game, rather than a two player
+competition. The presence of stronger or weaker players in the set of four
+players affects the results of the t-test between any two players.
 
 \section{Human versus Computer Validation}\label{6_humanValidation}
 
@@ -1191,19 +1193,19 @@ Based on the results of the evolutionary phase of this study, and the intra- and
 inter-population validations, a set of RGA players was selected and competed
 against human players to validate the evolutionary results. The results of these
 competitions are presented here. Although there was a little success by the
-computer players, the results are generally disappointing, but they do point to
+computer players, the results are generally disappointing. They do point to
 areas where additional research could be conducted.
 
 The intra- and inter-population analysis showed that the best players will be
 from the larger populations that played more games per generation, and evolved
 under the FO or NW fitness evaluators. For those reasons, players for this
-validation were selected from the RGA-1024-100-FO population.
+validation were initially selected from the RGA-1024-100-FO population.
 
 \subsection{Human Versus Computer Validation 1}\label{6_humanVRGA1}
 
 For the human versus computer validation, a trading algorithm based on the one
 proposed by Yasumura, et al, in ``Negotiation strategy of agents in the MONOPOLY
-game~\cite{Yasumura2001Negotiate}'' was implemented
+game'' was implemented~\cite{Yasumura2001Negotiate}.
 
 Full details of the algorithm can be found in Section~\ref{5_trade_property}.
 The algorithm evaluates the ownership situation of the properties being traded,
@@ -1220,11 +1222,10 @@ gain (or loss) from the trade.
 If the value \(U\) exceeds some threshold, the player proposes the trade, or
 accepts the trade. In their paper, Yasumura, et al, claimed that when their
 algorithm was compared to the game play of human experts, the algorithm matched
-the the kinds of trades proposed by human experts when gains and losses were
-balanced \(\omega \approx 0.5\)), and when the threshold was relatively low
-(approximately 100). They also claimed that when competed against each other,
-their trading agents had the most wins with low threshold and balanced
-\(\omega\).
+the kinds of trades proposed by human experts when gains and losses were
+balanced (\(\omega \approx 0.5\)), and when the threshold was equal to 100. They
+also claimed that when competed against each other, their trading agents had the
+most wins with low threshold and balanced \(\omega\).
 
 The three best players from the RGA-1024-100-FO population were chosen for the
 initial human versus computer validation. For each player, the values for
@@ -1249,27 +1250,29 @@ in Table~\ref{tab:val1_params}.
 \label{tab:val1_params}%
 \end{table}
 
-Each of the three players should be relatively the same in ability, so different
+Each of the three players should have the same relative ability, so different
 parameters were used for the trading. Despite the results of Yasumura,
-preliminary testing showed that computer players proposed an excessive number of
-trades with low threshold and balanced \(\omega\). The values in
-Table~\ref{tab:val1_params} were chosen to provide a representative sampling of
-combinations of trading parameters.
+preliminary testing showed that computer players proposed a large number of
+trades when the trading parameters were set to a low threshold and balanced
+\(\omega\). The values in Table~\ref{tab:val1_params} were chosen to provide a
+representative sampling of combinations of trading parameters.
 
 The threshold for all three players is set relatively high, while \(\omega\)
 ranges from a somewhat balanced value of 0.65 up to a high of 0.95. These values
 were chosen so that the players would favor gains over losses, but would only
-propose or accept trades when the gain was significant.
+propose or accept trades when the gain was significant, thus reducing the number
+of proposed trades.
 
 \subsubsection{Human Versus Computer Validation 1 Results}
 
 The human players were instructed to play as many games as possible in a one
-week time period. The results are shown in Table~\ref{tab:human_results1a}.
+week time period. The results are shown in Table~\ref{tab:human_results1a} and
+Table~\ref{tab:human_results1b}.
 
 % Table generated by Excel2LaTeX from sheet 'Sheet2'
 \begin{table}[htbp]
   \centering
-  \caption{Human versus Computer, Trial 1a}
+  \caption{Human versus Computer, Trial 1a, Number of Wins}
     \begin{tabular}{lr}
     \toprule
     \multicolumn{2}{c}{Results}\\
@@ -1283,10 +1286,35 @@ week time period. The results are shown in Table~\ref{tab:human_results1a}.
     \end{tabular}%
   \label{tab:human_results1a}%
 \end{table}%
- 
+
+% Table generated by Excel2LaTeX from sheet 'Sheet2'
+\begin{table}[htbp]
+  \centering
+  \caption{Human versus Computer, Trial 1a, Average Finish}
+    \begin{tabular}{lr}
+    \toprule
+    \multicolumn{2}{c}{Results} \\
+    \midrule
+    Player & Average Finish \\
+    \multicolumn{1}{l}{human} & 1.5 \\
+    \multicolumn{1}{l}{player0101.dat} & 3.0 \\
+    \multicolumn{1}{l}{player0423.dat} & 2.8 \\
+    \multicolumn{1}{l}{player0667.dat} & 2.7 \\
+    \bottomrule
+    \end{tabular}%
+  \label{tab:human_results1b}%
+\end{table}%
+
 It is clear that the human players completely dominated the computer players.
-Out of 70 games, the human players won 53 times (\(\approx24\%\)). The best of
-the computer players only managed to win 8 times.
+Out of 70 games, the human players won 53 times. The best of the computer
+players only managed to win 8 times (\(\approx24\%\)). The average finish order
+for the human players was 1.5; the average finish order of the computer players
+was \(\approx2.8\)\footnote{Finish order is simply the order of the players at
+the end of the game. The winner has a finish order of 1; the second place player
+has a finish order of 2, and so on.}. Since the human players won most games,
+their average finish order is midway between 1 and 2. The computer players
+finished 2nd, 3rd, or 4th most of the time, so their average finish order is
+close to 3.
 
 A post validation review was conducted with the human players, and they reported
 that some of the reasons for these results were
@@ -1335,18 +1363,21 @@ those in Yasumura's paper might result in better performance.
 \label{tab:val2_params}%
 \end{table}
 
-After these changes were made, The human players competed in another set of 
-games. The results are shown in Table~\ref{tab:human_results1b}. The human
-players were again much better than the computer players, although the computer
-players may have improved. The computer players won (\(\approx30\%\) of the
-games this time. Player 667 improved from an 11\% win rate to a 16\% win rate;
-Player 423 improved from 3\% to 14\%. Player 101, however, dropped from 10\% to
-0\%, hurting the overall computer rate.
+After these changes were made, The human players competed in another set of
+games. The results are shown in Table~\ref{tab:human_results1c} and
+Table~\ref{tab:human_results1d}. The human players were again much better than
+the computer players, although the computer players may have improved. The
+computer players won \(\approx30\%\) of the games this time. Player 667
+improved from an 11\% win rate to a 16\% win rate; Player 423 improved from 3\%
+to 14\%. Player 101, however, dropped from 10\% to 0\%, hurting the overall
+computer rate. Average finish in Table~\ref{tab:human_results1d} shows a similar
+improvement: average finish order for the human players became slightly worse,
+and improved slightly for the computer players. 
 
 % Table generated by Excel2LaTeX from sheet 'Sheet1'
 \begin{table}[htbp]
   \centering
-  \caption{Human versus Computer, Trial 1b}
+  \caption{Human versus Computer, Trial 1b, Number of Wins}
     \begin{tabular}{lr}
     \toprule
     \multicolumn{2}{c}{Results}\\
@@ -1358,7 +1389,25 @@ Player 423 improved from 3\% to 14\%. Player 101, however, dropped from 10\% to
     \multicolumn{1}{l}{player0667.dat} & 6 \\
     \bottomrule
     \end{tabular}%
-  \label{tab:human_results1b}%
+  \label{tab:human_results1c}%
+\end{table}%
+
+% Table generated by Excel2LaTeX from sheet 'Sheet1'
+\begin{table}[htbp]
+  \centering
+  \caption{Human versus Computer, Trial 1b, Average Finish}
+    \begin{tabular}{lr}
+    \toprule
+    \multicolumn{2}{c}{Results} \\
+    \midrule
+    Player & Average Finish \\
+    \multicolumn{1}{l}{human} & 1.6 \\
+    \multicolumn{1}{l}{player0101.dat} & 2.8 \\
+    \multicolumn{1}{l}{player0423.dat} & 2.9 \\
+    \multicolumn{1}{l}{player0667.dat} & 2.7 \\
+    \bottomrule
+    \end{tabular}%
+  \label{tab:human_results1d}%
 \end{table}%
 
 A post competition discussion was again held with human players. The consensus
@@ -1371,7 +1420,9 @@ players were occasionally making poor property decisions compared to a human
 player. For example, when a human player lands on a property that would complete
 a monopoly, the human will buy the property 100\% of the time. The computer
 players, however, will not make the buy decision 100\% of the time, since none
-of the gene values evolved to that high of a value.
+of the gene values evolved to that high of a value. As discussed in
+Section~\ref{6_genomeChanges}, some gene values approach 1.0 (which means a
+100\% buy decision), but never reach 1.0.
 
 \subsubsection{Human Versus Computer Validation 1 Summary}
 
@@ -1380,7 +1431,7 @@ players were not initially up to the level of human players. A large part of
 this was due to the trading algorithm that was initially implemented. Another
 large factor was due to the phenotype of each player. Even though the
 chromosomes tended to result in a high probability of buying decisions (see
-Section~\ref{figure-genome999} for example), that probability is not quite the
+Figure~\ref{figure-genome999} for example), that probability is not quite the
 same as what a human player would decide. 
 
 So when a human player gets an opportunity to block an opponent's monopoly, they
@@ -1411,26 +1462,27 @@ computer players, so another attempt was made to improve their performance.
 
 \subsection{Human Versus Computer Validation 2} \label{6_humanVRGA2}
 
-For this set of tests, the player pool was broadened to include players from
-several different generations. The best 4 players from generations 250, 500,
-750, and 999 of the RGA-1024-100-FO population were selected. So there were 16
-computer players in all. For each game, the program chose 3 opponents at
+For the second set of tests, the player pool was broadened to include players
+from several different generations. The best 4 players from generations 250,
+500, 750, and 999 of the RGA-1024-100-FO population were selected. So there were
+16 computer players in all. For each game, the program chose 3 opponents at
 random. So usually the human player was playing against a mix of players from
 the 4 generations.
 
 Another change was that the trading parameters were fixed to exactly follow
 Yasumura's recommendations. That is, \(\omega\) was set to be 0.50 and the
-threshold was set to be 100.
+threshold was set to be 100 for every player in every game.
 
 Yasumura, et al, claimed that the best agreement with human expert trading was
 found with these parameters; they also claimed that when competing against each
-other, the computer agents that used those parameters had the most wins. 
-
-There was a total of 109 games played between human players and computer
-players.
+other, the computer agents that used those parameters had the most wins
+(compared to other computer agents which used different values of \(\omega\)
+(0.1, 0.3, 0.7, or 0.9) and different values for threshold (200, 300, 400, or
+500).
 
 \subsubsection{Human Versus Computer Validation 2 Results}
 
+A total of 109 games were played between human players and computer players.
 Table~\ref{tab:human_rga_2a} shows the number of wins for each computer player,
 and the aggregate number of wins for each generation. It also shows how many
 games were played by each player and generation, and the percentage wins for
@@ -1443,10 +1495,10 @@ a win percentage of 23.1\%.
 % Table generated by Excel2LaTeX from sheet 'Pivot table'
 \begin{table}[htbp]
   \centering
-  \caption{Add caption}
+  \caption{Human versus Computer, Trial 2, Number of Wins}
     \begin{tabular}{rrrr}
     \toprule
-          & Values \\
+    \multicolumn{4}{c}{Results} \\
     \midrule
     Players & Number of wins & Num games & Win \% \\
     \multicolumn{1}{l}{gen250}         & 10.0 & 85 & 11.8 \\
@@ -1485,16 +1537,57 @@ from Generation 999 should have performed better than the other computer
 players. Instead, they appear to have performed worse than most other
 computer players in this set of competitions.
 
-A post-competition examination of the results leads to the conclusion that this
-poor performance in relation to the other players is probably because the
-Generation 999 players are more likely to buy properties. Since they are more
-likely to buy properties, they are more likely to have less available cash and
-also more likely to trade their properties to the human players. When the human
-players get a monopoly, it is the Generation 999 players that are more likely to
-go bankrupt first, since they have less cash available to pay rents.
+Table~\ref{tab:human_rga_2b} shows the results for average finish order. As one
+would expect based on the number of games won by humans, their average finish
+order was between 1 and 2; the average finish order for the computer players was
+close to 3.
+
+% Table generated by Excel2LaTeX from sheet 'Pivot table'
+\begin{table}[htbp]
+  \centering
+  \caption{Human versus Computer, Trial 2, Average Finish}
+    \begin{tabular}{lr}
+    \toprule
+    \multicolumn{2}{c}{Results} \\
+    \midrule
+    Players & Average Finish Order \\
+    \multicolumn{1}{l}{gen250} & 2.8 \\
+    \multicolumn{1}{l}{player0040.dat} & 2.6 \\
+    \multicolumn{1}{l}{player0191.dat} & 2.5 \\
+    \multicolumn{1}{l}{player0478.dat} & 3.0 \\
+    \multicolumn{1}{l}{player0752.dat} & 3.0 \\
+    \multicolumn{1}{l}{gen500} & 2.8 \\
+    \multicolumn{1}{l}{player0028.dat} & 2.8 \\
+    \multicolumn{1}{l}{player0445.dat} & 2.9 \\
+    \multicolumn{1}{l}{player0913.dat} & 2.7 \\
+    \multicolumn{1}{l}{player0923.dat} & 2.8 \\
+    \multicolumn{1}{l}{gen750} & 2.7 \\
+    \multicolumn{1}{l}{player0453.dat} & 2.9 \\
+    \multicolumn{1}{l}{player0474.dat} & 2.6 \\
+    \multicolumn{1}{l}{player0524.dat} & 2.6 \\
+    \multicolumn{1}{l}{player0750.dat} & 2.6 \\
+    \multicolumn{1}{l}{gen999} & 2.9 \\
+    \multicolumn{1}{l}{player0101.dat} & 3.0 \\
+    \multicolumn{1}{l}{player0423.dat} & 3.1 \\
+    \multicolumn{1}{l}{player0667.dat} & 2.7 \\
+    \multicolumn{1}{l}{player0928.dat} & 3.0 \\
+    \multicolumn{1}{l}{human} & 1.6 \\
+    \bottomrule
+    \end{tabular}%
+  \label{tab:human_rga_2b}%
+\end{table}%
+
+A post-competition examination of the results leads to the conclusion that the
+poor performance of players from Generation 999 in relation to the other players
+is probably because the Generation 999 players are more likely to buy
+properties. Since they are more likely to buy properties, they are more likely
+to have less available cash and also more likely to trade their properties to
+the human players. When the human players get a monopoly, it is the Generation
+999 players that are more likely to go bankrupt first, since they have less cash
+available to pay rents.
 
 A second reason for the poor performance of the Generation 999 players is that,
-just by chance, then tended to play more games against players from Generation
+just by chance, they tended to play more games against players from Generation
 750 and less against players from Generation 250. So on average, Generation 999
 players tended to play against stronger opponents. In the games in which at
 least one other opponent was from Generation 250, the Generation 999 player was
@@ -1512,34 +1605,37 @@ block an opponent from obtaining a monopoly and sometime declining to buy
 properties to complete a monopoly of its own.
 
 It also appears that the trading parameters may have improved the performance of
-the computer players. In the first competition, the threshold and \omega were
-fixed at relatively high values, and the computer players won \(\approx24\%\) of
-the games. When the threshold was lowered and \omega made more balanced, they
-won \(\approx30\%\) of the games. In this validation, when the values were set
-to those recommended by Yasumura, they won \(\approx34\%\) of the games.
+the computer players. In the first competition, the threshold and \(\omega\)
+were fixed at relatively high values, and the computer players won
+\(\approx24\%\) of the games. When the threshold was lowered and \(\omega\) made
+more balanced, they won \(\approx30\%\) of the games. In this validation, when
+the values were set to those recommended by Yasumura, they won \(\approx34\%\)
+of the games.
 
 \subsection{Human Versus Computer Validation 3} \label{6_humanVRGA3}
 
 One final validation was performed. For this final validation, the player pool
-was again limited to the three best players from Generation 999.
+was again limited to the best players from Generation 999.
 
-However, it was thought that fixing the values of the trading parameters in
-previous competitions, the players may have been stuck in poor locations in the
-solution space. Allowing the parameters to fluctuate might be a way to improve
-player performance. Even though Yasumura, et al, claim the best performance from
-a balanced \omega and a low trading threshold, they did not validate these
-parameters in a real world situation. The appropriateness of proposals was
-evaluated by comparing what the computer proposed for trading to the proposal
-made by a human expert in the same situation. In their paper, they indicate that
-there were some differences between their computer agents and the human experts,
-which the reasons for this difference are that, ``(1) the parameters in the
-evaluation function are not tuned enough and (2) the expert is taking into
-consideration elements other than the expected profit.''
+Even though Yasumura, et al, claim the best performance from a balanced
+\(\omega\) and a low trading threshold, they did not validate these parameters
+in a real world situation. The appropriateness of proposals was evaluated by
+comparing what the computer proposed for trading to the proposal made by a human
+expert in the same situation. In their paper, they indicate that there were some
+differences between their computer agents and the human experts, and the reasons
+for this difference are that, ``(1) the parameters in the evaluation function
+are not tuned enough and (2) the expert is taking into consideration elements
+other than the expected profit~\cite{Yasumura2001Negotiate}.'' Similarly,
+determining which set of parameters led to the most wins for their computer
+players was not tested in real world games, but rather by competing computer
+agents against each other. It is also not clear from the paper whether the
+computer agents played in 2-player games or multi-player games.
 
-So even though setting \omega to 0.5 and the threshold to 100 appears to have
-improved the performance, these may not be the best parameters. The trading
-algorithm was updated by randomly choosing \omega and the threshold for
-each player at the start of the game. 
+So even though setting \(\omega\) to 0.5 and the threshold to 100 appears to
+have improved the performance, these may not be the best parameters. Perhaps
+player performance could be improved by allowing the trading parameters to
+change from game to game. So the game software was updated to randomly choose
+\(\omega\) and the threshold for each player at the start of each game.
 
 The value for the threshold was randomly chosen from the set \{100, 200,
 400\} and \(\omega\) was randomly chosen from the set \{0.65, 0.80, 0.95\}. This
@@ -1547,20 +1643,76 @@ value would be different for each player in each game, but would stay constant
 for each player during the course of a single game. 
 
 Human volunteers then played the game again. Preliminary results show some
-improvement in trading behavior: the RGA players propose less trades, and the
-trades the do propose are more sensible than they were previously.
+improvement in trading behavior: the computer players propose less trades, and
+the trades they do propose are more sensible than they were previously. After a
+set period of time, results were gathered from the initial set of games, and the
+human players were asked to play a final round of games.
 
 \subsubsection{Human Versus Computer Validation 3 Results}
+
+Looking first at number of wins, Table~\ref{tab:human_results3a} shows that the
+number of wins for the human players has increased again to 73\% of the 63 games
+played. On the surface, it appears that performance of the computer players has
+decreased.
 
 % Table generated by Excel2LaTeX from sheet 'Sheet1'
 \begin{table}[htbp]
   \centering
-  \caption{Add caption}
-    \begin{tabular}{rr}
+  \caption{Human versus Computer, Trial 3a, Number of Wins}
+    \begin{tabular}{lrr}
     \toprule
-          & Values \\
+    \multicolumn{3}{c}{Results}  \\
     \midrule
-    Row Labels & Average Finish Order \\
+    Player & Number of Wins & Percent \\
+    \multicolumn{1}{l}{player0423.dat} & 2.00   & 3.2\% \\
+    \multicolumn{1}{l}{player0928.dat} & 3.00   & 4.8\% \\
+    \multicolumn{1}{l}{player0101.dat} & 5.00   & 7.9\% \\
+    \multicolumn{1}{l}{player0667.dat} & 7.00   & 11.1\% \\
+    \multicolumn{1}{l}{human} & 46.00  & 73.0\% \\
+    \bottomrule
+    \end{tabular}%
+  \label{tab:human_results3a}%
+\end{table}%
+
+However, these results are for all the computer players regardless of the values
+of the trading parameters. When trading parameters are taken into account, the
+picture improves for the computer players.
+
+% Table generated by Excel2LaTeX from sheet 'Sheet1'
+\begin{table}[htbp]
+  \centering
+  \caption{Human versus Computer, Trial 3a, Number of Wins, Omega=0.65, Threshold=400}
+    \begin{tabular}{lrr}
+    \toprule
+    \multicolumn{3}{c}{Results}  \\
+    \midrule
+    Player & Number of Wins & Percent \\
+    \multicolumn{1}{l}{player0928.dat} & 1.00   & 11.1\% \\
+    \multicolumn{1}{l}{player0101.dat} & 2.00   & 22.2\% \\
+    \multicolumn{1}{l}{player0667.dat} & 2.00   & 22.2\% \\
+    \multicolumn{1}{l}{human} & 4.00   & 44.4\% \\
+    \bottomrule
+    \end{tabular}%
+  \label{tab:human_results3b}%
+\end{table}%
+
+Table~\ref{tab:human_results3b} shows that when the results are filtered by
+\(\omega=0.65\) and threshold=400, the computer players won more than half those
+games. Similar improvement is seen in the average finish order values as seen in
+Table~\ref{tab:human_results3c}. The average finish order for Player 101 is
+because that player finished 1st or 2nd in every game it played (with
+\(\omega=0.65\) and threshold=400), whereas the other players, including the
+human players, sometimes finished 3rd or 4th.
+
+% Table generated by Excel2LaTeX from sheet 'Sheet1'
+\begin{table}[htbp]
+  \centering \caption[Human versus Computer, Trial 3a, Average Finish]{Human
+  versus Computer, Trial 3a, Average Finish, Omega=0.65, Threshold=400}
+    \begin{tabular}{lr}
+    \toprule
+    \multicolumn{2}{c}{Results}  \\
+    \midrule
+    Player & Average Finish Order \\
     \multicolumn{1}{l}{player0101.dat} & 1.67 \\
     \multicolumn{1}{l}{human} & 2.00 \\
     \multicolumn{1}{l}{player0928.dat} & 2.25 \\
@@ -1568,18 +1720,100 @@ trades the do propose are more sensible than they were previously.
     \multicolumn{1}{l}{player0423.dat} & 2.88 \\
     \bottomrule
     \end{tabular}%
-  \label{tab:addlabel}%
+  \label{tab:human_results3c}%
 \end{table}%
 
-Final results are pending.
+In the second round of games in this validation, the human players continue to
+do well as seen in Table~\ref{tab:human_results3d}, winning almost 59\% of the
+41 games that were played. The table shows the results for all games played,
+regardless of the trading parameters used by the computer players. The computer
+players are slightly worse in this round of games, compared to the previous
+round of games, but still better than any of the other previous validations.
+
+% Table generated by Excel2LaTeX from sheet 'Sheet1'
+\begin{table}[htbp]
+  \centering
+  \caption{Human versus Computer, Trial 3b, Number of Wins}
+    \begin{tabular}{lrr}
+    \toprule
+    \multicolumn{3}{c}{Results}  \\
+    \midrule
+    Players & Number of Wins & Percent \\
+    \multicolumn{1}{l}{player0667.dat} & 3.00   & 3.9\% \\
+    \multicolumn{1}{l}{player0928.dat} & 4.00   & 9.3\% \\
+    \multicolumn{1}{l}{player0101.dat} & 4.00   & 13.8\% \\
+    \multicolumn{1}{l}{player0423.dat} & 5.00   & 14.4\% \\
+    \multicolumn{1}{l}{human} & 25.00  & 58.5\% \\
+    \bottomrule
+    \end{tabular}%
+  \label{tab:human_results3d}%
+\end{table}%
+
+Table~\ref{tab:human_results3e} shows the average finish order results for this
+round of games, and again Player 101 has excelled. Like the previous round in
+this validation, Player 101 finished every game it played in 1st or 2nd place,
+much better than the other computer players and the human player.
+
+% Table generated by Excel2LaTeX from sheet 'Sheet1'
+\begin{table}[htbp]
+  \centering
+  \caption{Human versus Computer, Trial 3b, Average Finish Order, Omega=0.80, Threshold=400}
+    \begin{tabular}{lr}
+    \toprule
+    \multicolumn{2}{c}{Results}  \\
+    \midrule
+    Players & Average Finish Order \\
+    \multicolumn{1}{l}{player0101.dat} & 1.67 \\
+    \multicolumn{1}{l}{human} & 1.70 \\
+    \multicolumn{1}{l}{player0423.dat} & 3.00 \\
+    \multicolumn{1}{l}{player0928.dat} & 3.50 \\
+    \multicolumn{1}{l}{player0667.dat} & 4.00 \\
+    \bottomrule
+    \end{tabular}%
+  \label{tab:human_results3e}%
+\end{table}%
 
 \subsubsection{Human Versus Computer Validation 3 Summary}
- 
-\section{Summary}
 
-Although it appears that evolutionary computing can be used to learn when to
-make property buying decisions in the game of Monopoly, the RGA players were
-hampered in this experiment by having a trading algorithm that sometimes
-resulted in making bad trades which led to losses against human players. That is
-probably partly due to the trading algorithm and partly due to implementation
-decisions made when the algorithm was coded.
+In this third validation, the computer players were able to compete at a level
+equal to that of the human players. The computer players won 41\% of the games
+they played in the last set of validation games, and a bit more than 55\% of the
+games the played in the first set when filtered for \(\omega\) and threshold.
+One of the computer players even played better than the human players in the two
+sets of games.
+
+The difference between these two sets of games and the previous human versus
+computer validations in this chapter is that in this validation the trading
+parameters were allowed to fluctuate somewhat randomly. Because of this, the
+trading parameters became a partial Genetic Algorithm approach to solving the
+problem. The term partial is used because although trading parameters were
+chosen at random for each game, they were chosen from a fixed set, and no
+evolution of the parameters occurred between games.
+
+These two sets of games also suggest that in real world situations, the trading
+parameters that are best are not necessarily those that Yasumura, et al, found
+to be best. 
+
+\section{Conclusions}
+
+This chapter has shown that computer players for the game of Monopoly can be
+evolved using Genetic Algorithm techniques. The players that evolved did get
+better over time, and the Number of Wins and Finish Order fitness evaluators
+resulted in the best computer players (at least when competed against each
+other). 
+
+Due to the highly random nature of the game, the K-Random opponents technique
+for competitive evolutions works best for this solution space, although it does
+require a relatively large population and a large number of generations to
+evolve better players.
+
+However, although it appears that evolutionary computing can be used to learn
+when to make property buying decisions in the game of Monopoly, the computer
+players were hampered in this experiment by having a trading algorithm that
+sometimes resulted in making bad trades which led to losses against human
+players. That is probably partly due to the trading algorithm and partly due to
+implementation decisions made when the algorithm was coded. The results here
+showed that the conclusions of Yasumura, et al, while valid in the simulated
+environment of their implementation, do not work in the real world. 
+
+ 
