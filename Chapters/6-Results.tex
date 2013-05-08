@@ -17,11 +17,10 @@ Section~\ref{6_evoresults}.
 
 The sixth fitness evaluator, TOURNAMENT (TO) was also tested. For the tournament
 fitness evaluator the number of games was determined by the population size and
-the results of each tournament, and so was not independent. Each match in the
-evolution of the population was an entire single elimination tournament as
-described in Section~\ref{5_fitnesseval}. There were 20 matches in every
-generation. For TOURNAMENT, 1000 generations were evolved for every combination
-of population size and chromosome type.
+the results of each tournament, and so was not independent. When the fitness
+evaluator was TO, each generation was an entire modified single elimination
+tournament as described in Section~\ref{5_fitnesseval}. For TO, 1000 generations
+were evolved for every combination of population size and chromosome type.
 
 Results of the evolution of the RGA chromosome are presented first. An analysis
 of the fitness distributions and descriptive statistics for various RGA
@@ -32,27 +31,27 @@ this chromosome tended to evolve poorly. This is most likely due to the fact
 that the data structure used for the SGA chromosomes is not well suited to the
 problem domain.
 
-Finally, results for the TGA chromosomes are very briefly discussed, but these
+Finally, results for the TGA chromosomes are briefly discussed, but these
 players were essentially identical to the RGA chromosomes and so do not provide
 any additional insight.
 
 After the evolutionary process was complete, the best players from each
 generation were competed in various combinations to validate the results. The
-validation process is listed below. Because the evolution of SGA and TGA
-chromosomes do not provide any useful information, the validation of the evolved
-players focuses exclusively on results obtained from the RGA chromosomes.
+validation process is listed below. The validation of the evolved players
+focuses exclusively on results obtained from the RGA chromosomes because the
+SGA and TGA players do not provide any useful information.
 
 \begin{enumerate}
   \item {Intra-population validation}
   \begin{enumerate}
     \item {For each RGA population select the best player from generation 250,
     500, 750, and 999}
-    \item {Compete the 4 players in 100 games}
+    \item {Compete the 4 players in 1000 games}
     \item {Record the fitness scores for FINISH\_ORDER and NUM\_WINS}
     \item {Repeat 50 times without evolution}
     \item {Use Student's t-test to compare average fitness}
   \end{enumerate}
-  \item {Inter-population validation for fitness evaluator}
+  \item {Inter-population validation}
   \begin{enumerate}
     \item {From generation 999 of a set of populations differing only by
     original fitness evaluator, select the best player under each fitness
@@ -94,7 +93,7 @@ different generations within a population were competed against each other.
 For example, using the RGA-1024-100-NetW population (a population of RGA players
 of size 1024, evolved using 100 games per generation, with the NET\_WORTH
 fitness evaluator) select the best player from generations 250, 500, 750, and
-999. Compete those 4 players in a set of 100 games and record the cumulative
+999. Compete those 4 players in a set of 1000 games and record the cumulative
 fitness using FINISH\_ORDER and NUM\_WINS\footnote{Regardless of the original
 fitness evaluator used in evolution, the validation experiments use
 FINISH\_ORDER and NUM\_WINS to compare players.}. Repeat this process 50 times
@@ -112,7 +111,7 @@ into sets of 4 using partial permutations. Each set of 4 players then play 50
 games; the cumulative fitness is recorded using FINISH\_ORDER. Repeat this
 process 30 times without further evolution of the players\footnote{The results
 of the first validation were extremely strong, which implied that 50 trials and
-100 games per trial was excessive; thus the validation parameters were relaxed
+1000 games per trial was excessive; thus the validation parameters were relaxed
 for the second validation.}. The players' performance over the 30 trials was
 analyzed to determine if different fitness evaluators were better than others.
 The results of this analysis can be found in Section~\ref{6_interPopValidation}.
@@ -161,13 +160,13 @@ actual results matched the expected results quite closely.
 
 Figure~\ref{figure-RGA-G000-N100-FO-initial_fitness} shows the fitness
 distribution for the first generation of the RGA-1024-100-FO population. The
-figure shows a binomial shaped distribution which appears to be centered around
-the population average of 150\footnote{Because the FINISH\_ORDER evaluator
-assigns 1, 2, and 3 points to the players in a game, for a total of 6 points per
-game, the average fitness for any single game is \(6/4\) or 1.5. So for \(n\)
-games the average fitness is \(n \cdot 1.5\). For a population that plays 100
-games per generation, the fitness distribution will be centered on the average
-score of 150.}.
+figure shows a binomial shaped distribution which is centered around the
+population average of 150\footnote{Because the FINISH\_ORDER evaluator assigns
+1, 2, and 3 points to the players in a game, for a total of 6 points per game,
+the average fitness for any single game is \(6/4\) or 1.5. So for \(n\) games
+the average fitness is \(n \cdot 1.5\). For a population that plays 100 games
+per generation, the fitness distribution will be centered on the average score
+of 150.}.
 
 \begin{figure}
 \centering
@@ -198,7 +197,7 @@ An example of the fitness distribution for the NUM\_WINS fitness evaluator is
 shown in Figure~\ref{figure-RGA-G000-N100-NW-initial_fitness}. The average
 fitness for a single game is \(3/4\) or 0.75; for \(n\) games the average
 fitness is \(n \cdot 1.5\). The figure shows a binomial shaped distribution
-which appears to be centered around the population average of 75.
+which is centered around the population average of 75.
 
 \begin{figure}
 \centering
@@ -378,7 +377,7 @@ deviations are not equal between generations would require running (in this
 example) a population of size 1024 through at least 250 generations, and then
 repeating that 250 generation trial enough times to get a statistically
 significant sample. Based on the work performed for this research, doing this
-for the all of the populations would have taken several weeks of processing
+for all of the populations would have taken several weeks of processing
 time. It was decided that a better use of resources would be to do a comparative
 test between players of different generations and populations.}.
 
@@ -460,7 +459,7 @@ generations can still be improving in fitness. In fact,
 later in this chapter statistical tests show that players in the last generation
 are better (i.e., they win more games) than players in the earliest generations.
 
-This section has focused primarily on the RGA-1024-100 sets of populations. In
+This section has focused primarily on the RGA-1024-100-* populations. In
 general, a similar pattern of statistics is seen in most of the other RGA and
 TGA populations that were evolved in this study. Some of the populations,
 however, showed weaker, or sometimes conflicting results. A complete set of
@@ -691,7 +690,7 @@ results for the TGA player were essentially the same as for the RGA player.
 
 The descriptive statistics for the TGA-*-100-* populations can be found in
 Appendix~\ref{appendix:tgastats}. Table~\ref{tab:tga-1024-100-fo-stats} is an
-excerpt from the TGA-1024-100 table in the appendix. As with the RGA
+excerpt from the TGA-1024-100-* table in the appendix. As with the RGA
 populations, it shows that the variance in fitness is high in early generations,
 but it quickly decreases and then remains stable through the last generation.
 
@@ -715,16 +714,17 @@ but it quickly decreases and then remains stable through the last generation.
 
 Of course, not all the populations were as well behaved. Looking at
 Table~\ref{tab:app-tga-0032-007-stats} in Appendix~\ref{appendix:tgastats}, it
-can be seen that the variance does not decrease over time, but rather appears to
-fluctuate. The validation experiments discussed in
+can be seen that for the TGA-0032-007-* populations the variance does not
+decrease over time, but rather appears to fluctuate. The validation experiments
 Section~\ref{6_intraPopValidation} will show that this is most likely due to the
-small population size and the small number of games played in every generation.
+small population size (32) and the small number of games (7) played in every
+generation.
 
 The fitness distributions for the TGA populations were very similar to the
 corresponding fitness distributions for the RGA populations. The player genomes
-were also very similar. This is unsurprising, since the fitness seems to depend
-mostly on buying property (in which the RGA and TGA genomes are identical), and
-not on getting out of jail which was the difference between the two genomes.
+were also very similar. This is unsurprising, since fitness depends mostly on
+buying property (in which the RGA and TGA genomes are identical), and not on
+getting out of jail which was the difference between the two genomes.
 
 For this reason, further validation of the TGA players was not pursued after
 the initial evolution phase of these experiments. Instead, the remainder of the
@@ -733,25 +733,23 @@ in the next section.
 
 \section{Population Validation} \label{6_Validation}
 
-As with other research that used competitive fitness functions, validations of
-the various populations were performed to test if the populations were actually
-getting better. First, populations were compared across generations. Second,
-different fitness evaluators were compared. Finally, the players were validated
-against human players.
+Validations of the various populations of computer players were performed to
+test if the populations were actually getting better. First, populations were
+compared across generations. Second, different fitness evaluators were compared.
+Finally, the players were validated against human players.
 
 \subsection{Intrapopulation validation}\label{6_intraPopValidation}
 
 For every population, the best player in generation 999 was played against the
-best player in generations 250, 500, and 750. 100 games were played with the
-same set of 4 best players. If the population was actually evolving better
-players, the best player in the last generation will win more games on average
-than the other players; and the best player in the 250th generation should lose
-more games on average.
+best player in generations 250, 500, and 750 for 1000 games. If the population
+was actually evolving better players, the best player in the last generation
+will win more games on average than the other players; and the best player in
+the 250th generation should lose more games on average.
 
 For each game, a fitness score was determined using the finish order fitness
-evaluator. The score for each trial was the cumulative fitness over 100 games.
-After 100 games were played, this same trial was repeated 50 times, without
-evolution. The parameters of 50 games repeated for 100 trials was chosen to
+evaluator. The score for each trial was the cumulative fitness over 1000 games.
+After 1000 games were played, this same trial was repeated 50 times, without
+evolution. The parameters of 50 games repeated for 1000 trials was chosen to
 ensure statistically significant results.
 
 \subsubsection{Intrapopulation Validation Results}
@@ -798,32 +796,36 @@ appendix).
 Each row represents a single population. The first row, for example, is a
 partial set of the scores and tests for the RGA-0128-100-FO population. The
 score in the average fitness column is the average fitness scores for that
-player over 50 trials of 100 games per trial. The table shows the average scores
-for Generation 250 and Generation 500. The average score in Generation 500
-appears to be better than the average score of Generation 250 for every
-population.
+player over 50 trials of 1000 games per trial. Since 1000 games are played for
+every trial, the expected average fitness score is 1500. The table shows the
+average scores for Generation 250 and Generation 500. The average score in
+Generation 500 appears to be better than the average score of Generation 250 for
+every population, although both players had average fitness less than the
+expected average fitness.
 
 To evaluate whether players in later generations were better than players in
 earlier generations, a one-tailed Student's t-test was performed with $H_{0}$
 that the average fitness is the same for each generation. In most cases, the
 null hypothesis is rejected, indicating that the average fitness scores are
 different. Since average fitness increases over time, the one-tailed t-test says
-that not only are the fitness scores different, the larger scores do not just
-appear to be larger, the difference in average scores is statistically
-significant.
+that not only are the fitness scores different, the difference in average scores
+is statistically significant.
 
 Table~\ref{tab:validationRGA0128} shows 3 of the tests: generation 250 compared
 to generation 500, 500 to 750, and 750 to 999. At almost any significance level,
 the results indicate that almost every later generation is better than every
-earlier generation. For two of the tests in Table~\ref{tab:validationRGA0128}
-the null hypothesis is accepted. One of those is the test for the
-NUM\_MONOPOLIES evaluator in the comparison of generation 500 to generation 750.
-For the significance level \(\alpha=0.01\) the null hypothesis is accepted for
-that test and the conclusion is that the players from those two generations have
-the same ability. The second is the test for NUM\_WINS 750 to 999.
+earlier generation. The null hypothesis is accepted for only two of the tests in
+Table~\ref{tab:validationRGA0128}. One of those is the comparison of generation
+500 to generation 750 for the RGA-0128-100-NM population. Accepting the null
+hypothesis for that test means that the players from those two generations have
+the same ability. The null hypothesis is also accepted when comparing
+generaiton 750 to generation 999 for the RGA-0128-100-NW population.
 
 However, looking at all the results in Appendix~\ref{appendix:intravalidation}, 
-the null hypothesis is rejected for most of the tests.
+the null hypothesis is rejected for most of the tests. For the RGA-0128-*-*
+populations, the null hypothesis is rejected for 77\% of the tests in
+Table~\ref{tab:intrapop128_numwins} and for 76\% of the tests in
+Table~\ref{tab:intrapop128_finorder}.
 
 Table~\ref{tab:validationRGA1024} is an excerpt of the validation results
 for the RGA-1024 population (Table~\ref{tab:intrapop1024_finorder} in the
@@ -860,9 +862,20 @@ appendix).
   \label{tab:validationRGA1024}%
 \end{table}%
 
-The null hypothesis is rejected for every test in
-Table~\ref{tab:validationRGA1024}. The populations are improving over time in
-most cases.
+The table shows the average scores for Generation 250 and Generation 500. The
+average score in Generation 500 appears to be better than the average score of
+Generation 250 for every population, although both players had average fitness
+less than the expected average fitness.
+
+Table~\ref{tab:validationRGA1024} shows 3 of the tests: generation 250 compared
+to generation 500, 500 to 750, and 750 to 999. The null hypothesis is rejected
+for every test in Table~\ref{tab:validationRGA1024}. 
+
+Looking at all the results in Appendix~\ref{appendix:intravalidation}, 
+the null hypothesis is rejected for most of the tests. For the RGA-1024-*-*
+populations, the null hypothesis is rejected for 80\% of the tests in
+Table~\ref{tab:intrapop128_numwins} and for 83\% of the tests in
+Table~\ref{tab:intrapop128_finorder}.
 
 \subsubsection{Intrapopulation Validation Summary}
 
@@ -986,7 +999,7 @@ fitness evaluators do appear to be better than others.
   \label{tab:interpop_avgfitness}%
 \end{table}%
 
-In each trial, 50 games are played, so the expected score for any player is \(50
+50 games are played in each trial, so the expected score for any player is \(50
 \cdot 1.5 = 75\). Table~\ref{tab:interpop_avgfitness} shows the actual average
 fitness for each player in each round that the player competed.
 
@@ -1045,7 +1058,7 @@ NW against the other players. For the 6 Rounds in which both NW and FO played
 (rounds 1-6), the t-test value is greater than 0.01 in every round, which means
 that the null hypothesis is accepted for all comparisons of NW to FO. So the
 conclusion is that when the NW or FO fitness evaluators are used to evolve
-players, those players have the same fitness or ability.
+players, those players have the same fitness.
 
 When comparing NW to TO or NM, the null hypothesis is rejected in all but one
 test (Round 2, NW vs NM), and the test that accepts the null hypothesis does so
@@ -1086,13 +1099,14 @@ game.
 
 Table~\ref{tab:interpop_ttest2} shows the t-test results for the FO player
 compared to the other players. Column 1, NW vs FO, is the same column seen
-earlier in Table~\ref{tab:interpop_ttest1}. The null hypothesis is rejected for
-NetW, TO, and NM. As with NW, it is accepted in 4 of 6 rounds against NP. So the
-finish order fitness evaluator can evolve players of the same ability as number
-of wins; it is better at evolving players than net worth, tournament, and number
-of monopolies; and in some cases the player created by the number of properties
-fitness evaluator performs as well as the finish order player. Again, NP appears
-to perform as well as FO because of the presence of weaker players.
+earlier in Table~\ref{tab:interpop_ttest1}. The null hypothesis is rejected
+(with one exception) for all tests between FO and NetW, TO, and NM. As with NW,
+it is accepted in 4 of 6 rounds against NP. So the finish order fitness
+evaluator can evolve players of the same ability as number of wins; it is better
+at evolving players than net worth, tournament, and number of monopolies; and in
+some cases the player created by the number of properties fitness evaluator
+performs as well as the finish order player. Again, NP appears to perform as
+well as FO because of the presence of weaker players.
 
 The final table, Table~\ref{tab:interpop_ttest3}, shows the remaining t-test
 results. The relevant information from that table is that when comparing NetW to
@@ -1151,35 +1165,36 @@ and NM, so $H_{0}$ is rejected for the t-test between NM and NP.
 
 The results of this set of experiments show that the Number of Wins (NW) and
 Finish Order (FO) fitness evaluators produce the best players. It is not
-surprising since these two evaluators result in players of similar ability,
-since they differ only in the number of points awards to 2nd, 3rd, and 4th place
-in the game. Next, Net Worth (NW) and Number of Properties (NP) produce players
+surprising that these two evaluators result in players of similar ability,
+since they differ only in the number of points awarded to 2nd, 3rd, and 4th
+place in the game. Next, Net Worth (NW) and Number of Properties (NP) produce players
 of similar ability, but of less ability than NW and FO. Finally, Tournament (TO)
 and Number of Monopolies (NM) produce the least capable players.
 
-These results are also reasonable in terms of the game. Obviously there is a
-high correlation between measuring fitness in terms of winning games, finish
-order, or net worth, and the number of games the player can subsequently win.
-However even though a player with a lot of monopolies or a lot of properties is
-more able to bankrupt other players, it also matters which properties or
-monopolies a player owns. Suppose there are two players, one with 3 Red
-properties and the other with 3 Light Blue properties, have the same number of
-properties and the same number of monopolies, but most experts would say the
-player with the Red properties is more likely to win. Similarly, a player with a
-single high value monopoly like Red or Orange would be predicted as more likely
-to win than a player with two low value monopolies. So there is less correlation
-between number of properties or number of monopolies and winning a game.
+These results are also reasonable in terms of the game. Obviously one would
+expect high correlation between fitness and the number of games the player can
+subsequently win when fitness is measured by NW, FO, or NetW. However there is
+less correlation when fitness is measured by NM or NP. Even though a player with
+a lot of monopolies or a lot of properties is more able to bankrupt other
+players, that ability also depends on which properties or monopolies a player
+owns. Suppose there are two players, one with 3 Red properties and the other
+with 3 Light Blue properties; they have the same number of properties and the
+same number of monopolies, but most experts would say the player with the Red
+properties is more likely to win. Similarly, a player with a single high value
+monopoly like Red or Orange would be predicted as more likely to win than a
+player with two low value monopolies. So there is less correlation between
+number of properties or number of monopolies and winning a game.
 
 The apparent weakness of the Tournament fitness evaluator also makes sense in
 light of previous research. Panait and Luke found that Single Elimination
 Tournament performed worse than K-Random Opponents when noise was introduced
 into the solution space~\cite{Panait02acomparative}. The mean number of games
-played by each player per generation for Tournament was only 2 (the median was
-5). The low number of games per generation, and the high degree of randomness in
-each game, created a solution space with a large amount of noise, which led to
-the poor performance of Tournament fitness evaluator.
+played by each player per match with MSET was only 2 (the median was 5). The low
+number of games per generation, and the high degree of randomness in each game,
+created a solution space with a large amount of noise, which led to the poor
+performance of Tournament fitness evaluator.
 
-Finally, although some of the results imply that NM and NP are similar in
+Finally, although some of the results imply that NP and NM are similar in
 performance, other results imply that NP is better than NM. The fitness
 evaluator NP is probably better than NM; the ambiguous results are due to the
 confounding effect of having four players per game, rather than a two player
@@ -1426,7 +1441,7 @@ Section~\ref{6_genomeChanges}, some gene values approach 1.0 (which means a
 \subsubsection{Human Versus Computer Validation 1 Summary}
 
 This first set of computer versus human validations showed that the computer
-players were not initially up to the level of human players. A large part of
+players were not up to the level of human players. A large part of
 this was due to the trading algorithm that was initially implemented. Another
 large factor was due to the phenotype of each player. Even though the
 chromosomes tended to result in a high probability of buying decisions (see
@@ -1500,6 +1515,7 @@ a win percentage of 23.1\%.
     \multicolumn{4}{c}{Results} \\
     \midrule
     Players & Number of wins & Num games & Win \% \\
+    \midrule
     \multicolumn{1}{l}{gen250}         & 10.0 & 85 & 11.8 \\
     \multicolumn{1}{l}{player0040.dat} & 6.0  & 26 & 23.1 \\
     \multicolumn{1}{l}{player0191.dat} & 1.0  & 15 & 6.7 \\
@@ -1622,7 +1638,7 @@ in a real world situation. The appropriateness of proposals was evaluated by
 comparing what the computer proposed for trading to the proposal made by a human
 expert in the same situation. In their paper, they indicate that there were some
 differences between their computer agents and the human experts, and the reasons
-for this difference are that, ``(1) the parameters in the evaluation function
+for this difference were that, ``(1) the parameters in the evaluation function
 are not tuned enough and (2) the expert is taking into consideration elements
 other than the expected profit~\cite{Yasumura2001Negotiate}.'' Similarly,
 determining which set of parameters led to the most wins for their computer
@@ -1697,11 +1713,11 @@ picture improves for the computer players.
 
 Table~\ref{tab:human_results3b} shows that when the results are filtered by
 \(\omega=0.65\) and threshold=400, the computer players won more than half those
-games. Similar improvement is seen in the average finish order values as seen in
-Table~\ref{tab:human_results3c}. The average finish order for Player 101 is
-because that player finished 1st or 2nd in every game it played (with
-\(\omega=0.65\) and threshold=400), whereas the other players, including the
-human players, sometimes finished 3rd or 4th.
+games. Similar improvement is seen in the average finish order values which are
+shown in Table~\ref{tab:human_results3c}. The best computer player was Player
+101 which had an average finish of 1.67. Player 101 finished 1st or 2nd in every
+game it played (with \(\omega=0.65\) and threshold=400), whereas the other
+players, including the human players, sometimes finished 3rd or 4th.
 
 % Table generated by Excel2LaTeX from sheet 'Sheet1'
 \begin{table}[htbp]
@@ -1722,12 +1738,12 @@ human players, sometimes finished 3rd or 4th.
   \label{tab:human_results3c}%
 \end{table}%
 
-In the second round of games in this validation, the human players continue to
-do well as seen in Table~\ref{tab:human_results3d}, winning almost 59\% of the
+In the final round of games in this validation, the human players continue to
+do well, as seen in Table~\ref{tab:human_results3d}, winning almost 59\% of the
 41 games that were played. The table shows the results for all games played,
 regardless of the trading parameters used by the computer players. The computer
-players are slightly worse in this round of games, compared to the previous
-round of games, but still better than any of the other previous validations.
+players are slightly better in this round of games (39\% win rate), compared to
+the previous round of games (27\% win rate).
 
 % Table generated by Excel2LaTeX from sheet 'Sheet1'
 \begin{table}[htbp]
@@ -1737,21 +1753,22 @@ round of games, but still better than any of the other previous validations.
     \toprule
     \multicolumn{3}{c}{Results}  \\
     \midrule
-    Players & Number of Wins & Percent \\
-    \multicolumn{1}{l}{player0667.dat} & 3.00   & 3.9\% \\
-    \multicolumn{1}{l}{player0928.dat} & 4.00   & 9.3\% \\
-    \multicolumn{1}{l}{player0101.dat} & 4.00   & 13.8\% \\
-    \multicolumn{1}{l}{player0423.dat} & 5.00   & 14.4\% \\
-    \multicolumn{1}{l}{human} & 25.00  & 58.5\% \\
+    Player & Number of Wins & Percent \\
+    \multicolumn{1}{l}{player0667.dat} & 3.00   & 7.3\% \\
+    \multicolumn{1}{l}{player0928.dat} & 4.00   & 9.8\% \\
+    \multicolumn{1}{l}{player0101.dat} & 4.00   & 9.8\% \\
+    \multicolumn{1}{l}{player0423.dat} & 5.00   & 12.2\% \\
+    \multicolumn{1}{l}{human} & 25.00  & 61.0\% \\
     \bottomrule
     \end{tabular}%
   \label{tab:human_results3d}%
 \end{table}%
 
 Table~\ref{tab:human_results3e} shows the average finish order results for this
-round of games, and again Player 101 has excelled. Like the previous round in
-this validation, Player 101 finished every game it played in 1st or 2nd place,
-much better than the other computer players and the human player.
+round of games, filtered by \(\omega=0.80\) and threshold=400, and again Player
+101 has excelled. Like the previous round in this validation, the average finish
+order for Player 101 was 1.67, and it finished every game it played in 1st or
+2nd place, much better than the other computer players and the human player.
 
 % Table generated by Excel2LaTeX from sheet 'Sheet1'
 \begin{table}[htbp]
@@ -1775,11 +1792,12 @@ much better than the other computer players and the human player.
 \subsubsection{Human Versus Computer Validation 3 Summary}
 
 In this third validation, the computer players were able to compete at a level
-equal to that of the human players. The computer players won 41\% of the games
-they played in the last set of validation games, and a bit more than 55\% of the
-games the played in the first set when filtered for \(\omega\) and threshold.
-One of the computer players even played better than the human players in the two
-sets of games.
+equal to that of the human players. The computer players won 39\% of the games
+they played in the final set of validation games
+(Table~\ref{tab:human_results3d}); and when filtered for \(\omega\) and
+threshold they won a bit more than 55\% of the games in the initial set of this
+validation (Table~\ref{tab:human_results3b}). One of the computer players even
+played better than the human players in both two sets of games.
 
 The difference between these two sets of games and the previous human versus
 computer validations in this chapter is that in this validation the trading
@@ -1814,5 +1832,3 @@ players. That is probably partly due to the trading algorithm and partly due to
 implementation decisions made when the algorithm was coded. The results here
 showed that the conclusions of Yasumura, et al, while valid in the simulated
 environment of their implementation, do not work in the real world. 
-
- 

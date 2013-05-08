@@ -14,8 +14,8 @@ This thesis began with a summary of genetic algorithms. Genetic algorithms are a
 technique for finding optimal or near optimal solutions to problems which cannot
 be deterministically solved in polynomial time. If a potential solution to such
 a problem can be encoded into some data structure, then a genetic algorithm can
-encode a population of solutions, evaluate them, and evolve them. Because this
-provides an efficient way to search a large search space, this technique can
+encode a population of solutions, evaluate them, and evolve them. This
+provides an efficient way to search a large search space, and can
 lead to optimal solutions much quicker than a brute force approach.
 
 Much research has been conducted into  applying genetic algorithms to games and
@@ -105,9 +105,9 @@ parameters were fixed.
 
 This seems to contradict the research that the trading algorithm was based on.
 Of course, the evolutionary aspect of the computer players was not involved in
-the trading algorithm, so the RGA players were not able to evolve better
-strategies during the competition, unlike the human players who undoubtedly
-learned as they participated in the competition.
+the trading algorithm, so the computer players were not able to evolve better
+trading strategies during the competition, unlike the human players who
+undoubtedly learned as they participated in the competition.
 
 \section{Contributions}
 
@@ -154,10 +154,12 @@ for property trading affect the evolution of property buying chromosomes? If so,
 how does the co-evolution of these two strategies affect the computer player?
 
 Another area that could be investigated further is the use of Modified Single
-Elimination Tournament (MSET). The largest generations that played the most
-games took upwards of 10 hours to evolve through 1000 generations of a single
-population on the hardware available for these experiments. That meant we needed
-over 200 hours to evolve just the RGA-1024-*-* populations.
+Elimination Tournament (MSET) to competitive environments. When we used any of
+the other fitness evaluators, the largest generations that played the most games
+(e.g. RGA-1024-100-*) took upwards of 10 hours to evolve through 1000
+generations of a single population on the hardware available for these
+experiments. That meant we needed over 200 hours to evolve just the RGA-1024-*-*
+populations.
 
 We had hoped that applying MSET would allow shorter evolution times and yet
 still produce players with the same or better ability as the other fitness
@@ -166,7 +168,7 @@ worse than most other players. Previous research has shown that noisy
 environments do impair the effectiveness of SET. Additional research could look
 into how noise impacts MSET and whether the evolutionary parameters for MSET
 could be adjusted to improve its performance in evolving game players while
-still taking less time than other fitness evaluators.
+still taking less time than other fitness evaluators. 
 
 Finally, this research had some success evolving players for the game of
 Monopoly, which has a lot of randomness or noise. Additional research could
