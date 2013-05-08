@@ -9,9 +9,9 @@ that to guide the development of a genome that represents the game strategy of a
 player.
 
 Next, the fitness functions are developed. As seen in
-Chapter~\ref{chap:background}, when applying machine learning techniques to
-games, it is often necessary to apply a competitive fitness function. For this
-study some pure competitive fitness functions were developed, but other
+Chapter~\ref{chap:background}, when applying evolutionary computing techniques
+to games, it is often necessary to apply a competitive fitness function. For
+this study some pure competitive fitness functions were developed, but other
 techniques for measuring fitness that are not directly competitive were also
 developed.
 
@@ -57,8 +57,8 @@ declined to buy the property originally, can bid for the property in an auction.
 The player must then decide whether to participate in the auction and how much
 to bid for the property.
 
-Decisions on whether to buy a property depend on what other properties have been
-acquired and which players have acquired them.
+The decision of whether to buy a property or not depends on what other
+properties have been acquired and which players have acquired them.
   
 \subsection{Paying Bail}
 When a player is in jail, the player must decide whether to pay bail and exit
@@ -82,23 +82,16 @@ a monopoly.
 
 \subsection{General Approach}
 
-The four decision areas above led to a preliminary decision to use a multiple
-chromosome strategy where different chromosomes will control the player behavior
-depending on the state of the game: one strategy for early in the game when few
-properties are owned; a different strategy for later in the game when many
-properties are owned. Frayn used a similar strategy, except in his study
-chromosomes represented the valuation of properties, which depended on ownership
-and development factors~\cite{DBLP:conf/cig/Frayn05}. Also, Frayn used only
-three chromosomes for house valuations.
+Of the four decision areas listed above, only two were implemented in
+chromosomes: the buy property decision and the get out of jail decision.
 
-Additionally, this study used genetic algorithms for just two decisions the
-player would make: the buy property decision and the get out of jail decision.
-The Get Out Of Jail chromosome is another departure from Frayn; from his paper,
-it appears that Frayn's Get Out Of Jail decision was based on two genes from a
-chromosome that also controlled other game decisions.
- 
+Depending on the state of the the property group, different chromosomes will
+control whether a player buys a property or not. Frayn used a similar strategy,
+except in his study chromosomes represented the valuation of properties, which
+depended on ownership and development factors~\cite{DBLP:conf/cig/Frayn05}.
+
 The other two decisions, whether to build a house and whether to trade a
-property, were not implemented using genetic computation. The house buying
+property, were not implemented using evolutionary computation. The house buying
 decision was implemented as a rule based algorithm and is discussed further in
 section~\ref{5_buy_house}. The property trading decision was implemented by
 adapting a property evaluation function proposed by Yasumura, Oguchi, and
@@ -108,9 +101,9 @@ in Section~\ref{5_trade_property}.
 \section{Chromosome description} \label{5_chromo}
 
 The genome for the evolved player consists of multiple chromosomes, each
-chromosome used for a different purpose or state of the game. This is in
-contrast to the classic simple GA (SGA) where each member of the population has
-a single chromosome that is expressed as a string of binary
+chromosome used for a different state of the game. This is in contrast to the
+classic simple GA (SGA) where each member of the population has a single
+chromosome that is expressed as a string of binary
 digits~\cite{haupt2004practical}. Following the initial description of the
 genome used in this study, two alternate versions of the chromosome will be
 described.
@@ -151,22 +144,21 @@ Each array corresponds to one of the following game states:
 \begin{table}[ht]
 \caption{Chromosome Illustration}
 \begin{center}
-\begin{tabular}{|l|c|c|c|c|c|}
+\begin{tabular}{|l|c|c|c|c|}
 \hline
 \multicolumn{1}{|l|}{\backslashbox{Location}{Chromosome}}
 & \multicolumn{1}{|c|}{Chr1}
 & \multicolumn{1}{|c|}{Chr2}
 & \multicolumn{1}{|c|}{Chr3}
-& \multicolumn{1}{|c|}{Chr4} 
-& \multicolumn{1}{|c|}{Etc\ldots } \\ \hline
-0 - Go &  ignored  &  ignored &  ignored & ignored & \ldots \\ \hline 
-1 - Mediterranean Ave &  $0.615$  &  $0.540$  &  $0.611$ & $0.654$ & \ldots \\ \hline 
-2 - Community Chest &  ignored  &  ignored &  ignored & ignored & \ldots \\ \hline 
-3 - Baltic Ave &  $0.288$  &  $0.532$  &  $0.165$ & $0.088$ & \ldots \\ \hline
-4 - Income Tax &  ignored  &  ignored &  ignored & ignored & \ldots \\ \hline
-5 - Reading Railroad & $0.129$  &  $0.649$  &  $0.965$ & $0.390$ & \ldots \\ \hline 
-6 - Oriental Ave & $0.834$  &  $0.310$  &  $0.593$ & $0.738$ & \ldots \\ \hline
-Etc\ldots & \ldots & \ldots & \ldots & \ldots & \ldots \\ \hline
+& \multicolumn{1}{|c|}{Chr4} \\ \hline
+0 - Go &  ignored  &  ignored &  ignored & ignored \\ \hline 
+1 - Mediterranean Ave &  $0.615$  &  $0.540$  &  $0.611$ & $0.654$ \\ \hline 
+2 - Community Chest &  ignored  &  ignored &  ignored & ignored \\ \hline 
+3 - Baltic Ave &  $0.288$  &  $0.532$  &  $0.165$ & $0.088$ \\ \hline
+4 - Income Tax &  ignored  &  ignored &  ignored & ignored \\ \hline
+5 - Reading Railroad & $0.129$  &  $0.649$  &  $0.965$ & $0.390$ \\ \hline 
+6 - Oriental Ave & $0.834$  &  $0.310$  &  $0.593$ & $0.738$ \\ \hline
+Etc\ldots & \ldots & \ldots & \ldots & \ldots \\ \hline
 \end{tabular}
 \label{table-chromo}
 \end{center}
@@ -188,8 +180,8 @@ player (3rd chromosome).
 
 \subsection{Chromosomes for Paying Bail}
 
-The other set of chromosomes is used to determine when to pay to get out of
-jail, and when to remain in jail (and hopefully not roll doubles with the dice).
+The other chromosome is used to determine when to pay to get out of jail, and
+when to remain in jail (and hopefully not roll doubles with the dice).
 This chromosome is a 2-D array of real numbers.
 
 Rows and columns in the array are indexed by 6-bit numbers created by the
@@ -271,11 +263,11 @@ based procedure. The procedure is summarized in Algorithm~\ref{alg_buyHouse}.
 \caption{House Buying Algorithm}
 \label{alg_buyHouse}
 \begin{algorithmic}
-\IF{not player has monopoly} 
+\IF{player doees not have monopoly} 
   \STATE exit
 \ENDIF
 
-\IF{not player has sufficient cash} 
+\IF{player does not have sufficient cash} 
   \STATE exit
 \ENDIF
 
@@ -293,19 +285,19 @@ The algorithm begins by checking that the player has a monopoly. If the player
 does not have a monopoly, the algorithm exits since the player cannot buy
 houses.
 
-Then the algorithm checks that the player has enough cash. A variation 
-of Frayn's procedure for computing the minimum cash a player should keep
-available was used~\cite{DBLP:conf/cig/Frayn05}. A player should keep
-\$200 plus 1\% of the total net worth of all players in the game
-plus 1\% of the average net worth of the players in the game plus 10\% of the
-cost of all houses and hotels currently on the board.
+Then the algorithm checks that the player has enough cash. A variation of
+Frayn's procedure for computing the minimum cash a player should keep available
+was used~\cite{DBLP:conf/cig/Frayn05}. A player should keep \$200 plus 1\% of
+the total net worth of all players in the game plus 1\% of the average net worth
+of the players in the game plus 10\% of the cost of all houses and hotels
+currently on the board.
 \begin{equation*}
-200 + 0.01 \cdot totalNetWorth + 0.01 \cdot avgNetWorth + 0.1 \cdot costOfHouses
+min~cash = 200 + 0.01 \cdot totalNetWorth + 0.01 \cdot avgNetWorth + 0.1 \cdot
+costOfHouses
 \end{equation*}
-For the player to have enough cash to buy a house or a hotel, the player must
-have the minimum cash plus enough to buy a house or hotel for whichever
-monopolies the player owns. If the player does not have enough cash, the
-algorithm exits.
+A player has enough cash to buy a house or a hotel if the player has the minimum
+cash plus enough cash to buy a house or hotel for whichever monopolies the
+player owns. If the player does not have enough cash, the algorithm exits.
 
 If the player has enough cash, the player buys houses for all monopolies
 that have less than 3 houses on them\footnote{The greatest return for a player
@@ -328,23 +320,23 @@ better properties in the expectation that the property could be acquired later
 through a trade. Also, players might learn to buy less valuable properties at a
 higher rate than expected so that the properties could be traded.
 
-However, when it came time to play-test the GA players against human players, a
-trading algorithm was needed so that human players would not be bored by a game
-that was simply about which player was luckiest in landing on valuable
-properties, or which player was lucky enough to acquire a monopoly by chance.
+However, when it came time to play-test the evolved computer players against
+human players, a trading algorithm was needed so that human players would not be
+bored by a game that was simply about which player was luckiest in landing on
+valuable properties, or which player was lucky enough to acquire a monopoly by
+chance.
 
-A trading algorithm based on research by Yasumura, et
-al,~\cite{Yasumura2001Negotiate} was used as the basis for property trading by
-the A.I. players in the human-A.I. competition. The human players were, of
-course, free to use their own criteria for evaluating whether or not to trade
-properties. Yasumura, et al,
-developed an evaluation function that was the sum of some combination of
-expected gains (Algorithms~\ref{alg_stg}, \ref{alg_mtg}, and \ref{alg_ltg})
-minus expected losses (Algorithms~\ref{alg_stl} and \ref{alg_mtl}). The
-ownership situation of the properties (See Algorithm~\ref{alg_bigU}) determines
-how the gains and losses are summed. The player's decision is be based on the
-result of the evaluation function and whether the player was weighted more
-towards avoiding losses or seeking gains.
+A trading algorithm based on research by Yasumura, et al, was used as the basis
+for property trading by the computer players in the human versus computer
+competition~\cite{Yasumura2001Negotiate}. The human players were, of course,
+free to use their own criteria for evaluating whether or not to trade
+properties. Yasumura, et al, developed an evaluation function that was the sum
+of some combination of expected gains (Algorithms~\ref{alg_stg}, \ref{alg_mtg},
+and \ref{alg_ltg}) minus expected losses (Algorithms~\ref{alg_stl} and
+\ref{alg_mtl}). The ownership situation of the properties (See
+Algorithm~\ref{alg_bigU}) determines how the gains and losses are summed. The
+player's decision is based on the result of the evaluation function and whether
+the player was weighted more towards avoiding losses or seeking gains.
 
 Expected short term gain \(E_S\) for player \(s\) getting a property card in a
 trade is the sum of the probabilities that another player \(i\) will land on the
@@ -448,19 +440,19 @@ exceeds a given threshold, the player will propose the trade, or accept a
 proposed trade. 
 
 Yasumura, et al, evaluated 5 thresholds from a low value of 100 to a high value
-of 500. They developed a Monopoly simulator and competed various agents using
-the simulator. They found the best profits and most wins were generated by
-agents that used the lowest threshold. They also evaluated various values for
-\(\omega_1\) and found the best results when \(\omega_1\) was greater the 0.5.
-Following their lead, various values for the threshold and \(\omega_1\) were used 
-for the human versus computer competitions. The results of these competitions
-are discussed in detail in Sections~\ref{6_humanVRGA1} and \ref{6_humanVRGA2}.
+of 500. They developed a Monopoly simulator and competed various agents against
+each other using the simulator. They found the best profits and most wins were
+generated by agents that used the lowest threshold. They also evaluated various
+values for \(\omega_1\) and found the best results when \(\omega_1\) was close
+to 0.5. In the human versus computer competition, various values for the
+threshold and \(\omega_1\) were used. The results of these competitions are
+discussed in detail in Section~\ref{6_humanValidation}.
 
 \section{Fitness Evaluation} \label{5_fitnesseval}
 
 Six different fitness evaluations were tested in the evolutionary process. Each
-evaluator was applied separately to different populations. In 
-Section~\ref{6_interpopValidation} the various evaluators are tested against 
+evaluator was applied separately to different populations. In
+Section~\ref{6_interPopValidation} the various evaluators are tested against
 each other and the results show which evaluators performed best.
 
 Four of the fitness evaluations are based on which player wins a game, or in
@@ -476,7 +468,7 @@ award fitness points to the players as follows.
   of the game receives \(n-1\) points; second place receives \(n-2\) points, and
   so on. The last place finisher receives 0 points.}
   \item {Number of Monopolies (NUM\_MONOPOLIES); each player receives one
-  point for each monopoly they control.}
+  point for each mo\-no\-poly they control.}
   \item {Number of Properties owned (NUM\_PROPERTIES); each player receives one
   point per property owned at the end of the game.}
   \item {Net Worth (NET\_WORTH); at the end of each game, the net worth of each
@@ -561,9 +553,9 @@ used in this project follows.
 Table~\ref{table-fraynparams} shows the parameters that Frayn used when creating
 and evolving the population of game players in his
 research~\cite{DBLP:conf/cig/Frayn05}. His research used a competition method
-similar to K-Random Opponents with \(K=300\), and a population size of 1000. As
-mentioned previously, he used a single fitness measurement that awards points
-based on the place-finish of each player in the game.
+similar to K-Random Opponents with \(K=300\), and a population size of
+1000. He used a single fitness measurement that awards points based on the
+place-finish of each player in the game.
 
 \begin{table}[ht]
 \caption{Frayn's Evolution Parameters}
@@ -601,34 +593,34 @@ Frayn's process was as follows.
   \end{itemize}
   
   \item At the end of the generation, the total number of points earned by each
-  individual is evaluated as the fitness of the individual.
-  \item The new population of 1000 players is created.
+  individual is the fitness of the individual.
+  \item A new population of 1000 players is created.
   \begin{itemize}
-    \item Top 3 players move into next generation (elitism).
-    \item 300 players chosen by tournament selection with replacement.
+    \item Top 3 players are copied into next generation (elitism).
+    \item 300 players chosen by tournament selection with replacement are
+    copied into the next generation.
     \item 300 players chosen by tournament selection with replacement and then
-    mutated.
-    \item 397 children created by selecting parents using tournament selection
-    with replacement, and then applying uniform crossover to the parents'
-    chromosomes.
+    mutated are copied into the next generation.
+    \item 397 children are created by selecting parents using tournament
+    selection with replacement, and then applying uniform crossover to the 
+    parents' chromosomes.
   \end {itemize}
 \end{enumerate}
 
 Note that each player in a generation plays 100 games against 300 other
 opponents (3 different opponents for each game). So the competitive fitness
-function used by Frayn is K-Random Opponents with \(K\approx300\). K is
-approximate because the three opponents are selected independently for each
-game, so it is possible for the same opponent to be selected in more than one
-game. Over the total span of his study, Frayn reported that his project included
-over 377 million simulated games.
+function used by Frayn is K-Random Opponents with \(K=300\). The 300 opponents
+are not necessarily unique because the three opponents in each game are selected
+independently, so it is possible for the same opponent to be selected in more
+than one game. Over the total span of his study, Frayn reported that his project
+included over 377 million simulated games.
 
 \subsection{Evolutionary parameters used in this research}
 
 The last remaining task is to decide on the parameters to be used for the
 genetic algorithm. The success of any genetic algorithm is highly dependent on
 the parameters chosen. Parameters will be chosen using guidance from previous
-studies. The thought is that if those parameters worked for previous studies
-they will likewise lead to successful solutions in this study.
+studies.
 
 \subsubsection{Population size}
 
@@ -643,7 +635,7 @@ sizes comparable to those used in previous research that used the same
 optimization problems~\cite{Jaskowski:2008:FC:1389095.1389161}.
 
 This research uses a population size similar to Frayn's size of 1000. However,
-to implement a MSET competition it will be necessary to modify this value
+to implement an MSET competition it will be necessary to modify this value
 slightly to be 1024. Based on the results of the studies of competitive fitness
 functions~\cite{Angeline:1993:CEE:645513.657590, Panait02acomparative,
 Jaskowski:2008:FC:1389095.1389161}, the behavior of smaller population sizes
@@ -701,20 +693,11 @@ clear the game has a state space complexity less than that of Othello at
 The populations are tested using both K-Random Opponents and MSET.
 
 Again following Frayn, each player in the population competes in 100 games per
-generation, which equates to approximately 300 opponents\footnote{The number of
-opponents is approximate because of the random nature in which matches within a
-generation are intialized. After all players play a single game, the players are
-all returned to the player pool and are randomly selected again for the next
-game. So just by chance alone, some players will play each other more than once
-in a generation. For populations with a small size and a large number of games
-such as a population of 32 players that plays 100 games per generation, players
-will definitely play each other more than once in a single generation. For large
-populations that play small numbers of games per generation (e.g. pop. size=1024
-and number of games=7) it is less likely to occur.}. However, because Panait
-and Luke, and Ja\'{s}kowski et al., had success with smaller values of K for the
+generation, which equates to 300 opponents. However, because Panait and Luke,
+and Ja\'{s}kowski et al., had success with smaller values of K for the
 optimization problems they studied, this research also looks at K-Random
-Opponents where the number of games played by a player is \(K=21\) (7~games),
-\(K=75\) (25~games), and \(K=150\) (50~games). After each player completes a
+Opponents where the number of games played by a player is 7~games (\(K=21\)),
+25~games (\(K=75\)), and 50~games (\(K=150\)). After each player completes a
 game, a fitness score is computed by one of the fitness evaluators described
 earlier.
 
@@ -760,7 +743,7 @@ uses parameters similar to those used by Frayn, but with some modifications.
 
 \(child_{2} = (1 - \beta ) \cdot parent_{1} + \beta \cdot parent_{2}\)
 
-where beta is a random real number, \(0 < \beta < 1\)}
+where \(\beta\) is a random real number, \(0 < \beta < 1\)}
 \end{itemize}
 
 The parameters used for the genetic algorithm are summarized in
@@ -781,10 +764,10 @@ Table~\ref{table-evoparams}.
            & NUM\_MONOPOLIES \\
            & NET\_WORTH \\ 
            & TOURNAMENT \\ \hline
-  Propagation: & 10\%Elitism \\
-               & 30\% reproduction by roulette selection \\
-               & 30\% reproduction with mutation by roulette selection \\ 
-               & 30\% recombination by roulette selection \\ \hline  
+  Propagation: & 10\% Elitism \\
+               & 30\% Reproduction by roulette selection \\
+               & 30\% Reproduction with mutation by roulette selection \\ 
+               & 30\% Recombination by roulette selection \\ \hline  
 \end{tabular}
 \label{table-evoparams}
 \end{center}
@@ -792,16 +775,16 @@ Table~\ref{table-evoparams}.
 
 \subsection{Evolutionary Algorithm}
 
-The evolutionary algorithm proceeds as shown in Algorithm~\ref{alg_evo}. A
-population is created for each set of game parameters (chromosome type,
-population size, number of matches per generation, and fitness evaluator).
-Each population is initialized. The population is divided into random groups of
-four players, and each group competes in a game. At the completion of each game,
-the fitness scores for the players in that game are computed and the scores are
-added to the cumulative score for each player. That constitutes one match. The
-population is randomly redivided into new groups of four players, and another
-match is executed. When the number of matches for that population is met, the
-population is evolved and propagated. This repeats for 1000 generations.
+The evolutionary algorithm is shown in Algorithm~\ref{alg_evo}. A population is
+created for each set of game parameters (chromosome type, population size,
+number of matches per generation, and fitness evaluator). Each population is
+initialized. The population is divided into random groups of four players, and
+each group competes in a game. At the completion of each game, the fitness
+scores for the players in that game are computed and the scores are added to the
+cumulative score for each player. That constitutes one match. The population is
+randomly redivided into new groups of four players, and another match is
+executed. When the number of matches for that population is met, the population
+is evolved and propagated. This repeats for 1000 generations.
 
 \begin{algorithm}
 \caption{Evolutionary Algorithm}

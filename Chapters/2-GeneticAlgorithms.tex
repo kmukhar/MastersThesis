@@ -17,7 +17,7 @@ Genetic algorithms can be used to find approximate solutions to problems that
 are considered to be intractable.
 
 First, a brief summary of the complexity class
-NP~\cite{alsuwaiyel1999algorithms,Cormen:2009:IAT:1614191} presented and some
+NP~\cite{alsuwaiyel1999algorithms,Cormen:2009:IAT:1614191} is presented and some
 examples of those types of problems are listed. There are various ways to tackle
 NP problems such as approximation, the Monte Carlo method, and
 heuristics~\cite{russell2010artificial}. None of those methods can guarantee an
@@ -25,16 +25,16 @@ exact solution, just a ``good enough'' solution.
 
 Another way to get an approximate solution is to use a genetic algorithm. A
 genetic algorithm is similar to the Monte Carlo method, in that a set of
-solutions is created randomly. But unlike randomization, additional random
-solutions are not generated in the hopes of stumbling on a better solution.
-The development of better solutions in a genetic algorithm is guided by
-selection pressures which eliminate poor solutions and evolve good solutions
-into better solutions.
+solutions is created randomly. But after the initial set of solutions is
+created, additional random solutions are not generated in the hopes of stumbling
+on a better solution. The development of better solutions in a genetic algorithm
+is guided by selection pressures which eliminate poor solutions and evolve good
+solutions into better solutions.
 
-After looking at the basic genetic algorithm, there is a brief discussion of
-various ways to modify the standard genetic algorithm to expand its ability to
-find solutions to problems. These enhancements allow genetic algorithms to be
-applied to a large set of problems.
+After looking at the basic genetic algorithm, we briefly discuss various ways to
+modify the standard genetic algorithm to expand its ability to find solutions to
+problems. These enhancements allow genetic algorithms to be applied to a large
+set of problems.
 
 \section{NP Problems}
 
@@ -69,12 +69,11 @@ nondeterministic algorithm that runs in polynomial time.'' Cormen et al, provide
 this simple definition of NP: ``The class NP consists of those problems that are
 `verifiable' in polynomial time~\cite{Cormen:2009:IAT:1614191}.'' By combining
 those definitions it can be said that there are some problems for which no
-deterministic algorithm has yet been found which can produce an exact or optimal solution in
-polynomial time. However, there may be nondeterministic algorithms which can
-produce a solution in polynomial time. If a solution to such a problem is
-produced by a nondeterministic algorithm, and the solution can be verified by a
-deterministic algorithm in polynomial time, then the problem is a member of the
-class NP\footnote{NP problems can be further classified into additional
+deterministic algorithm has yet been found which can produce an exact or optimal
+solution in polynomial time; but if there is a nondeterministic algorithm which
+can produce a solution in polynomial time, and if the solution can be verified
+by a deterministic algorithm in polynomial time, then the problem is a member of
+the class NP\footnote{NP problems can be further classified into additional
 classes such as NP-Hard and NP-Complete. However, for the purposes of this
 chapter the two classes P and NP are sufficient. Interested readers can find
 more information in any reference on algorithms, including the references cited
@@ -126,9 +125,9 @@ heuristics to find near optimal solutions with relatively low time cost.
 
 \section{Basic Genetic Algorithms}
 
-Genetic algorithms~\cite{Holland1992, goldberg1989genetic,
-fogel2000evolutionary, haupt2004practical} tend to be good at solving
-optimization problems where the solution has the following two attributes:
+Genetic algorithms tend to be good at solving optimization problems where the
+solution has the following two attributes~\cite{Holland1992,
+goldberg1989genetic, fogel2000evolutionary, haupt2004practical}:
 
 \begin{enumerate}
   \item {The solution can be encoded into some kind of data structure.}
@@ -144,7 +143,7 @@ are reproduced, combined, or mutated with higher probability than lower quality
 solutions. Since higher quality solutions are more likely to propagate into the
 next generation, over time they come to make up larger proportions of the
 population. Combination and mutation introduce variations into the population
-which creates solutions which cover unexplored regions of the solution space and
+which create solutions which cover unexplored regions of the solution space and
 make it more likely that solutions don't get trapped in local minima or maxima.
 Over time this tends to produce approximate solutions which are optimal or very
 close to optimal.
@@ -176,9 +175,9 @@ selected individuals using various techniques and a new population is created.}
 
 Applying a genetic algorithm to a problem requires that a solution to the
 problem can be encoded into a data structure. A single data structure is
-referred to as a chromosome. A given chromosome represents a single individual
-in the population. In its simplest form a chromosome might consist of a binary
-string, that is, a string of 1s and 0s~\cite{Holland1992,goldberg1989genetic}.
+referred to as a chromosome. In its simplest form a chromosome might consist of
+a binary string, that is, a string of 1s and
+0s~\cite{Holland1992,goldberg1989genetic}.
 The interpretation of the chromosome is problem dependent. If the problem domain
 is creating a melody, the 0s and 1s in the chromosome might encode specific
 notes and other musical features; if the problem domain is the traveling
@@ -188,14 +187,13 @@ the chromosome might represent a particular game move.
 
 The genetic algorithm for any problem begins by initializing the chromosomes
 that represent solutions. This is usually done by randomly generating the data
-in the chromosome. An individual chromosome is often referred to as an
-individual and the complete set of chromosomes is referred to as the population.
+in the chromosome. A single chromosome is often referred to as an individual
+and the complete set of chromosomes is referred to as the population.
 
 The size of the population is an important decision in applying genetic
 algorithms to a problem. A population that is too small may not find a solution,
-or may take a long time to find a solution, which is a waste of computing
-resources. A population that is too large may find a solution, but may use more
-resources than is necessary.
+or may take a long time to find a solution. A population that is too large may
+find a solution, but may use more resources than is necessary.
 
 \subsection{Fitness}
 
@@ -238,17 +236,16 @@ take the best solution at that point.
 
 \subsection{Selection}
 
-After fitness is measured, the fitness is used to guide the selection of
+After fitness is measured, the fitness value is used to guide the selection of
 individuals for propagation into the next
 generation~\cite{haupt2004practical,dejong2006evolutionary}.
 
-One method for performing this is to assign a weight to each individual
-equal to the ratio of the individual's fitness to the total fitness of the
-population. Then each individual is selected with probability equal to that
-ratio. This is commonly referred to as roulette wheel selection. Another
-technique is to randomly pick two individuals and compare their fitness; the
-individual with the higher fitness is then selected. This is referred to as
-tournament selection. 
+One method for performing this is to compute the ratio of each individual's
+fitness to the total fitness of the population. Then each individual is selected
+with probability equal to that ratio. This is commonly referred to as roulette
+wheel selection. Another technique is to randomly pick two individuals and
+compare their fitness; the individual with the higher fitness is then selected.
+This is referred to as tournament selection.
 
 Individuals that are selected can be moved directly into the next generation.
 Alternately, they can be combined with other individuals to create new
@@ -286,10 +283,10 @@ After the new population is created, the process repeats.
 
 \section{Genetic Algorithm Extensions}
 
-A large amount of research has been conducted into extending various features of
-the basic algorithm to cover a larger number of problems. This section takes a
-brief look at some of those extensions. Also, additional details about different
-ways to measure fitness are presented in Chapter~\ref{chap:background}.
+The features of the basic genetic algorithm discussed previously have been
+extended to cover a larger number of problems. This section takes a brief look
+at some of those extensions. Also, additional details about different ways to
+measure fitness are presented in Chapter~\ref{chap:background}.
 
 \subsection{Chromosomes}
 
@@ -324,7 +321,7 @@ that have a stochastic component, there is no good objective fitness function.
 If a chromosome is designed to output moves for a game, how does one know
 whether the strategy encoded by the chromosome is a good? Just because an
 individual wins a game does not make the individual high quality: it could be a
-poor quality individual but played against a worse player. Similarly, just
+poor quality individual that played against a worse player. Similarly, just
 because an individual loses a game does not make the individual poor quality: it
 could have lost just because of chance. In this case, one uses a competitive
 fitness function~\cite{fogel1999intelligence}. Competitive fitness 
@@ -343,5 +340,5 @@ chromosomes~\cite{haupt2004practical}. With a problem like the traveling
 salesman problem, the standard crossover operations are not appropriate since
 they can duplicate cities in the chromosome. For permutation type problems like
 the traveling salesman problem, other crossover operations have been
-developed~\cite{goldberg1989genetic} which avoid duplications in the child
-chromosomes.
+developed which avoid duplications in the child
+chromosomes~\cite{goldberg1989genetic}.
