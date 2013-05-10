@@ -20,15 +20,5 @@
 			<type>1</type>
 			<location>C:/Users/kmukhar/MiKTex/tex/latex/tools/.tex</location>
 		</link>
-		<link>
-			<name>fleqn.clo</name>
-			<type>1</type>
-			<location>C:/Users/kmukhar/MiKTex/tex/latex/base/fleqn.clo</location>
-		</link>
-		<link>
-			<name>leqno.clo</name>
-			<type>1</type>
-			<location>C:/Users/kmukhar/MiKTex/tex/latex/base/leqno.clo</location>
-		</link>
 	</linkedResources>
 </projectDescription>

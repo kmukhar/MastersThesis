@@ -122,10 +122,10 @@ array element. There are 40 locations on the Monopoly board, so each location
 corresponds to an element in the array. The ``Go'' space is element 0, with
 subsequent locations assigned successive element indices.
 However, only 28 locations can be owned by a player, so 12 of the array elements
-are ignored.\footnote{The chromosome could have been designed with only 28
+are ignored\footnote{The chromosome could have been designed with only 28
 locations, but by using 40 elements, the need to create a mapping between
 locations and array elements is avoided (improved code readability and
-maintainability) at a small cost of memory for the 12 unused elements.}
+maintainability) at a small cost of memory for the 12 unused elements.}.
 
 Each array corresponds to one of the following game states:
 
@@ -702,7 +702,7 @@ game, a fitness score is computed by one of the fitness evaluators described
 earlier.
 
 This research will also use a modified version of Single Elimination Tournament
-(SET). With two player games, SET pairs the players in a generation, competes
+(MSET). With two player games, SET pairs the players in a generation, competes
 each pair, and eliminates the losers, until a single player is left.
 Fitness is the number of games won, or equivalently the level attained in the
 tournament tree. Since four players compete in every Monopoly game in this
@@ -710,15 +710,14 @@ research, we use a modified SET (MSET) in which the bottom two players in each
 game are eliminated and the top two players advance to the next level. At the
 final level, the last two remaining players get the same fitness score.
 
-The number of players in a generation is set to a multiple of four so that
-MSET is easier to implement. Population numbers that are not multiples of
-four would require implementing the simulator to give some players
-byes\footnote{A bye is when a participant in a tournament automatically
-advances to the next level automatically without playing a game at the current
-level.} for some matches, and keeping track of that information. It is easier
-just to specify that the population size is a multiple of four, so that no byes
-are necessary. So that is why Frayn's population of 1000 was changed to 1024 for
-this research.
+The number of players in a generation is set to a multiple of four so that MSET
+is easier to implement. Population numbers that are not multiples of four would
+require implementing the simulator to give some players byes\footnote{A bye is
+when a participant in a tournament advances to the next level automatically
+without playing a game at the current level.} for some matches, and keeping
+track of that information. It is easier just to specify that the population size
+is a multiple of four, so that no byes are necessary. So that is why Frayn's
+population of 1000 was changed to 1024 for this research.
 
 \subsubsection{Reproduction}
 
